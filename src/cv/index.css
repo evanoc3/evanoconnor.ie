@@ -1,0 +1,72 @@
+@page {
+	size: A4;
+	margin: 2.75cm;
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	color: #222;
+	line-height: 1;
+}
+
+
+@media only screen {
+	body {
+		background-color: #dcdcdc;
+		
+	}
+
+	article {
+		background-color: white;
+		margin: 2cm auto;
+		width: 210mm;
+		height: 297mm;
+		padding: 2.75cm;
+		box-shadow: 0 0 1rem rgba(0,0,0,0.1);
+	}
+}
+
+@media only print {
+	a {
+		text-decoration: none;
+	}
+}
+
+
+h1#page-title {
+	font-size: 3rem;
+	font-family: Arial;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+	text-align: center;
+	line-height: 1em;
+	margin-bottom: 1rem;
+}
+
+
+div#contact-row {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	column-gap: 1.25rem;
+}
+
+
+svg.contact-row-icon {
+	width: 1.1em;
+	height: 1.1em;
+	position: relative;
+	top: 4px;
+}
+
+
+a {
+	color: #222;
+}
