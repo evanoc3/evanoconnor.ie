@@ -2,14 +2,15 @@
 
 
 /**
- * @param {Date} date
+ * @param {Date} dateFrom
+ * @param {Date} dateTo
  * @return {string} 
  */
-function getHumanReadableTimeInterval(date1, date2) {
+function getHumanReadableTimeInterval(dateFrom, dateTo) {
   const monthsInYear = 12;
 
-  const yearDiff = date2.getUTCFullYear() - date1.getUTCFullYear();
-  const monthDiff = date2.getUTCMonth() - date1.getUTCMonth();
+  const yearDiff = dateTo.getUTCFullYear() - dateFrom.getUTCFullYear();
+  const monthDiff = dateTo.getUTCMonth() - dateFrom.getUTCMonth();
 
   let totalMonths = yearDiff * monthsInYear + monthDiff;
 
@@ -23,14 +24,22 @@ function getHumanReadableTimeInterval(date1, date2) {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+function setCurrentJobDuration() {
 	const curJobStartDate = new Date("2021-09-01");
   const curTime = new Date();
+  const curMonthName = curTime.toLocaleString("default", { month: "short" });
 	const curJobDuration = getHumanReadableTimeInterval(curJobStartDate, curTime);
-	document.getElementById("current_work_duration").innerText = `(${curJobDuration})`;
+	document.getElementById("current-work-item__duration").setAttribute("title", `Sep 2021 – ${curMonthName} ${curTime.getUTCFullYear()} (${curJobDuration})`);
+}
+
+
+/* Add the duration in current job to label */
+document.addEventListener("DOMContentLoaded", () => {
+  setCurrentJobDuration();
 });
 
 
+/* Set event handler for print button */
 document.getElementById("print_btn").addEventListener("click", () => {
 	window.print();
 });

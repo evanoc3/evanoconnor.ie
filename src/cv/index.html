@@ -9,14 +9,22 @@
 	</head>
 
 	<body>
-		<button id="print_btn">Print</button>
+		<button id="print_btn">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="print_btn__icon">
+				<polyline points="6 9 6 2 18 2 18 9"></polyline>
+				<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+				<rect x="6" y="14" width="12" height="8"></rect>
+			</svg>
+
+			Print
+		</button>
 
 		<article>
 			<h1 id="page-title">Evan O'Connor</h1>
 
 			<div id="contact-row">
 				<a href="mailto:evan@evanoconnor.ie" class="contact-row__link" title="Email">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-row__icon" id="email-icon">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="contact-row__icon" id="email-icon">
 						<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
 						<polyline points="22,6 12,13 2,6"></polyline>
 					</svg>
@@ -42,32 +50,35 @@
 			</div>
 
 			<div class="subheader-row">
-				<div class="subheader-row__line"></div>
+				<hr class="subheader-row__line" />
 
 				<h2 class="subheader-row__title">Work</h2>
 
-				<div class="subheader-row__line"></div>
+				<hr class="subheader-row__line" />
 			</div>
 
 			<table>
 				<tr>
-					<td class="work-item">
-						<img src="/img/webex.svg" class="work-item__icon" title="Webex logo" />
+					<td class="exp-item">
+						<img src="/img/webex.svg" class="exp-item__icon" title="Webex logo" />
 
-						<h3 class="work-item__title">Software Engineer &bull; <a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="work-item__link">Webex</a></h3>
+						<h3 class="exp-item__title">Software Engineer &bull; <a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Cisco</a></h3>
 
-						<div class="work-item__duration"><em>Sep 2021 &ndash; Present <span id="current_work_duration"></span></em></div>
+						<div class="exp-item__duration" id="current-work-item__duration"><em>Sep 2021 &ndash; Present</em></div>
 
-						<p class="work-item__desc">As an engineer on the desktop clients team. I worked on the Mac, Windows and Linux apps, implementing features, fixing bugs, and addressing technical debt.</p>
+						<div class="exp-item__desc">
+							<p>Working on Mac, Windows, and Linux desktop client apps at Webex. Brought business value by implementing features. Improved app reliability by fixing bugs. Improved code readability, maintainability, and addressed tech debt.</p>
+							<p>Held sole responsibility for localization of the client apps, and publishing version release notes.</p>
+						</div>
 
-						<ul class="work-item__skills">
-							<li class="work-item__skill">C++</li>
-							<li class="work-item__skill">CMake</li>
-							<li class="work-item__skill">Git</li>
-							<li class="work-item__skill">Python</li>
-							<li class="work-item__skill">QML</li>
-							<li class="work-item__skill">Qt</li>
-							<li class="work-item__skill">Swift</li>
+						<ul class="exp-item__skills">
+							<li class="exp-item__skill">C++</li>
+							<li class="exp-item__skill">CMake</li>
+							<li class="exp-item__skill">Git</li>
+							<li class="exp-item__skill">Python</li>
+							<li class="exp-item__skill">QML</li>
+							<li class="exp-item__skill">Qt</li>
+							<li class="exp-item__skill">Swift</li>
 						</ul>
 					</td>
 
@@ -75,42 +86,53 @@
 			</table>
 
 			<div class="subheader-row">
-				<div class="subheader-row__line"></div>
+				<hr class="subheader-row__line" />
 
 				<h2 class="subheader-row__title">Education</h2>
 
-				<div class="subheader-row__line"></div>
+				<hr class="subheader-row__line" />
 			</div>
 
 			<table>
 				<tr>
-					<td class="work-item">
-						<img src="/img/university_of_galway.jpg" class="work-item__icon" title="University of Galway logo" />
+					<td class="exp-item">
+						<img src="/img/university_of_galway.jpg" class="exp-item__icon" title="University of Galway logo" />
 
-						<h3 class="work-item__title">Computer Science &amp; IT &bull; <a href="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html" target="_blank" rel="noopener noreferrer" class="work-item__link">University of Galway</a></h3>
+						<h3 class="exp-item__title">BSc Computer Science &amp; IT &bull; <a href="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html" target="_blank" rel="noopener noreferrer" class="exp-item__link">University of Galway</a></h3>
 
-						<div class="work-item__duration"><em>2017 &ndash; 2021</em></div>
+						<div class="exp-item__duration" title="Sep 2017 &ndash; Jun 2021 (3 years 9 months)"><em>2017 &ndash; 2021</em></div>
 
-						<p class="work-item__desc">Studied CS&IT for undergrad.</p>
+						<p class="exp-item__desc">
+							Graduated with first class honours from a bachelor degree in Computer Science &amp; Information Technology at the University of Galway.
+						</p>
 
-						<ul class="work-item__skills">
-							<li class="work-item__skill">C</li>
-							<li class="work-item__skill">C#</li>
-							<li class="work-item__skill">CSS</li>
-							<li class="work-item__skill">HTML</li>
-							<li class="work-item__skill">Java</li>
-							<li class="work-item__skill">JavaScript</li>
-							<li class="work-item__skill">Matlab</li>
-							<li class="work-item__skill">Node.js</li>
-							<li class="work-item__skill">PHP</li>
-							<li class="work-item__skill">Racket</li>
-							<li class="work-item__skill">React</li>
-							<li class="work-item__skill">Typescript</li>
+						<ul class="exp-item__skills">
+							<li class="exp-item__skill">C</li>
+							<li class="exp-item__skill">C#</li>
+							<li class="exp-item__skill">CSS</li>
+							<li class="exp-item__skill">HTML</li>
+							<li class="exp-item__skill">Java</li>
+							<li class="exp-item__skill">JavaScript</li>
+							<li class="exp-item__skill">Matlab</li>
+							<li class="exp-item__skill">Node.js</li>
+							<li class="exp-item__skill">PHP</li>
+							<li class="exp-item__skill">Racket</li>
+							<li class="exp-item__skill">React</li>
+							<li class="exp-item__skill">Typescript</li>
 						</ul>
 					</td>
 
 				</tr>
 			</table>
+
+
+			<div class="subheader-row">
+				<hr class="subheader-row__line" />
+
+				<h2 class="subheader-row__title">Projects</h2>
+
+				<hr class="subheader-row__line" />
+			</div>
 
 		</article>
 	</body>
