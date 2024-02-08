@@ -1,10 +1,15 @@
 :root {
+	--page-margin: 2cm;
+	--transition-duration: 0.25s;
+
 	--primary-text-colour: #222;
+	--secondary-text-colour: #545454;
 	--link-text-colour: #545454;
 	--shadow-colour: rgba(0,0,0, 0.1);
 	--primary-background-colour: white;
 	--secondary-background-colour: #dcdcdc;
 	--badge-background-colour: #d5d5d5;
+	--badge-hovered-background-colour: #c4c4c4;
 	--separator-colour: #6e6e6e;
 }
 
@@ -19,7 +24,46 @@
 body {
 	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	color: var(--text-colour);
-	line-height: 1;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1cm 1rem;
+	gap: 1cm;
+}
+
+
+button#print_btn {
+	align-self: flex-end;
+	background: none;
+	border: none;
+	appearance: none;
+	font-size: 1rem;
+	color: var(--link-text-colour);
+	transition-duration: var(--transition-duration);
+	cursor: pointer;
+	padding: 0.75rem 1.25rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	margin-right: 1cm;
+}
+
+button#print_btn:hover, button#print_btn:active {
+	background-color: var(--shadow-colour);
+	color: var(--text-colour);
+}
+
+
+svg#print_btn__icon {
+	width: 1rem;
+	height: 1rem;
+	position: relative;
+	top: 3px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
 
 
@@ -29,13 +73,13 @@ article {
 
 
 h1#page-title {
-	font-size: 3rem;
+	font-size: 2.75rem;
 	font-family: Arial;
 	font-weight: 600;
 	letter-spacing: -0.025em;
 	text-align: center;
-	line-height: 1em;
-	margin-bottom: 1.5rem;
+	line-height: 1;
+	margin-bottom: 1rem;
 }
 
 
@@ -52,7 +96,7 @@ a.contact-row__link {
 	text-decoration: none;
 	cursor: pointer;
 	color: var(--link-text-colour);
-	transition: color 0.25s;
+	transition-duration: var(--transition-duration);
 }
 
 a.contact-row__link:hover {
@@ -87,14 +131,15 @@ div.subheader-row {
 	flex-flow: row nowrap;
 	align-items: center;
 	column-gap: 0.4rem;
-	margin: 2.5rem 0 1.5rem;
+	margin: 1.75rem 0 1.25rem;
 }
 
 
 hr.subheader-row__line {
 	display: inline-block;
 	border: none;
-	height: 1.5px;
+	height: 0.1rem;
+	border-radius: 1px;
 	background-color: var(--separator-colour);
 	flex: 1 0;
 }
@@ -102,7 +147,7 @@ hr.subheader-row__line {
 
 h2.subheader-row__title {
 	display: inline;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1.25rem;
 }
 
@@ -117,7 +162,7 @@ td.exp-item {
 	display: grid;
 	grid-template-columns: 3rem 1fr auto;
 	grid-template-rows: repeat(3, auto);
-	gap: 0.5rem;
+	gap: 0.75rem;
 }
 
 
@@ -142,6 +187,10 @@ a.exp-item__link {
 div.exp-item__duration {
 	grid-area: 1 / 3 / 2 / 4;
 	text-align: right;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	color: var(--secondary-text-colour);
 }
 
 
@@ -169,68 +218,27 @@ li.exp-item__skill {
 	background-color: var(--badge-background-colour);
 	border-radius: 1rem;
 	font-size: 0.8rem;
+	transition-duration: var(--transition-duration);
+	cursor: pointer;
+}
+
+li.exp-item__skill:hover {
+	background-color: var(--badge-hovered-background-colour);
 }
 
 
 /* #region Screen-only styles */
 @media only screen {
 
-	html, body {
-		width: 100vw;
-		min-height: 100vh;
-	}
-
-
 	body {
 		background-color: var(--secondary-background-colour);
 	}
 
-
-	button#print_btn {
-		position: absolute;
-		top: 1cm;
-		transform: translateY(-50%);
-		right: 1cm;
-		background: none;
-		border: none;
-		appearance: none;
-		font-size: 1rem;
-		color: var(--link-text-colour);
-		transition: color 0.5s;
-		cursor: pointer;
-		padding: 0.75rem 1.25rem;
-		transition: background-color 0.25s;
-		border-radius: 0.5rem;
-		cursor: pointer;
-	}
-
-	button#print_btn:hover, button#print_btn:active {
-		background-color: var(--shadow-colour);
-	}
-
-	button#print_btn:hover, button#print_btn:active {
-		color: var(--text-colour);
-	}
-
-	svg#print_btn__icon {
-		width: 1rem;
-		height: 1rem;
-		position: relative;
-		top: 3px;
-		fill: none;
-		stroke: currentColor;
-		stroke-width: 2;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-	}
-
-
 	article {
 		box-shadow: 0 0 1rem var(--shadow-colour);
-		padding: 2.5cm;
 		width: 210mm;
 		height: 297mm;
-		margin: 2cm auto;
+		padding: var(--page-margin);
 	}
 
 }
@@ -242,7 +250,7 @@ li.exp-item__skill {
 
 	@page {
 		size: A4;
-		margin: 2.5cm;
+		margin: 2cm;
 	}
 
 
@@ -257,7 +265,7 @@ li.exp-item__skill {
 	}
 
 
-	span.contact-row__label, a.work-item__link {
+	span.contact-row__label, a.exp-item__link {
 		text-decoration: none;
 	}
 
