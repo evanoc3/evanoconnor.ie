@@ -1,3 +1,28 @@
+/* #region CSS Reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+body {
+	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	color: var(--primary-text-colour);
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1cm 1rem;
+	gap: 1cm;
+}
+
+ul {
+	list-style-position: inside;
+}
+
+/* #endregion */
+
 :root {
 	--page-margin: 2cm;
 	--transition-duration: 0.25s;
@@ -11,25 +36,6 @@
 	--badge-background-colour: #d5d5d5;
 	--badge-hovered-background-colour: #c4c4c4;
 	--separator-colour: #6e6e6e;
-}
-
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-
-body {
-	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-	color: var(--text-colour);
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: flex-start;
-	align-items: center;
-	padding: 1cm 1rem;
-	gap: 1cm;
 }
 
 
@@ -47,6 +53,7 @@ button#print_btn {
 	cursor: pointer;
 	margin-right: 1cm;
 }
+
 
 button#print_btn:hover, button#print_btn:active {
 	background-color: var(--shadow-colour);
@@ -213,16 +220,18 @@ ul.exp-item__skills {
 }
 
 
-li.exp-item__skill {
+a.exp-item__skill {
 	padding: 0.2rem 0.5rem;
 	background-color: var(--badge-background-colour);
 	border-radius: 1rem;
 	font-size: 0.8rem;
 	transition-duration: var(--transition-duration);
+	color: var(--primary-text-colour);
+	text-decoration: none;
 	cursor: pointer;
 }
 
-li.exp-item__skill:hover {
+a.exp-item__skill:hover {
 	background-color: var(--badge-hovered-background-colour);
 }
 
