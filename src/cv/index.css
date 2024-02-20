@@ -49,9 +49,10 @@ button {
 	--badge-hovered-colour: #c4c4c4;
 	--separator-colour: #6e6e6e;
 
-	--dark-theme-secondary-background-colour: #242424;
-	--dark-theme-secondary-button-background-hovered-colour: #434343;
-	--dark-theme-secondary-button-text-colour: #d2d2d2;
+	--dark-theme-primary-background-colour: #e7e7e7;
+	--dark-theme-secondary-background-colour: #343434;
+	--dark-theme-secondary-button-background-hovered-colour: #414141;
+	--dark-theme-secondary-button-text-colour: #c1c1c1;
 	--dark-theme-secondary-button-text-hovered-colour: white;
 }
 /* #endregion */
@@ -277,6 +278,7 @@ a.exp-item__skill:hover {
 	/* #region Apply dark-theme colours */
 	@media only screen and (prefers-color-scheme: dark) {
 		body:not([data-theme]) {
+			--primary-background-colour: var(--dark-theme-primary-background-colour);
 			--secondary-background-colour: var(--dark-theme-secondary-background-colour);
 			--secondary-button-background-hovered-colour: var(--dark-theme-secondary-button-background-hovered-colour);
 			--secondary-button-text-colour: var(--dark-theme-secondary-button-text-colour);
@@ -285,6 +287,7 @@ a.exp-item__skill:hover {
 	}
 	
 	body[data-theme="dark"] {
+		--primary-background-colour: var(--dark-theme-primary-background-colour);
 		--secondary-background-colour: var(--dark-theme-secondary-background-colour);
 		--secondary-button-background-hovered-colour: var(--dark-theme-secondary-button-background-hovered-colour);
 		--secondary-button-text-colour: var(--dark-theme-secondary-button-text-colour);

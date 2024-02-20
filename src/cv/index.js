@@ -24,6 +24,9 @@ function getHumanReadableTimeInterval(dateFrom, dateTo) {
 }
 
 
+/**
+ * Dynamically calculates the length of time i've been at my current job as a human readable string and sets it as the tooltip for the label.
+ */
 function setCurrentJobDuration() {
 	const curJobStartDate = new Date("2021-09-01");
   const curTime = new Date();
@@ -35,14 +38,37 @@ function setCurrentJobDuration() {
 
 /**
  * Checks to see if the browser javascript engine supports CSS media query matching and whether it prefers light/dark theme.
- * Returns the theme the browser prefers or "light" by default.
- * @return {"light" | "dark"} 
+ * Returns the theme the browser prefers or undefined if matchMedia is not supported in the browser.
+ * @return {"light" | "dark" | undefined} 
  */
 function getCurrentBrowserTheme() {
-  return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  if (window.matchMedia) {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  return undefined;
 }
 
 
+/**
+ * Checks the browser's localStorage cache to see if there is a previously set preference for theme. 
+ * @returns {"light" | "dark" | undefined}
+ */
+function getCurrentThemeFromLocalStorage() {
+  if (window.localStorage) {
+    const themePreference = window.localStorage.getItem("/cv/ prefers-color-scheme");
+    if (["light", "dark"].includes(themePreference)) {
+      return themePreference;
+    }
+  }
+
+  return undefined;
+}
+
+
+/**
+ * Toggles the current theme of the document using the data-theme attribute on the body.
+ * Reads the current theme from the same attribute if present, or from the CSS prefers-color-scheme media query if not.
+ */
 function onThemeButtonClicked() {
   const currentBrowserTheme = getCurrentBrowserTheme();
   const bodyHasThemeAttribute = document.body.dataset.theme !== undefined;
@@ -56,11 +82,22 @@ function onThemeButtonClicked() {
     newThemeAttribute = (themeAttribute === "light") ? "dark" : "light";
   }
 
+  if (window.localStorage) {
+    if (getCurrentBrowserTheme() === newThemeAttribute) {
+      window.localStorage.removeItem("/cv/ prefers-color-scheme");
+    }
+    else {
+      window.localStorage.setItem("/cv/ prefers-color-scheme", newThemeAttribute);
+    }
+  }
+
   document.body.dataset.theme = newThemeAttribute;
 }
 
 
-/* Add the duration in current job to label */
+/**
+ * Do various things once the page has loaded
+ */
 document.addEventListener("DOMContentLoaded", () => {
   setCurrentJobDuration();
 
@@ -71,5 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // setup theme button
   document.getElementById("theme-btn").classList.add("visible");
   document.getElementById("theme-btn").addEventListener("click", onThemeButtonClicked);
-  document.body.dataset.theme = getCurrentBrowserTheme();
+  const initialTheme = getCurrentThemeFromLocalStorage() ?? getCurrentBrowserTheme();
+  if (initialTheme) {
+    document.body.dataset.theme = initialTheme;
+  }
 });
