@@ -8,6 +8,56 @@
 
 body {
 	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+ul {
+	list-style-position: inside;
+}
+
+
+button {
+	display: none;
+	background: none;
+	border: none;
+	appearance: none;
+	cursor: pointer;
+}
+
+/* #endregion */
+
+
+:root {
+	--page-margin: 2cm;
+	--transition-duration: calc(1s / 3);
+}
+
+
+/* #region Theme Colours */
+:root {
+	--primary-text-colour: #222;
+	--secondary-text-colour: #545454;
+	--link-text-colour: var(--secondary-text-colour);
+	--secondary-button-background-colour: transparent;
+	--secondary-button-background-hovered-colour: #c6c6c6;
+	--secondary-button-text-colour: var(--secondary-text-colour);
+	--secondary-button-text-hovered-colour: var(--primary-text-colour);
+	--shadow-colour: rgba(0,0,0, 0.1);
+	--primary-background-colour: white;
+	--secondary-background-colour: #dcdcdc;
+	--badge-colour: #d5d5d5;
+	--badge-hovered-colour: #c4c4c4;
+	--separator-colour: #6e6e6e;
+
+	--dark-theme-secondary-background-colour: #242424;
+	--dark-theme-secondary-button-background-hovered-colour: #434343;
+	--dark-theme-secondary-button-text-colour: #d2d2d2;
+	--dark-theme-secondary-button-text-hovered-colour: white;
+}
+/* #endregion */
+
+
+body {
 	color: var(--primary-text-colour);
 	display: flex;
 	flex-flow: column nowrap;
@@ -17,51 +67,36 @@ body {
 	gap: 1cm;
 }
 
-ul {
-	list-style-position: inside;
-}
 
-/* #endregion */
-
-:root {
-	--page-margin: 2cm;
-	--transition-duration: 0.25s;
-
-	--primary-text-colour: #222;
-	--secondary-text-colour: #545454;
-	--link-text-colour: #545454;
-	--shadow-colour: rgba(0,0,0, 0.1);
-	--primary-background-colour: white;
-	--secondary-background-colour: #dcdcdc;
-	--badge-background-colour: #d5d5d5;
-	--badge-hovered-background-colour: #c4c4c4;
-	--separator-colour: #6e6e6e;
-}
-
-
-button#print_btn {
+div#secondary-btn-row {
 	align-self: flex-end;
-	background: none;
-	border: none;
-	appearance: none;
-	font-size: 1rem;
-	color: var(--link-text-colour);
-	transition-duration: var(--transition-duration);
-	cursor: pointer;
-	padding: 0.75rem 1.25rem;
-	border-radius: 0.5rem;
-	cursor: pointer;
+	display: flex;
+	flex-flow: row nowrap;
+	gap: 0.5rem;
 	margin-right: 1cm;
 }
 
 
-button#print_btn:hover, button#print_btn:active {
-	background-color: var(--shadow-colour);
-	color: var(--text-colour);
+button.secondary-btn {
+	font-size: 1rem;
+	background-color: var(--secondary-button-background-colour);
+	color: var(--secondary-button-text-colour);
+	transition-duration: var(--transition-duration);
+	cursor: pointer;
+	padding: 0.75rem 1.25rem;
+	border-radius: 0.5rem;
 }
 
+button.secondary-btn.visible {
+	display: block;
+}
 
-svg#print_btn__icon {
+button.secondary-btn:hover, button.secondary-btn:active {
+	background-color: var(--secondary-button-background-hovered-colour);
+	color: var(--secondary-button-text-hovered-colour);
+}
+
+svg.secondary-btn__icon {
 	width: 1rem;
 	height: 1rem;
 	position: relative;
@@ -222,7 +257,7 @@ ul.exp-item__skills {
 
 a.exp-item__skill {
 	padding: 0.2rem 0.5rem;
-	background-color: var(--badge-background-colour);
+	background-color: var(--badge-colour);
 	border-radius: 1rem;
 	font-size: 0.8rem;
 	transition-duration: var(--transition-duration);
@@ -232,15 +267,42 @@ a.exp-item__skill {
 }
 
 a.exp-item__skill:hover {
-	background-color: var(--badge-hovered-background-colour);
+	background-color: var(--badge-hovered-colour);
 }
 
 
 /* #region Screen-only styles */
 @media only screen {
 
+	/* #region Apply dark-theme colours */
+	@media only screen and (prefers-color-scheme: dark) {
+		body:not([data-theme]) {
+			--secondary-background-colour: var(--dark-theme-secondary-background-colour);
+			--secondary-button-background-hovered-colour: var(--dark-theme-secondary-button-background-hovered-colour);
+			--secondary-button-text-colour: var(--dark-theme-secondary-button-text-colour);
+			--secondary-button-text-hovered-colour: var(--dark-theme-secondary-button-text-hovered-colour);
+		}
+	}
+	
+	body[data-theme="dark"] {
+		--secondary-background-colour: var(--dark-theme-secondary-background-colour);
+		--secondary-button-background-hovered-colour: var(--dark-theme-secondary-button-background-hovered-colour);
+		--secondary-button-text-colour: var(--dark-theme-secondary-button-text-colour);
+		--secondary-button-text-hovered-colour: var(--dark-theme-secondary-button-text-hovered-colour);
+	}
+	/* #endregion */
+
 	body {
 		background-color: var(--secondary-background-colour);
+		transition-duration: var(--transition-duration);
+	}
+
+	body[data-theme="light"] svg#theme-btn__sun-icon, body[data-theme="dark"] svg#theme-btn__moon-icon {
+		display: none;
+	}
+
+	body[data-theme="dark"] svg#theme-btn__sun-icon, body[data-theme="light"] svg#theme-btn__moon-icon {
+		display: block;
 	}
 
 	article {
@@ -249,7 +311,6 @@ a.exp-item__skill:hover {
 		height: 297mm;
 		padding: var(--page-margin);
 	}
-
 }
 /* #endregion */
 
@@ -269,7 +330,12 @@ a.exp-item__skill:hover {
 	}
 
 
-	button#print_btn {
+	div#secondary-btn-row {
+		display: none;
+	}
+
+
+	button.secondary-btn.visible {
 		display: none;
 	}
 

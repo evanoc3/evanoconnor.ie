@@ -9,15 +9,37 @@
 	</head>
 
 	<body>
-		<button id="print_btn">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="print_btn__icon">
-				<polyline points="6 9 6 2 18 2 18 9"></polyline>
-				<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-				<rect x="6" y="14" width="12" height="8"></rect>
-			</svg>
 
-			Print
-		</button>
+		<div id="secondary-btn-row">
+			<button id="print-btn" class="secondary-btn">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon">
+					<polyline points="6 9 6 2 18 2 18 9"></polyline>
+					<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+					<rect x="6" y="14" width="12" height="8"></rect>
+				</svg>
+	
+				Print
+			</button>
+
+			<button id="theme-btn" class="secondary-btn" title="Toggle light/dark theme">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon" id="theme-btn__moon-icon">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+				</svg>
+
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon" id="theme-btn__sun-icon">
+					<circle cx="12" cy="12" r="5"></circle>
+					<line x1="12" y1="1" x2="12" y2="3"></line>
+					<line x1="12" y1="21" x2="12" y2="23"></line>
+					<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+					<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+					<line x1="1" y1="12" x2="3" y2="12"></line>
+					<line x1="21" y1="12" x2="23" y2="12"></line>
+					<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+					<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+				</svg>
+			</button>
+		</div>
+
 
 		<article>
 			<h1 id="page-title">Evan O'Connor</h1>
@@ -67,7 +89,7 @@
 						<div class="exp-item__duration" id="current-work-item__duration"><em>Sep 2021 &ndash; Present</em></div>
 
 						<div class="exp-item__desc">
-							<p>Worked on the Mac, Windows, &amp; Linux desktop client apps at Webex on a team with a particular focus on:</p>
+							<p>Currently working on the desktop clients teams at Webex, with a particular focus on:</p>
 
 							<ul>
 								<li>Accessibility (keyboard navigation, screen-reader, localization, RTL, etc&hellip;),</li>
@@ -76,11 +98,11 @@
 								<li>Improving code quality and promoting best practices.</li>
 							</ul>
 								
-							<p>As part of that team I helped deliver several important features, <em>e.g. customizable keyboard shortcuts, manual check for updates, quiet hours, and font scaling</em>. As part of hackathons I also conceived of and delivered two other features called searchable settings, and quick message.</p>
+							<p>As part of that team I help deliver important features, <em>e.g. customizable keyboard shortcuts, manual check for updates, quiet hours, and font scaling</em>. As part of hackathons I&apos;ve also conceived of and delivered other features such as <em>searchable settings</em>, and <em>quick message</em>.</p>
 
-							<p>I improved the clients&apos; performance and reliability by fixing bugs and refactoring technical debt across the codebase. This also involved leading the move away from old, deprecated APIs towards newer alternatives for delivering user notifications and websocket connection.</p>
+							<p>Improve the clients&apos; reliability and performance by fixing bugs and refactoring tech debt across the codebase. This has involved leading the move away from old, deprecated APIs towards newer alternatives for delivering user notifications and establishing websocket connections.</p>
 
-							<p>Aside from my work on that team, I was also solely responsible for the important processes of translation of the clients in other languages, and publishing version notes.</p>
+							<p>Aside from my work on that team, I am also solely responsible for the processes of translation of the clients into other languages, and publication of version release notes.</p>
 						</div>
 
 						<ul class="exp-item__skills">
