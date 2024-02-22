@@ -203,7 +203,7 @@ div.exp-item {
 	display: grid;
 	grid-template-columns: 3rem 1fr auto;
 	grid-template-rows: repeat(3, auto);
-	row-gap: none;
+	row-gap: 0;
 	column-gap: 0.75rem;
 	margin-top: 1.25rem;
 }
@@ -273,6 +273,35 @@ a.exp-item__skill {
 a.exp-item__skill:hover {
 	background-color: var(--badge-hovered-colour);
 }
+
+
+div.proj-item {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: repeat(2, auto);
+	row-gap: 0;
+	column-gap: 0.75rem;
+	margin-top: 1.25rem;
+}
+
+h3.proj-item__title {
+	font-weight: 500;
+	grid-area: 1 / 1 / 2 / 2;
+	padding-bottom: calc(1rem / 3);
+	display: inline;
+}
+
+div.proj-item__desc {
+	font-weight: 500;
+	grid-area: 1 / 2 / 2 / 2;
+	padding-bottom: calc(1rem / 3);
+}
+
+.exp-item__desc {
+	line-height: 1.3;
+	grid-area: 2 / 2 / 3 / 4;
+}
+
 
 
 /* #region Screen-only styles */
