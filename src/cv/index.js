@@ -1,10 +1,12 @@
 "use strict";
 
-
 /**
+ * Takes in two dates and returns a string containing the most significant unit of time between them, e.g. "2 months", or "1 year".
+ * Note that this function only handles years and months and is not designed to handle smaller units of time such as days, hours or minutes.
+ * 
  * @param {Date} dateFrom
  * @param {Date} dateTo
- * @return {string} 
+ * @returns {string} 
  */
 function getHumanReadableTimeInterval(dateFrom, dateTo) {
   const monthsInYear = 12;
@@ -26,6 +28,8 @@ function getHumanReadableTimeInterval(dateFrom, dateTo) {
 
 /**
  * Dynamically calculates the length of time i've been at my current job as a human readable string and sets it as the tooltip for the label.
+ * 
+ * @returns {void}
  */
 function setCurrentJobDuration() {
 	const curJobStartDate = new Date("2021-09-01");
@@ -39,7 +43,8 @@ function setCurrentJobDuration() {
 /**
  * Checks to see if the browser javascript engine supports CSS media query matching and whether it prefers light/dark theme.
  * Returns the theme the browser prefers or undefined if matchMedia is not supported in the browser.
- * @return {"light" | "dark" | undefined} 
+ * 
+ * @returns {"light" | "dark" | undefined} 
  */
 function getCurrentBrowserTheme() {
   if (window.matchMedia) {
@@ -51,6 +56,7 @@ function getCurrentBrowserTheme() {
 
 /**
  * Checks the browser's localStorage cache to see if there is a previously set preference for theme. 
+ * 
  * @returns {"light" | "dark" | undefined}
  */
 function getCurrentThemeFromLocalStorage() {
@@ -68,6 +74,8 @@ function getCurrentThemeFromLocalStorage() {
 /**
  * Toggles the current theme of the document using the data-theme attribute on the body.
  * Reads the current theme from the same attribute if present, or from the CSS prefers-color-scheme media query if not.
+ * 
+ * @returns {void}
  */
 function onThemeButtonClicked() {
   const currentBrowserTheme = getCurrentBrowserTheme();
