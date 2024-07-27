@@ -1,61 +1,37 @@
-/* #region CSS Reset */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+@use "../styles/mixins/reset"; 
 
 
-body {
-	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
+$page-margin: 1.5cm;
 
 
-ul {
-	list-style-position: inside;
-}
-
-
-button {
-	display: none;
-	background: none;
-	border: none;
-	appearance: none;
-	cursor: pointer;
-}
-
-/* #endregion */
-
-
-:root {
-	--page-margin: 2cm;
-	--transition-duration: calc(1s / 3);
-}
-
-
-/* #region Theme Colours */
-:root {
+@mixin light-theme-colours {
 	--primary-text-colour: #222;
 	--secondary-text-colour: #545454;
-	--link-text-colour: var(--secondary-text-colour);
+	--link-text-colour: #8b8b8b;
 	--secondary-button-background-colour: transparent;
 	--secondary-button-background-hovered-colour: #c6c6c6;
 	--secondary-button-text-colour: var(--secondary-text-colour);
-	--secondary-button-text-hovered-colour: var(--primary-text-colour);
 	--shadow-colour: rgba(0,0,0, 0.1);
-	--primary-background-colour: white;
+	--primary-background-colour: #fff;
 	--secondary-background-colour: #dcdcdc;
-	--badge-colour: #d5d5d5;
-	--badge-hovered-colour: #c4c4c4;
-	--separator-colour: #6e6e6e;
-
-	--dark-theme-primary-background-colour: #e7e7e7;
-	--dark-theme-secondary-background-colour: #343434;
-	--dark-theme-secondary-button-background-hovered-colour: #414141;
-	--dark-theme-secondary-button-text-colour: #c1c1c1;
-	--dark-theme-secondary-button-text-hovered-colour: white;
+	--badge-background-colour: #d5d5d5;
+	--badge-background-hovered-colour: #c4c4c4;
+	--separator-colour: #9e9e9e;
 }
-/* #endregion */
+
+
+@mixin dark-theme-colours {
+	--primary-background-colour: #e7e7e7;
+	--secondary-background-colour: #343434;
+	--secondary-button-text-colour: #c1c1c1;
+	--secondary-button-text-hovered-colour: #fff;
+}
+
+
+:root {
+	--transition-duration: calc(1s / 3);
+	@include light-theme-colours;
+}
 
 
 body {
@@ -100,8 +76,9 @@ button.secondary-btn:hover, button.secondary-btn:active {
 svg.secondary-btn__icon {
 	width: 1rem;
 	height: 1rem;
-	position: relative;
-	top: 3px;
+	// position: relative;
+	// top: 3px;
+	vertical-align: middle;
 	fill: none;
 	stroke: currentColor;
 	stroke-width: 2;
@@ -241,6 +218,7 @@ div.exp-item__duration {
 .exp-item__desc {
 	line-height: 1.3;
 	grid-area: 2 / 2 / 3 / 4;
+	font-size: 0.9rem;
 }
 
 .exp-item__desc > p:not(:first-of-type) {
@@ -260,7 +238,7 @@ ul.exp-item__skills {
 
 a.exp-item__skill {
 	padding: 0.2rem 0.5rem;
-	background-color: var(--badge-colour);
+	background-color: var(--badge-background-colour);
 	border-radius: 1rem;
 	font-size: 0.8rem;
 	transition-duration: var(--transition-duration);
@@ -271,7 +249,7 @@ a.exp-item__skill {
 }
 
 a.exp-item__skill:hover {
-	background-color: var(--badge-hovered-colour);
+	background-color: var(--badge-background-hovered-colour);
 }
 
 
@@ -303,29 +281,17 @@ div.proj-item__desc {
 }
 
 
-
-/* #region Screen-only styles */
 @media only screen {
 
-	/* #region Apply dark-theme colours */
-	@media only screen and (prefers-color-scheme: dark) {
+	@media(prefers-color-scheme: dark) {
 		body:not([data-theme]) {
-			--primary-background-colour: var(--dark-theme-primary-background-colour);
-			--secondary-background-colour: var(--dark-theme-secondary-background-colour);
-			--secondary-button-background-hovered-colour: var(--dark-theme-secondary-button-background-hovered-colour);
-			--secondary-button-text-colour: var(--dark-theme-secondary-button-text-colour);
-			--secondary-button-text-hovered-colour: var(--dark-theme-secondary-button-text-hovered-colour);
+			@include dark-theme-colours;
 		}
 	}
 	
 	body[data-theme="dark"] {
-		--primary-background-colour: var(--dark-theme-primary-background-colour);
-		--secondary-background-colour: var(--dark-theme-secondary-background-colour);
-		--secondary-button-background-hovered-colour: var(--dark-theme-secondary-button-background-hovered-colour);
-		--secondary-button-text-colour: var(--dark-theme-secondary-button-text-colour);
-		--secondary-button-text-hovered-colour: var(--dark-theme-secondary-button-text-hovered-colour);
+		@include dark-theme-colours;
 	}
-	/* #endregion */
 
 	body {
 		background-color: var(--secondary-background-colour);
@@ -344,18 +310,16 @@ div.proj-item__desc {
 		box-shadow: 0 0 1rem var(--shadow-colour);
 		width: 210mm;
 		height: 297mm;
-		padding: var(--page-margin);
+		padding: $page-margin;
 	}
 }
-/* #endregion */
 
 
-/* #region Print-only styles */
 @media only print {
 
 	@page {
 		size: A4;
-		margin: 2cm;
+		margin: $page-margin;
 	}
 
 
@@ -380,4 +344,3 @@ div.proj-item__desc {
 	}
 
 }
-/* #endregion */

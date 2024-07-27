@@ -1,11 +1,24 @@
 # evanoconnor.ie
 
-## Building & Running Locally
+## Setup
 
-This repo needs no build step. To get it running locally all you need is some tool which can serve a directory of static files over HTTP. The easiest one I've found is python's built-in [`http.server`](https://docs.python.org/3/library/http.server.html) module, which you can use like this:
+The development workflow relies on [Node.js](https://nodejs.org/en), [NPM](https://www.npmjs.com/), and [Vite](https://vitejs.dev/). The current version of node being used can be found in [`.nvmrc`](./.nvmrc).
 
-```sh
-python3 -m http.server -d src;
-```
 
-By default this will serve the contents of the `src` directory on localhost port 8000, but a port number can also be specified at the end of the command.
+## Development
+
+Check out the prject and run `npm run dev` to start a local development server.
+
+
+## Building for Production
+
+1. Run `npm run build` to create a `dist` directory with all the static files necessary for hosting the website.
+
+2. Run `docker build -t evanoconnor.ie .` to build a docker image.
+
+3. Run `docker run -p 8080:80 evanoconnor.ie` to start a container running the production build.
+
+
+## Deployments
+
+I'm currently using [Fly.io](https://fly.io) to host the website. With the flyctl tool configured locally, deploying is as easy as running `fly deploy`.

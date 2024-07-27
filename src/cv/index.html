@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>CV &ndash; Evan O&apos;Connor</title>
-		<link rel="stylesheet" href="./index.css" />
+		<link rel="stylesheet" href="./index.scss" />
 	</head>
 
 	<body>
@@ -37,7 +37,6 @@
 				</svg>
 			</button>
 		</div>
-
 
 		<article>
 			<h1 id="page-title">Evan O'Connor</h1>
@@ -79,22 +78,42 @@
 				</header>
 
 				<div class="exp-item">
+					<img src="/img/wxcc.png" class="exp-item__icon" title="Webex Contact Center logo" />
+
+					<h3 class="exp-item__title">Software Engineer &bull; <a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Contact Center (Cisco)</a></h3>
+
+					<div class="exp-item__duration" id="current-work-item__duration"><em>Jan 2024 &ndash; Present</em></div>
+
+					<div class="exp-item__desc">
+						<p></p>
+					</div>
+
+					<ul class="exp-item__skills">
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="exp-item__skill">JavaScript</a></li>
+						<li><a href="https://nodejs.org/en" target="_blank" rel="noopener" class="exp-item__skill">Node.js</a></li>
+						<li><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener" class="exp-item__skill">TypeScript</a></li>
+						<li><a href="https://react.dev/" target="_blank" rel="noopener" class="exp-item__skill">React</a></li>
+						<li><a href="https://sass-lang.com/" target="_blank" rel="noopener" class="exp-item__skill">Sass</a></li>
+						<li><a href="https://lit.dev/" target="_blank" rel="noopener" class="exp-item__skill">Web Components (Lit)</a></li>
+					</ul>
+				</div>
+
+				<div class="exp-item">
 					<img src="/img/webex.svg" class="exp-item__icon" title="Webex logo" />
 
 					<h3 class="exp-item__title">Software Engineer &bull; <a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Webex (Cisco)</a></h3>
 
-					<div class="exp-item__duration" id="current-work-item__duration"><em>Sep 2021 &ndash; Present</em></div>
+					<div class="exp-item__duration" title="Sep 2021 &ndash; Jan 2024 (2 years 4 months)"><em>Sep 2021 &ndash; Jan 2024</em></div>
 
 					<div class="exp-item__desc">
-						<p>Delivering features with high quality and within deadlines. I&apos;ve also delivered some features individually to the client during hackathons.</p>
+						<p>Delivering high quality features within deadlines. I&apos;ve also delivered some features individually to the client during hackathons.</p>
 
-						<p>Improving the clients&apos; reliability and performance by fixing bugs and refactoring tech debt across the codebase. This has involved leading the move away from old, deprecated APIs and introducing newer alternatives.</p>
+						<p>Improving the clients&apos; reliability and performance by fixing bugs &amp; refactoring tech debt across the codebase. This has involved leading the move away from old, deprecated APIs and introducing newer alternatives.</p>
 
 						<p>Solely responsible for the processes of translation of the clients into other languages, and publication of version release notes.</p>
 					</div>
 
 					<ul class="exp-item__skills">
-						<li><a href="https://www.gnu.org/software/bash/" target="_blank" rel="noopener" class="exp-item__skill">Bash</a></li>
 						<li><a href="https://isocpp.org/" target="_blank" rel="noopener" class="exp-item__skill">C++</a></li>
 						<li><a href="https://cmake.org/" target="_blank" rel="noopener" class="exp-item__skill">CMake</a></li>
 						<li><a href="https://git-scm.com/" target="_blank" rel="noopener" class="exp-item__skill">Git</a></li>
@@ -114,13 +133,7 @@
 					<div class="exp-item__duration" title="Jan 2020 &ndash; Sep 2020 (9 months)"><em>Jan 2020 &ndash; Sep 2020</em></div>
 
 					<div class="exp-item__desc">
-						<p>Worked on the desktop clients teams at Webex, with a particular focus on:</p>
-
-						<ul>
-							<li>Accessibility (keyboard navigation, screen-reader, localization, RTL, etc&hellip;),</li>
-							<li>Theming,</li>
-							<li>Creating a library of reusable UI components.</li>
-						</ul>
+						<p>Worked on the desktop clients teams at Webex, with a particular focus on: Accessibility (keyboard navigation, screen-reader, localization, RTL, etc&hellip;), theming, &amp; creating a library of reusable UI components.</p>
 					</div>
 
 					<ul class="exp-item__skills">
@@ -174,6 +187,6 @@
 		</article>
 	</body>
 
-	<script type="text/javascript" src="./index.js"></script>
+	<script type="module" src="./index.ts"></script>
 	<script async data-id="101444306" src="https://static.getclicky.com/js"></script>
 </html>

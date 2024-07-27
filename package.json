@@ -1,0 +1,17 @@
+{
+  "name": "@evaoconn/evanoconnor.ie",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "sass": "^1.77.8",
+    "vite": "^5.3.5"
+  },
+  "scripts": {
+    "dev": "vite --port 8080",
+    "build": "vite build"
+  },
+  "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
+  "license": "MIT"
+}
