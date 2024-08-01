@@ -17,7 +17,7 @@ export default {
 		rollupOptions: {
 			input: [
 				join(__dirname, "src", "index.html"),
-				join(__dirname, "src", "cv", "index.html"),
+				join(__dirname, "src", "cv.html"),
 				join(__dirname, "src", "404.html"),
 			]
 		}

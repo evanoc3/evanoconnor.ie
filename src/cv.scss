@@ -1,4 +1,4 @@
-@use "../styles/mixins/reset"; 
+@use "./styles/reset"; 
 
 
 $page-margin: 1.5cm;
@@ -7,7 +7,7 @@ $page-margin: 1.5cm;
 @mixin light-theme-colours {
 	--primary-text-colour: #222;
 	--secondary-text-colour: #545454;
-	--link-text-colour: #8b8b8b;
+	--link-text-colour: #808080;
 	--secondary-button-background-colour: transparent;
 	--secondary-button-background-hovered-colour: #c6c6c6;
 	--secondary-button-text-colour: var(--secondary-text-colour);

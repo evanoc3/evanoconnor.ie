@@ -92,7 +92,7 @@ function onThemeButtonClicked(): void {
 
 
 /**
- * Do various things once the page has loaded
+ * Do various things once the page has loaded.
  */
 document.addEventListener("DOMContentLoaded", () => {
   setCurrentJobDuration();
