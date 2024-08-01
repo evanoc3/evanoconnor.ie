@@ -10,6 +10,7 @@ export default {
 	appType: "mpa",
 	root: join(__dirname, "src"),
 	publicDir: join(__dirname, "static"),
+	envDir: __dirname,
 	build: {
 		outDir: join(__dirname, "dist"),
 		emptyOutDir: true,
