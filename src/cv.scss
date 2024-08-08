@@ -16,16 +16,18 @@ $page-margin: 1.5cm;
 	--secondary-background-colour: #dcdcdc;
 	--badge-background-colour: #e1e1e1;
 	--badge-background-hovered-colour: #c4c4c4;
-	--separator-colour: #9e9e9e;
+	--separator-colour: #969696;
 }
 
 
 @mixin dark-theme-colours {
 	--primary-background-colour: #e7e7e7;
 	--secondary-background-colour: #343434;
+	--secondary-button-background-hovered-colour: #595959;
 	--secondary-button-text-colour: #c1c1c1;
 	--secondary-button-text-hovered-colour: #fff;
-	--badge-background-colour: #d5d5d5;
+	--badge-background-colour: #c7c7c7;
+	--badge-background-hovered-colour: #adadad;
 }
 
 
@@ -161,7 +163,7 @@ header.subheader-row {
 hr.subheader-row__line {
 	display: inline-block;
 	border: none;
-	height: 0.1rem;
+	height: 2px;
 	border-radius: 1px;
 	background-color: var(--separator-colour);
 	flex: 1 0;
@@ -226,7 +228,7 @@ div.exp-item__duration {
 }
 
 .exp-item__desc > p:not(:first-of-type) {
-	margin-top: calc(1rem / 3);
+	margin-top: 0.5rem;//calc(1rem / 3);
 }
 
 
@@ -245,7 +247,7 @@ a.exp-item__skill {
 	background-color: var(--badge-background-colour);
 	border-radius: 1rem;
 	font-size: 0.8rem;
-	transition-duration: var(--transition-duration);
+	transition: background-color var(--transition-duration);
 	color: var(--primary-text-colour);
 	text-decoration: none;
 	cursor: pointer;

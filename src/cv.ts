@@ -26,11 +26,11 @@ function getHumanReadableTimeInterval(dateFrom: Date, dateTo: Date): string {
  * Dynamically calculates the length of time i've been at my current job as a human readable string and sets it as the tooltip for the label.
  */
 function setCurrentJobDuration(): void {
-	const curJobStartDate = new Date("2024-01-31");
+	const curJobStartDate = new Date("2024-03-31");
   const curTime = new Date();
   const curMonthName = curTime.toLocaleString("default", { month: "short" });
 	const curJobDuration = getHumanReadableTimeInterval(curJobStartDate, curTime);
-	document.getElementById("current-work-item__duration")!.setAttribute("title", `Jan 2024 – ${curMonthName} ${curTime.getUTCFullYear()} (${curJobDuration})`);
+	document.getElementById("current-work-item__duration")!.title = `Mar 2024 – ${curMonthName} ${curTime.getUTCFullYear()} (${curJobDuration})`;
 }
 
 
