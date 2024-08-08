@@ -14,7 +14,7 @@ $page-margin: 1.5cm;
 	--shadow-colour: rgba(0,0,0, 0.1);
 	--primary-background-colour: #fff;
 	--secondary-background-colour: #dcdcdc;
-	--badge-background-colour: #d5d5d5;
+	--badge-background-colour: #e1e1e1;
 	--badge-background-hovered-colour: #c4c4c4;
 	--separator-colour: #9e9e9e;
 }
@@ -25,6 +25,7 @@ $page-margin: 1.5cm;
 	--secondary-background-colour: #343434;
 	--secondary-button-text-colour: #c1c1c1;
 	--secondary-button-text-hovered-colour: #fff;
+	--badge-background-colour: #d5d5d5;
 }
 
 
@@ -62,22 +63,20 @@ button.secondary-btn {
 	cursor: pointer;
 	padding: 0.75rem 1.25rem;
 	border-radius: 0.5rem;
-}
 
-button.secondary-btn.visible {
-	display: block;
-}
+	&.visible {
+		display: block;
+	}
 
-button.secondary-btn:hover, button.secondary-btn:active {
-	background-color: var(--secondary-button-background-hovered-colour);
-	color: var(--secondary-button-text-hovered-colour);
+	&:hover, &:active {
+		background-color: var(--secondary-button-background-hovered-colour);
+		color: var(--secondary-button-text-hovered-colour);
+	}
 }
 
 svg.secondary-btn__icon {
 	width: 1rem;
 	height: 1rem;
-	// position: relative;
-	// top: 3px;
 	vertical-align: middle;
 	fill: none;
 	stroke: currentColor;
@@ -116,11 +115,11 @@ a.contact-row__link {
 	text-decoration: none;
 	cursor: pointer;
 	color: var(--link-text-colour);
-	transition-duration: var(--transition-duration);
-}
+	transition: color var(--transition-duration);
 
-a.contact-row__link:hover {
-	color: var(--text-colour);
+	&:hover {
+		color: var(--text-colour);
+	}
 }
 
 
@@ -129,11 +128,11 @@ svg.contact-row__icon {
 	width: 1.1em;
 	position: relative;
 	top: 4px;
-	fill: var(--link-text-colour);
+	fill: currentColor;
 }
 
 svg#email-icon {
-	stroke: var(--link-text-colour);
+	stroke: currentColor;
 	fill: none;
 	stroke-width: 2;
 	stroke-linecap: round;
@@ -202,6 +201,11 @@ h3.exp-item__title {
 
 a.exp-item__link {
 	color: var(--link-text-colour);
+	transition: color var(--transition-duration);
+
+	&:hover {
+		color: var(--text-colour);
+	}
 }
 
 
@@ -246,10 +250,10 @@ a.exp-item__skill {
 	text-decoration: none;
 	cursor: pointer;
 	display: inline-block;
-}
 
-a.exp-item__skill:hover {
-	background-color: var(--badge-background-hovered-colour);
+	&:hover {
+		background-color: var(--badge-background-hovered-colour);
+	}
 }
 
 
@@ -273,11 +277,6 @@ div.proj-item__desc {
 	font-weight: 500;
 	grid-area: 1 / 2 / 2 / 2;
 	padding-bottom: calc(1rem / 3);
-}
-
-.exp-item__desc {
-	line-height: 1.3;
-	grid-area: 2 / 2 / 3 / 4;
 }
 
 
