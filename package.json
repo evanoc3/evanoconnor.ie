@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "PORT=${PORT:-8080} && vite --port $PORT",
-    "dist": "vite build"
+    "dist": "vite build",
+    "deploy": "node ./scripts/deploy.mjs"
   },
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
   "license": "MIT"
