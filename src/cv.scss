@@ -49,15 +49,16 @@ body {
 
 
 div#secondary-btn-row {
-	align-self: flex-end;
+	width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
 	gap: 0.5rem;
-	margin-right: 1cm;
+	padding: 0 1cm;
+	justify-content: flex-end;
 }
 
 
-button.secondary-btn {
+button.secondary-btn, a.secondary-btn {
 	font-size: 1rem;
 	background-color: var(--secondary-button-background-colour);
 	color: var(--secondary-button-text-colour);
@@ -65,6 +66,11 @@ button.secondary-btn {
 	cursor: pointer;
 	padding: 0.75rem 1.25rem;
 	border-radius: 0.5rem;
+	text-decoration: none;
+
+	&:not(.visible) {
+		display: none;
+	}
 
 	&.visible {
 		display: block;
@@ -73,6 +79,16 @@ button.secondary-btn {
 	&:hover, &:active {
 		background-color: var(--secondary-button-background-hovered-colour);
 		color: var(--secondary-button-text-hovered-colour);
+	}
+
+	&:hover {
+		& > svg.secondary-btn__icon {
+			transform: scale(1.15);
+		}
+	}
+
+	&#home-btn {
+		margin-right: auto;
 	}
 }
 
@@ -85,10 +101,16 @@ svg.secondary-btn__icon {
 	stroke-width: 2;
 	stroke-linecap: round;
 	stroke-linejoin: round;
+	transition: color var(--transition-duration), transform var(--transition-duration);
+
+	&#home-btn__icon {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
 }
 
 
-article {
+main {
 	background-color: var(--primary-background-colour);
 }
 
@@ -225,10 +247,11 @@ div.exp-item__duration {
 	line-height: 1.3;
 	grid-area: 2 / 2 / 3 / 4;
 	font-size: 0.9rem;
+	line-height: 1.3;
 }
 
 .exp-item__desc > p:not(:first-of-type) {
-	margin-top: 0.5rem;//calc(1rem / 3);
+	margin-top: 0.5rem;
 }
 
 
@@ -307,7 +330,7 @@ div.proj-item__desc {
 		display: block;
 	}
 
-	article {
+	main {
 		box-shadow: 0 0 1rem var(--shadow-colour);
 		width: 210mm;
 		height: 297mm;
@@ -331,11 +354,6 @@ div.proj-item__desc {
 
 
 	div#secondary-btn-row {
-		display: none;
-	}
-
-
-	button.secondary-btn.visible {
 		display: none;
 	}
 
