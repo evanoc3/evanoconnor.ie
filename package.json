@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "PORT=${PORT:-8080} && vite --port $PORT",
     "dist": "vite build",
+    "preview": "PORT=${PORT:-8080} && vite preview --port $PORT",
     "deploy": "node ./scripts/deploy.mjs"
   },
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
