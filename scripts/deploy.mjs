@@ -16,6 +16,7 @@ main();
 
 async function main() {
 	try {
+		await ensureGitBranchIsMain();
 		await ensureGitWorkingTreeIsClean();
 		await buildViteDistBundle();
 		await buildDockerImage();
@@ -28,20 +29,18 @@ async function main() {
 	console.log("Done.");
 }
 
+async function ensureGitBranchIsMain() {
+	console.log("(1/5) Verifying git branch...");
+	const stdout = await exec("git rev-parse --abbrev-ref HEAD", { cwd: rootDir });
 
-async function ensureGitWorkingTreeIsClean() {
-	console.log("(1/4) Checking git working tree status is clean...");
-	const stdout = await exec("git status", { cwd: rootDir });
-	const isGitWorkingTreeClean = stdout.includes("nothing to commit, working tree clean");
-
-	if (!isGitWorkingTreeClean) {
-		throw new Error("cannot proceed unless git working tree is clean. Please stash or commit any uncommitted changes and try again.")
+	if (stdout !== "main") {
+		throw new Error(`this script can only be run on the 'main' branch.`);
 	}
 }
 
 
 async function exec(cmd, opts) {
-	console.log(`Executing subprocess with command: "${cmd}"`);
+	console.log(`Executing sub-process with command: "${cmd}"`);
 	let { stdout } = await _exec(cmd, opts);
 
 	stdout = stdout.toString().trim();
@@ -53,19 +52,30 @@ async function exec(cmd, opts) {
 }
 
 
+async function ensureGitWorkingTreeIsClean() {
+	console.log("\n(2/5) Checking git working tree is clean...");
+	const stdout = await exec("git status", { cwd: rootDir });
+	const isGitWorkingTreeClean = stdout.includes("nothing to commit, working tree clean");
+
+	if (!isGitWorkingTreeClean) {
+		throw new Error("cannot proceed unless git working tree is clean. Please stash or commit any uncommitted changes and try again.")
+	}
+}
+
+
 async function buildViteDistBundle() {
-	console.log("\n(2/4) Building vite bundle...");
+	console.log("\n(3/5) Building vite bundle...");
 	await exec("npx vite build", { cwd: rootDir });
 }
 
 
 async function buildDockerImage() {
-	console.log("\n(3/4) Building docker image...");
+	console.log("\n(4/5) Building docker image...");
 	await exec("docker build -t evanoconnor.ie .", { cwd: rootDir });
 }
 
 
 async function deployToFlyIo() {
-	console.log("\n(4/4) Deploying to fly.io...");
+	console.log("\n(5/5) Deploying to fly.io...");
 	await exec("fly deploy", { cwd: rootDir });
 }
