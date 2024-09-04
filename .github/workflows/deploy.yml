@@ -1,14 +1,15 @@
-name: CI
+name: Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
 jobs:
   build-and-deploy:
-    name: Build
+    name: Build and Deploy
     runs-on: macos-latest
+    concurrency: deploy-group
     steps:
       - name: Checkout Git repo
         uses: actions/checkout@v4
@@ -24,7 +25,10 @@ jobs:
       - name: Build
         run: npm run dist
 
-      - name: Cache build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          path: ./dist
+      - name: Setup Flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
