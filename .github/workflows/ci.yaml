@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     name: Build
     runs-on: macos-latest
     steps:
@@ -23,6 +23,8 @@ jobs:
 
       - name: Build
         run: npm run dist
+        env: 
+          VITE_UMAMI_SITE_ID: ${{ secrets.UMAMI_SITE_ID }}
 
       - name: Cache build artifacts
         uses: actions/upload-artifact@v4

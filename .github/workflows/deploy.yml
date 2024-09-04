@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  deploy:
+    name: Deploy
     runs-on: macos-latest
     concurrency: deploy-group
     steps:
@@ -24,6 +24,8 @@ jobs:
 
       - name: Build
         run: npm run dist
+        env: 
+          VITE_UMAMI_SITE_ID: ${{ secrets.UMAMI_SITE_ID }}
 
       - name: Setup Flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
