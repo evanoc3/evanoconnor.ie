@@ -10,7 +10,7 @@ body {
 }
 
 
-ul {
+ul, ol {
 	list-style-position: inside;
 }
 
@@ -21,4 +21,9 @@ button {
 	border: none;
 	appearance: none;
 	cursor: pointer;
+}
+
+hr {
+	appearance: none;
+	border: none;
 }

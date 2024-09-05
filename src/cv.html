@@ -11,83 +11,63 @@
 	</head>
 
 	<body>
+		<!-- Secondary Button Row -->
 		<div id="secondary-btn-row">
-
-			<a href="#home" id="home-btn" class="secondary-btn"> <!-- TODO: add 'visible' class and change href when homepage is ready -->
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon" id="home-btn__icon">
-					<polyline points="15 18 9 12 15 6"></polyline>
-				</svg>
-
-				Home
-			</a>
-
 			<button id="print-btn" class="secondary-btn">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon">
-					<polyline points="6 9 6 2 18 2 18 9"></polyline>
-					<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-					<rect x="6" y="14" width="12" height="8"></rect>
+				<svg xmlns="http://www.w3.org/2000/svg" class="secondary-btn__icon">
+					<use href="./img/printer.svg#img" />
 				</svg>
 	
 				Print
 			</button>
 
 			<button id="theme-btn" class="secondary-btn" title="Toggle light/dark theme">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon" id="theme-btn__moon-icon">
-					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+				<svg xmlns="http://www.w3.org/2000/svg" class="secondary-btn__icon" id="theme-btn__moon-icon">
+					<use href="./img/moon.svg#img" />
 				</svg>
 
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="secondary-btn__icon" id="theme-btn__sun-icon">
-					<circle cx="12" cy="12" r="5"></circle>
-					<line x1="12" y1="1" x2="12" y2="3"></line>
-					<line x1="12" y1="21" x2="12" y2="23"></line>
-					<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-					<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-					<line x1="1" y1="12" x2="3" y2="12"></line>
-					<line x1="21" y1="12" x2="23" y2="12"></line>
-					<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-					<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+				<svg xmlns="http://www.w3.org/2000/svg" class="secondary-btn__icon" id="theme-btn__sun-icon">
+					<use href="./img/sun.svg#img" />
 				</svg>
 			</button>
 		</div>
 
+		<!-- Main -->
 		<main>
+
+			<!-- Page Title -->
 			<header>
 				<div id="header-grid">
-					<div id="profile-img-container">
-						<img src="./img/me.jpg" id="profile-img" alt="Profile photo" />
-					</div>
+					<img src="./img/me.jpg" id="profile-img" alt="Profile photo" />
 
 					<h1 id="page-title">Evan O&apos;Connor</h1>
 	
 					<nav>
+						<!-- LinkedIn Contact Link -->
 						<a href="https://www.linkedin.com/in/evanoc3/" title="Connect with me on LinkedIn at: https://www.linkedin.com/in/evanoc3/" class="contact-row__link" target="_blank" rel="me noopener">
-							<svg class="contact-row__icon">
-								<use href="./img/linkedin.svg#img" />
-							</svg>
-							<span class="contact-row__label">evanoc3</span>
+							<svg><use href="./img/linkedin.svg#img" /></svg>
+							<span>evanoc3</span>
 						</a>
 		
+						<!-- GitHub Contact Link-->
 						<a href="https://github.com/evanoc3" title="Find me on GitHub at: https://github.com/evanoc3" class="contact-row__link" rel="me noopener">
-							<svg xmlns="http://www.w3.org/2000/svg" class="contact-row__icon">
-								<use href="./img/github.svg#img" />
-							</svg>
-							
-							<span class="contact-row__label">evanoc3</span>
+							<svg><use href="./img/github.svg#img" /></svg>
+							<span>evanoc3</span>
 						</a>
 	
+						<!-- Email Contact Link-->
 						<a href="mailto:evan@evanoconnor.ie" class="contact-row__link" title="Email me at: evan@evanoconnor.ie">
-							<svg xmlns="http://www.w3.org/2000/svg" class="contact-row__icon">
-								<use href="./img/envelope.svg#img" />
-							</svg>
-		
-							<span class="contact-row__label">evan@evanoconnor.ie</span>
+							<svg><use href="./img/envelope.svg#img" /></svg>
+							<span>evan@evanoconnor.ie</span>
 						</a>
 					</nav>
 				</div>
 
 			</header>
 
+			<!-- Experience Section -->
 			<section>
+				<!-- 'Work' Subheader Title -->
 				<header class="subheader-row">
 					<hr class="subheader-row__line" noshade />
 
@@ -96,31 +76,48 @@
 					<hr class="subheader-row__line" noshade />
 				</header>
 
+				<!-- Contact Center Work Item -->
 				<div class="exp-item">
 					<img src="/img/wxcc.png" class="exp-item__icon" title="Webex Contact Center logo" />
 
-					<h3 class="exp-item__title">Software Engineer &bull; <a href="https://www.webex.com/us/en/products/customer-experience/contact-center.html" target="_blank" rel="noopener noreferrer" class="exp-item__link">Contact Center (Cisco)</a></h3>
+					<div class="exp-item__title">
+						<h3>Software Engineer</h3>
+						<span>
+							&nbsp;&bull;
+							<a href="https://www.webex.com/us/en/products/customer-experience/contact-center.html" target="_blank" rel="noopener noreferrer" class="exp-item__link">Contact Center (Cisco)</a>
+						</span>
+					</div>
 
 					<div class="exp-item__duration" id="current-work-item__duration"><em>Mar 2024 &ndash; Present</em></div>
 
 					<div class="exp-item__desc">
-						<p>Currently working on improving the quality, reliability and feature velocity of Webex Contact Center.</p>
+						<p>Currently working on improving the quality, reliability, and feature velocity of Webex Contact Center.</p>
 					</div>
 
 					<ul class="exp-item__skills">
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener" class="exp-item__skill">CSS</a></li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener" class="exp-item__skill">HTML</a></li>
 						<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener" class="exp-item__skill">JavaScript</a></li>
 						<li><a href="https://jestjs.io/" target="_blank" rel="noopener" class="exp-item__skill">Jest</a></li>
 						<li><a href="https://nodejs.org/en" target="_blank" rel="noopener" class="exp-item__skill">Node.js</a></li>
+						<li><a href="https://www.python.org/" target="_blank" rel="noopener" class="exp-item__skill">Python</a></li>
 						<li><a href="https://react.dev/" target="_blank" rel="noopener" class="exp-item__skill">React</a></li>
 						<li><a href="https://sass-lang.com/" target="_blank" rel="noopener" class="exp-item__skill">Sass</a></li>
 						<li><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener" class="exp-item__skill">TypeScript</a></li>
 					</ul>
 				</div>
 
+				<!-- Webex Work Item-->
 				<div class="exp-item">
 					<img src="/img/webex.svg" class="exp-item__icon" title="Webex logo" />
 
-					<h3 class="exp-item__title">Software Engineer &bull; <a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Webex (Cisco)</a></h3>
+					<div class="exp-item__title">
+						<h3>Software Engineer</h3>
+						<span>
+							&nbsp;&bull;
+							<a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Webex (Cisco)</a>
+						</span>
+					</div>
 
 					<div class="exp-item__duration" title="Sep 2021 &ndash; Mar 2024 (2 years 6 months)"><em>Sep 2021 &ndash; Mar 2024</em></div>
 
@@ -138,15 +135,22 @@
 						<li><a href="https://www.python.org/" target="_blank" rel="noopener" class="exp-item__skill">Python</a></li>
 						<li><a href="https://doc.qt.io/qt-6/qmlapplications.html" target="_blank" rel="noopener" class="exp-item__skill">QML</a></li>
 						<li><a href="https://www.qt.io/product" target="_blank" rel="noopener" class="exp-item__skill">Qt</a></li>
+						<li><a href="https://www.zsh.org/" target="_blank" rel="noopener" class="exp-item__skill">Shell</a></li>
 						<li><a href="https://www.swift.org/" target="_blank" rel="noopener" class="exp-item__skill">Swift</a></li>
-						<li><a href="https://www.zsh.org/" target="_blank" rel="noopener" class="exp-item__skill">ZSH</a></li>
 					</ul>
 				</div>
 
+				<!-- Intern Work Item -->
 				<div class="exp-item">
 					<img src="/img/webex.svg" class="exp-item__icon" title="Webex logo" />
 
-					<h3 class="exp-item__title">Software Engineering Intern &bull; <a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Webex (Cisco)</a></h3>
+					<div class="exp-item__title">
+						<h3>Software Engineering Intern</h3>
+						<span>
+							&nbsp;&bull;
+							<a href="https://webex.com" target="_blank" rel="noopener noreferrer" class="exp-item__link">Webex (Cisco)</a>
+						</span>
+					</div>
 
 					<div class="exp-item__duration" title="Jan 2020 &ndash; Sep 2020 (9 months)"><em>Jan 2020 &ndash; Sep 2020</em></div>
 
@@ -163,7 +167,10 @@
 				</div>
 			</section>
 
+			<!-- Eduction Section -->
 			<section>
+
+				<!-- 'Eduction' Subheader Title -->
 				<header class="subheader-row">
 					<hr class="subheader-row__line" noshade />
 	
@@ -172,10 +179,17 @@
 					<hr class="subheader-row__line" noshade />
 				</header>
 
+				<!-- Bachelors Degree Eduction Item -->
 				<div class="exp-item">
 					<img src="/img/university_of_galway.png" class="exp-item__icon" title="University of Galway logo" />
 
-					<h3 class="exp-item__title">BSc Computer Science &amp; IT &bull; <a href="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html" target="_blank" rel="noopener noreferrer" class="exp-item__link">University of Galway</a></h3>
+					<div class="exp-item__title">
+						<h3>BSc Computer Science &amp; IT</h3>
+						<span>
+							&nbsp;&bull;
+							<a href="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html" target="_blank" rel="noopener noreferrer" class="exp-item__link">University of Galway</a>
+						</span>
+					</div>
 
 					<div class="exp-item__duration" title="Sep 2017 &ndash; Jun 2021 (3 years 9 months)"><em>2017 &ndash; 2021</em></div>
 
