@@ -1,13 +1,21 @@
 @use "./styles/reset"; 
+@use "./styles/fonts_sizes" as fontSizes;
+@import "./fonts/inter/inter.scss";
+
 
 
 $page-margin: 1.5cm;
+$transition-duration: calc(1s / 3);
 
+
+// #region Theme Colours
 
 @mixin light-theme-colours {
 	--primary-text-colour: #222;
-	--secondary-text-colour: #545454;
-	--link-text-colour: #808080;
+	--secondary-text-colour: #4e4e4e;
+	
+	--link-text-colour: #6a6a6a;
+	--link-hovered-text-colour: var(var(--primary-text-colour));
 	--secondary-button-background-colour: transparent;
 	--secondary-button-background-hovered-colour: #c6c6c6;
 	--secondary-button-text-colour: var(--secondary-text-colour);
@@ -30,6 +38,8 @@ $page-margin: 1.5cm;
 	--badge-background-hovered-colour: #adadad;
 }
 
+// #endregion
+
 
 :root {
 	--transition-duration: calc(1s / 3);
@@ -45,8 +55,12 @@ body {
 	align-items: center;
 	padding: 1cm 1rem 2cm;
 	gap: 1cm;
+	font-family: Inter;
+	font-size: fontSizes.$body;
 }
 
+
+// #region Secondary row
 
 div#secondary-btn-row {
 	width: 100%;
@@ -62,7 +76,7 @@ button.secondary-btn, a.secondary-btn {
 	font-size: 1rem;
 	background-color: var(--secondary-button-background-colour);
 	color: var(--secondary-button-text-colour);
-	transition-duration: var(--transition-duration);
+	transition-duration: $transition-duration;
 	cursor: pointer;
 	padding: 0.75rem 1.25rem;
 	border-radius: 0.5rem;
@@ -101,7 +115,7 @@ svg.secondary-btn__icon {
 	stroke-width: 2;
 	stroke-linecap: round;
 	stroke-linejoin: round;
-	transition: color var(--transition-duration), transform var(--transition-duration);
+	transition: color $transition-duration, transform $transition-duration;
 
 	&#home-btn__icon {
 		width: 1.2rem;
@@ -109,22 +123,71 @@ svg.secondary-btn__icon {
 	}
 }
 
+// #endregion
+
 
 main {
 	background-color: var(--primary-background-colour);
+	display: flex;
+	flex-flow: column nowrap;
 }
+
+
+// #region Header
+
+$me-img-size: 6rem;
+
+header {
+	display: grid;
+	place-items: center;
+}
+
+div#header-grid {
+	display: inline-grid;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	column-gap: 1rem;
+}
+
+#profile-img-container {
+	width: $me-img-size;
+	height: $me-img-size;
+	grid-area: 1 / 1 / 3 / 2;
+	align-self: center;
+	border-radius: calc($me-img-size / 2);
+	padding: 0rem;
+	// box-shadow: inset 0 0 0.25rem rgba(0,0,0, 0.1);
+
+	> img#profile-img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		box-shadow: 0 0 6px rgba(0,0,0, 0.15);
+	}
+}
+
 
 
 h1#page-title {
-	font-size: 2.75rem;
-	font-family: Arial;
+	display: inline-block;
+	width: auto;
+	font-size: fontSizes.$h1;
+	font-family: InterDisplay;
 	font-weight: 600;
-	letter-spacing: -0.025em;
-	text-align: center;
 	line-height: 1;
-	margin-bottom: 1rem;
 }
 
+nav {
+	display: inline-flex;
+	width: auto;
+	flex-flow: row nowrap;
+	column-gap: 1.5rem;
+}
+
+// #endregion
+
+
+// #region Contact Row
 
 div#contact-row {
 	display: flex;
@@ -139,15 +202,15 @@ a.contact-row__link {
 	text-decoration: none;
 	cursor: pointer;
 	color: var(--link-text-colour);
-	transition: color var(--transition-duration);
+	transition: color $transition-duration;
 
 	&:hover {
-		color: var(--text-colour);
+		color: var(--link-hovered-text-colour);
 	}
 }
 
 
-svg.contact-row__icon {
+.contact-row__icon {
 	height: 1.1em;
 	width: 1.1em;
 	position: relative;
@@ -155,19 +218,15 @@ svg.contact-row__icon {
 	fill: currentColor;
 }
 
-svg#email-icon {
-	stroke: currentColor;
-	fill: none;
-	stroke-width: 2;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-}
-
 
 span.contact-row__label {
 	text-decoration: underline;
 }
 
+// #endregion
+
+
+// #region Sections
 
 section {
 	margin-top: 1.5rem;
@@ -185,8 +244,8 @@ header.subheader-row {
 hr.subheader-row__line {
 	display: inline-block;
 	border: none;
-	height: 2px;
 	border-radius: 1px;
+	min-height: 1.5px;
 	background-color: var(--separator-colour);
 	flex: 1 0;
 }
@@ -198,6 +257,10 @@ h2.subheader-row__title {
 	font-size: 1.25rem;
 }
 
+// #endregion
+
+
+// #region Experience Sections
 
 div.exp-item {
 	display: grid;
@@ -225,7 +288,7 @@ h3.exp-item__title {
 
 a.exp-item__link {
 	color: var(--link-text-colour);
-	transition: color var(--transition-duration);
+	transition: color $transition-duration;
 
 	&:hover {
 		color: var(--text-colour);
@@ -270,7 +333,7 @@ a.exp-item__skill {
 	background-color: var(--badge-background-colour);
 	border-radius: 1rem;
 	font-size: 0.8rem;
-	transition: background-color var(--transition-duration);
+	transition: background-color $transition-duration;
 	color: var(--primary-text-colour);
 	text-decoration: none;
 	cursor: pointer;
@@ -281,29 +344,10 @@ a.exp-item__skill {
 	}
 }
 
+// #endregion
 
-div.proj-item {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-template-rows: repeat(2, auto);
-	row-gap: 0;
-	column-gap: 0.75rem;
-	margin-top: 1.25rem;
-}
 
-h3.proj-item__title {
-	font-weight: 500;
-	grid-area: 1 / 1 / 2 / 2;
-	padding-bottom: calc(1rem / 3);
-	display: inline;
-}
-
-div.proj-item__desc {
-	font-weight: 500;
-	grid-area: 1 / 2 / 2 / 2;
-	padding-bottom: calc(1rem / 3);
-}
-
+// #region Screen-only Styles
 
 @media only screen {
 
@@ -319,7 +363,7 @@ div.proj-item__desc {
 
 	body {
 		background-color: var(--secondary-background-colour);
-		transition-duration: var(--transition-duration);
+		transition-duration: $transition-duration;
 	}
 
 	body[data-theme="light"] svg#theme-btn__sun-icon, body[data-theme="dark"] svg#theme-btn__moon-icon {
@@ -338,6 +382,10 @@ div.proj-item__desc {
 	}
 }
 
+// #endregion
+
+
+// #region Print-only Styles
 
 @media only print {
 
@@ -363,3 +411,5 @@ div.proj-item__desc {
 	}
 
 }
+
+// #endregion
