@@ -8,6 +8,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	const notFoundPathLabel = document.querySelector("#not-found-path")!;
 
-	const missingMessage = (slug === "/404.html" || slug === "/404") ? "page" : `path ${slug}`;
+	const missingMessage = (slug === "/404.html" || slug === "/404") ? "page" : `path "${slug}"`;
 	notFoundPathLabel.textContent = missingMessage;
 });
