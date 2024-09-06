@@ -28,7 +28,7 @@ export default {
 		Sitemap({
 			hostname: "https://evanoconnor.ie",
 			exclude: [ "/404" ],
-			changefreq: "monthly",
+			changefreq: "daily",
 			robots: [
 				{ userAgent: "*", allow: "/" },
 				{ userAgent: "*", disallow: "/assets/" }

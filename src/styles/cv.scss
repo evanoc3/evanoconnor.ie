@@ -1,7 +1,7 @@
-@use "./styles/reset";
 @use "sass:math";
 @use "sass:map";
-@import "./fonts/inter/inter.scss";
+@use "./reset";
+@use "./inter";
 
 
 // #region Variables
