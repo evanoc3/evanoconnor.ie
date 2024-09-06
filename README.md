@@ -21,14 +21,6 @@ Check out the project and run `npm run dev` to start a local development server.
 3. Run `docker run -p 8080:80 evanoconnor.ie` to start a container running the production build.
 
 
-## External Services
-
-* [LetsHost](https://www.letshost.ie) &ndash; For the .ie domain name.
-* [Fly.io](https://fly.io) &ndash; Hosts the docker containers which serve the website.
-* [Cloudflare](https://www.cloudflare.com/application-services/products/dns/) &ndash; For the nameservers and DNS.
-* [umami](https://umami.is) &ndash; GDPR-compliant analytics.
-
-
 ---
 
 &copy; 2024 Evan O&apos;Connor. All rights reserved.
