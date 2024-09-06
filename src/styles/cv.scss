@@ -118,6 +118,10 @@ div#secondary-btn-row {
 		display: block;
 	}
 
+	&.left {
+		margin-right: auto;
+	}
+
 	&:hover, &:active {
 		background-color: var(--secondary-button-background-hovered-colour);
 		color: var(--secondary-button-text-hovered-colour);
@@ -211,6 +215,8 @@ nav {
 		> span {
 			text-decoration: underline;
 			text-decoration-skip-ink: auto;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 2px;
 		}
 	}
 }
@@ -291,6 +297,8 @@ img.exp-item__icon {
 
 	a.exp-item__link {
 		transition: color $transition_duration;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 2px;
 	
 		&:hover {
 			color: var(--link-hovered-text-colour);
