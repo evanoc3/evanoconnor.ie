@@ -118,6 +118,10 @@ div#secondary-btn-row {
 		display: block;
 	}
 
+	&.left {
+		margin-right: auto;
+	}
+
 	&:hover, &:active {
 		background-color: var(--secondary-button-background-hovered-colour);
 		color: var(--secondary-button-text-hovered-colour);
