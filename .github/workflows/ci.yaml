@@ -9,6 +9,9 @@ jobs:
   build:
     name: Build
     runs-on: macos-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout Git repo
         uses: actions/checkout@v4
@@ -19,12 +22,12 @@ jobs:
           node-version-file: .nvmrc
     
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=dev
 
       - name: Build
-        run: npm run dist
-        env: 
-          VITE_UMAMI_SITE_ID: ${{ secrets.UMAMI_SITE_ID }}
+        run: npm run build
+        env:
+          DOTENV_PRIVATE_KEY_PRODUCTION: ${{ secrets.DOTENV_PRIVATE_KEY_PRODUCTION }}
 
       - name: Cache build artifacts
         uses: actions/upload-artifact@v4

@@ -1,0 +1,17 @@
+.github/
+.vscode/
+dist/
+docs/
+node_modules/
+.vite/
+.git/
+
+.dockerignore
+.env.keys
+.env.local
+.gitignore
+.nvmrc
+Dockerfile
+fly.toml
+LICENSE
+README.md

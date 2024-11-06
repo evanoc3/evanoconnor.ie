@@ -1,7 +1,8 @@
 @use "sass:math";
 @use "sass:map";
 @use "./reset";
-@use "./inter";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 
 // #region Variables
@@ -176,7 +177,7 @@ h1#page-title {
 	display: inline-block;
 	width: auto;
 	font-size: map.get($font_sizes, xxxl);
-	font-family: InterDisplay;
+	font-family: Inter;
 	font-weight: 600;
 	line-height: 1;
 	color: var(--header-primary-text-colour);
@@ -247,7 +248,7 @@ header.subheader-row {
 	> h2.subheader-row__title {
 		display: inline;
 		font-weight: 600;
-		font-family: InterDisplay;
+		font-family: Inter;
 		font-size: map.get($font_sizes, md);
 		color: var(--header-secondary-text-colour);
 	}
@@ -281,7 +282,7 @@ img.exp-item__icon {
 	grid-area: 1 / 2 / 2 / 3;
 	padding-bottom: calc(1rem / 3);
 
-	font-family: InterDisplay;
+	font-family: Inter;
 	font-size: map.get($font_sizes, md);
 
 	> h3 {

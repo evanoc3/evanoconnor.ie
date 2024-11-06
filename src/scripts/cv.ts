@@ -15,10 +15,10 @@ function getHumanReadableTimeInterval(dateFrom: Date, dateTo: Date): string {
   const years = Math.floor(totalMonths / monthsInYear);
   const remainingMonths = totalMonths % monthsInYear;
 
-  const yearString = years > 0 ? `${years} ${years === 1 ? 'year' : 'years'}` : '';
-  const monthString = remainingMonths > 0 ? `${remainingMonths} ${remainingMonths === 1 ? 'month' : 'months'}` : '';
+  const yearString = years > 0 ? `${years} ${years === 1 ? "year" : "years"}` : "";
+  const monthString = remainingMonths > 0 ? `${remainingMonths} ${remainingMonths === 1 ? "month" : "months"}` : "";
 
-  return yearString + (years && remainingMonths ? ' ' : '') + monthString;
+  return yearString + (years && remainingMonths ? " " : "") + monthString;
 }
 
 

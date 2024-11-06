@@ -1,59 +1,31 @@
 import { fileURLToPath } from "node:url";
-import { dirname, resolve, sep } from "node:path";
-import assert from "node:assert";
-import Sitemap from "vite-plugin-sitemap";
-import type { UserConfig } from "vite";
+import { dirname } from "node:path";
+import { defineConfig } from "vite";
 
+const currentDir = dirname(fileURLToPath(import.meta.url));
 
-const __dirname = fileURLToPath(dirname(import.meta.url));
-
-
-export default {
+export default defineConfig({
 	appType: "mpa",
-	root: path`${__dirname}/src`,
-	publicDir: path`${__dirname}/static`,
-	envDir: path`${__dirname}`,
+	root: `${currentDir}/src`,
+	publicDir: `${currentDir}/public`,
+	envDir: currentDir,
+	cacheDir: `${currentDir}/.vite`,
 	build: {
-		outDir: path`${__dirname}/dist`,
+		outDir: `${currentDir}/dist`,
 		emptyOutDir: true,
 		rollupOptions: {
 			input: [
-				path`${__dirname}/src/index.html`,
-				path`${__dirname}/src/cv.html`,
-				path`${__dirname}/src/404.html`
+				`${currentDir}/src/index.html`,
+				`${currentDir}/src/cv.html`,
+				`${currentDir}/src/404.html`
 			]
 		}
 	},
-	plugins: [
-		Sitemap({
-			hostname: "https://evanoconnor.ie",
-			exclude: [ "/404" ],
-			changefreq: "daily",
-			robots: [
-				{ userAgent: "*", allow: "/" },
-				{ userAgent: "*", disallow: "/assets/" }
-			],
-			readable: true
-		})
-	]
-} satisfies UserConfig;
-
-
-function path(strings: TemplateStringsArray, ...args: any[]): string {
-	assert(strings.length > 0);
-	assert(args.length === strings.length - 1);
-
-	let output = strings[0];
-
-	if (strings.length > 1) {
-		for(let i=1; i < strings.length; i++) {
-			output += args[i-1];
-			output += strings[i];
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: "modern-compiler"
+			}
 		}
-	}
-
-	// @ts-expect-error
-	output = output.replaceAll("/", sep);
-	output = resolve(output);
-	return output;
-}
+	},
+});
