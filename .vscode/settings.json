@@ -1,0 +1,9 @@
+{
+	"editor.insertSpaces": false,
+	"editor.tabSize": 2,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.DS_Store": true,
+		".vite": true
+	}
+}
