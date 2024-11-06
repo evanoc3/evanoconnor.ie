@@ -8,4 +8,4 @@ $.env.DOTENV_PRIVATE_KEY_PRODUCTION = ("DOTENV_PRIVATE_KEY_PRODUCTION" in proces
 	? process.env.DOTENV_PRIVATE_KEY_PRODUCTION
 	: await $`dotenvx get -f .env.keys --format eval DOTENV_PRIVATE_KEY_PRODUCTION`;
 
-await $`fly deploy --remote-only --build-secret DOTENV_PRIVATE_KEY_PRODUCTION="${$.env.DOTENV_PRIVATE_KEY_PRODUCTION}"`;
+await $`flyctl deploy --remote-only --build-secret DOTENV_PRIVATE_KEY_PRODUCTION="${$.env.DOTENV_PRIVATE_KEY_PRODUCTION}"`;
