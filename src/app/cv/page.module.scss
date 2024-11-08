@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+div#cv_page {
+	display: flex;
+	flex-flow: column nowrap;
+	row-gap: 1cm;
+	background-color: var(--background-secondary-colour);
+	padding: 1cm 1rem 2cm;
+}
+
+@media only print {
+
+	div#cv_page {
+		padding: 0;
+		row-gap: 0;
+		background-color: white;
+	}
+
+	#toolbar {
+		display: none;
+	}
+
+}
+
+div#page_layout {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+

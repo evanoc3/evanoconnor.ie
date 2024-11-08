@@ -1,0 +1,21 @@
+$page-margin: 1.5cm;
+
+main#main {
+	background-color: var(--background-primary-colour);
+	box-shadow: 0 0 1rem var(--shadow-colour);
+	width: 210mm;
+	height: 297mm;
+	padding: $page-margin;
+	margin: auto;
+	overflow: hidden;
+}
+
+
+@media only print {
+
+	main#main {
+		box-shadow: none;
+		margin: 0;
+	}
+
+}

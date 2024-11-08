@@ -1,14 +1,14 @@
+.git/
 .github/
+.next/
 .vscode/
-dist/
 docs/
 node_modules/
-.vite/
-.git/
 
 .dockerignore
 .env.keys
 .env.local
+.eslintrc.json
 .gitignore
 .nvmrc
 Dockerfile
