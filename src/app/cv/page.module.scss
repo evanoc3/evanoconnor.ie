@@ -10,14 +10,13 @@ div#cv_page {
 
 @media only print {
 
-	div#cv_page {
-		padding: 0;
-		row-gap: 0;
-		background-color: white;
-	}
-
 	#toolbar {
 		display: none;
+	}
+
+	div#cv_page {
+		padding: 0;
+		background-color: white;
 	}
 
 }

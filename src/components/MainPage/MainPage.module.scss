@@ -16,6 +16,10 @@ main#main {
 	main#main {
 		box-shadow: none;
 		margin: 0;
+		padding: 0;
+		background: none;
+		width: calc(210mm - ($page-margin * 2));
+		height: calc(297mm - ($page-margin * 2));
 	}
 
 }
