@@ -1,0 +1,83 @@
+@use "transitions";
+@use "font_sizes";
+
+
+header#hero_cell {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+
+div#grid {
+	display: inline-grid;
+	gap: 0.5rem 1rem;
+	grid-template-columns: repeat(2, auto);
+	grid-template-rows: repeat(2, auto);
+}
+
+img#hero_img {
+	$size: 5.5rem;
+
+	align-self: center;
+	border-radius: 50%;
+	grid-column: 1 / 2;
+	grid-row: 1 / 3;
+	height: $size;
+	width: $size;
+}
+
+h1#title {
+	align-self: end;
+	display: inline-block;
+	color: var(--header-primary-text-colour);
+	font-size: font_sizes.$h1;
+	font-weight: 600;
+	line-height: 1;
+	width: auto;
+}
+
+div#links_row {
+	align-self: start;
+	column-gap: 1.25rem;
+	display: inline-flex;
+	flex-flow: row nowrap;
+}
+
+a.link {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	gap: 2px;
+	text-decoration: none;
+	cursor: pointer;
+	color: var(--link-text-colour);
+	transition: color transitions.$duration;
+
+	&:hover {
+		color: var(--link-hovered-text-colour);
+	}
+}
+
+svg.link_icon {
+	height: 1rem;
+	width: 1rem;
+	position: relative;
+	top: 2px;
+	fill: currentColor;
+	margin-right: 2px;
+}
+
+span.link_text {
+	text-decoration: underline;
+	text-decoration-skip-ink: auto;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 2px;
+}
+
+@media only print {
+
+	span.link_text {
+		text-decoration: none;
+	}
+
+}

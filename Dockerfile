@@ -2,12 +2,13 @@
 
 FROM node:lts-alpine AS builder
 WORKDIR /app
-RUN curl -sfS https://dotenvx.sh | sh
 COPY . .
-RUN npm ci --include=dev
+RUN npm ci --include=dev --force
 RUN --mount=type=secret,id=DOTENV_PRIVATE_KEY_PRODUCTION,env=DOTENV_PRIVATE_KEY_PRODUCTION \
-	  npx dotenvx run -f .env.production -- npm run build
+	  npm run build
 
-FROM nginx:stable-alpine-slim
-COPY --from=builder /app/dist/ /usr/share/nginx/html/
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+FROM node:lts-alpine
+WORKDIR /app
+COPY --from=builder /app/.next/standalone/ .
+CMD ["node", "./server.js"]
+EXPOSE 3000

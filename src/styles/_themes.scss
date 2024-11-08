@@ -1,0 +1,21 @@
+@mixin style-in-theme($theme) {
+	@if $theme == "light" {
+		body:not([data-theme="dark"]) {
+			@content;
+		}
+		@media only screen and (prefers-color-scheme: dark) {
+			body[data-theme="light"] {
+				@content
+			}
+		}
+	} @else if $theme == "dark" {
+		body[data-theme="dark"] {
+			@content;
+		}
+		@media only screen and (prefers-color-scheme: dark) {
+			body:not([data-theme="light"]) {
+				@content
+			}
+		}
+	}
+}

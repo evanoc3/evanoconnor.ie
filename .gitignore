@@ -1,6 +1,7 @@
-dist/
 node_modules/
-.vite/
+.next/
 
 !.env*
 .env.keys
+next-env.d.ts
+.DS_Store

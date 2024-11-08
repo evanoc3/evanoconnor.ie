@@ -1,0 +1,25 @@
+@use "font_sizes";
+
+header.container {
+	align-items: center;
+	column-gap: 0.4rem;
+	display: flex;
+	flex-flow: row nowrap;
+	margin-top: 1.2rem;
+}
+
+hr.line {
+	appearance: none;
+	background-color: var(--separator-colour);
+	border: none;
+	border-radius: 1px;
+	flex: 1;
+	min-height: 1.5px;
+}
+
+h2.title {
+	color: var(--header-secondary-text-colour);
+	display: inline;
+	font-size: font_sizes.$h6;
+	font-weight: 600;
+}
