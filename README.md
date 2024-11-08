@@ -1,6 +1,6 @@
 # evanoconnor.ie
 
-Source code for personal website [evaoconnor.ie](https://evanoconnor.ie), built using [Node.js](https://nodejs.org/en)/[NPM](https://www.npmjs.com/), and [Vite](https://vitejs.dev/). 
+Source code for personal website [evaoconnor.ie](https://evanoconnor.ie), built using [Node.js](https://nodejs.org/en), [React](https://react.dev/) and the [Next.js](https://nextjs.org/) framework. 
 
 
 ### See Also
