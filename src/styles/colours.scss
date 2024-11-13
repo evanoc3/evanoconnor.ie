@@ -48,13 +48,15 @@
 
 body {
 	@include light-theme-colours;
-
-  &[data-theme="dark"] {
-    @include dark-theme-colours;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
+@media only screen {
+	body[data-theme="dark"] {
+		@include dark-theme-colours;
+	}
+}
+
+@media only screen and (prefers-color-scheme: dark) {
   body:not([data-theme="light"]) {
     @include dark-theme-colours;
   }
