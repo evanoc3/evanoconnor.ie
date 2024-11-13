@@ -1,3 +1,4 @@
+@use "transitions";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 div#cv_page {
@@ -5,6 +6,7 @@ div#cv_page {
 	flex-flow: column nowrap;
 	row-gap: 1cm;
 	background-color: var(--background-secondary-colour);
+	transition: background-color transitions.$duration;
 	padding: 1cm 1rem 2cm;
 }
 

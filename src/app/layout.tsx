@@ -8,7 +8,12 @@ export default function RootLayout({ children }: PropsWithChildren): JSX.Element
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <script defer src="https://cloud.umami.is/script.js" data-website-id={process.env.NEXT_PUBLIC_UMAMI_SITE_ID} />
+        {
+          (process.env.NEXT_PUBLIC_UMAMI_SITE_ID) ? (
+            <script defer src="https://cloud.umami.is/script.js" data-website-id={process.env.NEXT_PUBLIC_UMAMI_SITE_ID} />
+          ) : null
+        }
+        
       </head>
 
       <body>
