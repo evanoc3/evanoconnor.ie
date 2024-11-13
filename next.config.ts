@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
   sassOptions: {
     implementation: "sass-embedded",
     includePaths: [ "src/styles" ]
+  },
+  devIndicators: {
+    buildActivity: false,
+    appIsrStatus: false
   }
 };
 
