@@ -1,0 +1,47 @@
+---
+import PageLayout from "@/components/PageLayout.astro";
+import SecondaryButtonsRow from "@/components/SecondaryButtonsRow.astro";
+---
+
+<style lang="scss">
+	@use "resets";
+	@use "page";
+	
+	@include resets.global;
+	@include page.optimize-for-text;
+
+	@media only screen {
+		:global(body) {
+			background-color: #ddd;
+		}
+
+		main {
+			width: 210mm;
+			height: 297mm;
+			margin: 0 auto 1in;
+			padding: 1in;
+			background-color: white;
+		}
+	}
+  
+	@media only print {
+		@page {
+			size: A4;
+			margin: 1in;
+		}
+
+		#secondary-buttons-row-container {
+			display: none !important;
+		}
+	}
+</style>
+
+<PageLayout title="CV | evanoconnor.ie">
+	<div id="secondary-buttons-row-container">
+		<SecondaryButtonsRow />
+	</div>
+
+	<main>
+		Heyyo!
+	</main>
+</PageLayout>

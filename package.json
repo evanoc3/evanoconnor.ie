@@ -1,0 +1,16 @@
+{
+  "name": "@evanoc3/evanoconnor.ie",
+  "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "astro": "^5.2.5",
+    "sass-embedded": "^1.83.4"
+  }
+}

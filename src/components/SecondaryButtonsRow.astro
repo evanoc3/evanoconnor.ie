@@ -1,0 +1,43 @@
+---
+import ArrowLeftSvg from "@/icons/arrow-left.svg";
+import PrinterSvg from "@/icons/printer.svg";
+---
+<style lang="scss">
+	@use "resets";
+
+	#secondary-buttons-row {
+		display: flex;
+		flex-flow: row nowrap;
+		column-gap: 1rem;
+		padding: 1cm;
+
+		> div#spacer {
+			flex: 1;
+		}
+
+		> button {
+			@include resets.button;
+		}
+	}
+</style>
+
+<div id="secondary-buttons-row">
+	<a href="/index.html">
+		<ArrowLeftSvg />
+		Go Back
+	</a>
+
+	<div id="spacer"></div>
+
+	<button id="print-btn">
+		<PrinterSvg />
+		Print
+	</button>
+</div>
+
+<script>
+	const printButton = document.querySelector("#print-btn");
+	if (printButton) {
+		printButton.addEventListener("click", () => window.print());
+	}
+</script>
