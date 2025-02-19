@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+
+import LinkedInSvg from "@/icons/linkedin.svg";
+import GithubSvg from "@/icons/github.svg";
+import EnvelopeSvg from "@/icons/envelope-fill.svg";
+
+import MeJpg from "@/images/me.jpg";
+---
+
+<style lang="scss">
+	#grid {
+		display: grid;
+		grid-template-columns: 1fr auto auto auto auto 1fr;
+		grid-template-rows: auto auto;
+		grid-template-areas: "lspace avatar title title title rspace"
+		                     "lspace avatar linkedin github email rspace";
+		column-gap: 1rem;
+		row-gap: 0.5rem;
+	}
+
+	#avatar-placeholder {
+		grid-area: avatar;
+		background-color: rgb(7, 69, 69);
+		border-radius: 50%;
+		min-width: 5rem;
+		min-height: 5rem;
+	}
+
+	img {
+		grid-area: avatar;
+		max-height: 6rem;
+		max-width: 6rem;
+		border-radius: 50%;
+	}
+
+	h1 {
+		grid-area: title;
+		align-self: end;
+		color: var(--header-primary-text-colour, #333);
+		font-size: 2.986rem;
+		font-weight: 600;
+		line-height: 1;
+	}
+
+	a {
+		text-decoration-style: underline;
+		text-decoration-skip-ink: auto;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 2px;
+		align-self: start;
+		color: var(--link-text-colour, #6a6a6a);
+		text-align: center;
+
+		&#linkedin {
+			grid-area: linkedin;
+		}
+
+		&#github {
+			grid-area: github;
+		}
+
+		&#email {
+			grid-area: email;
+		}
+
+		> svg {
+			height: 1rem;
+			width: 1rem;
+			position: relative;
+			top: 4px;
+			right: 4px;
+			fill: currentColor;
+		}
+	}
+</style>
+
+
+<div id="grid">
+	<Image src={MeJpg} alt="" />
+
+	<h1>Evan O'Connor</h1>
+
+	<a id="linkedin" href="https://www.linkedin.com/in/evanoc3/" title="Connect with me on LinkedIn at: https://www.linkedin.com/in/evanoc3/" target="_blank" rel="me noopener">
+		<LinkedInSvg />evanoc3
+	</a>
+
+	<a id="github" href="https://github.com/evanoc3" title="Find me on GitHub at: https://github.com/evanoc3" target="_blank" rel="me noopener">
+		<GithubSvg />evanoc3
+	</a>
+
+	<a id="email" href="mailto:evan@evanoconnor.ie" title="Email me at: evan@evanoconnor.ie" target="_blank">
+		<EnvelopeSvg />evan@evanconnor.ie
+	</a>
+</div>
+

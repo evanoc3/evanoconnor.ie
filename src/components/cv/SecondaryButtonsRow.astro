@@ -18,6 +18,30 @@ import PrinterSvg from "@/icons/printer.svg";
 		> button {
 			@include resets.button;
 		}
+
+		> a {
+			@include resets.link;
+		}
+		
+		> a, > button {
+			font-size: 1rem; 
+			line-height: 1;
+			padding: 1rem 1.5rem;
+			border-radius: 2rem;
+			transition: background-color 0.5s;
+			cursor: pointer;
+			
+			&:hover {
+				background-color: rgba(0,0,0, 0.2);
+			}
+		}
+
+		svg {
+			height: 1rem;
+			width: 1rem;
+			position: relative;
+			top: 2px;
+		}
 	}
 </style>
 
