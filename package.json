@@ -10,7 +10,9 @@
     "preview": "astro preview"
   },
   "devDependencies": {
+    "@types/luxon": "^3.4.2",
     "astro": "^5.4.3",
+    "luxon": "^3.5.0",
     "sass-embedded": "^1.85.1"
   }
 }

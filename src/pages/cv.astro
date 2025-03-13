@@ -1,7 +1,15 @@
 ---
+import { DateTime } from "luxon";
+
 import PageLayout from "@/components/PageLayout.astro";
 import SecondaryButtonsRow from "@/components/cv/SecondaryButtonsRow.astro";
 import HeroCell from "@/components/cv/HeroCell.astro";
+import Section from "@/components/cv/Section.astro";
+import ExperienceListItem from "@/components/cv/ExperienceListItem.astro";
+
+import WebexContactCenterLogo from "@/images/wxcc.png";
+import WebexLogo from "@/images/webex.svg";
+import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 ---
 
 <style lang="scss">
@@ -30,8 +38,13 @@ import HeroCell from "@/components/cv/HeroCell.astro";
 			display: block;
 		}
 	}
+
+	@media only screen {
+		main {
+			box-shadow: 0 0 1rem var(--shadow-colour, rgba(0,0,0, 0.1));
+		}
+	}
 	
-  
 	@media only print {
 		@page {
 			size: A4;
@@ -55,13 +68,132 @@ import HeroCell from "@/components/cv/HeroCell.astro";
 
 	<main>
 		<HeroCell />
+
+		<Section title="Work">
+			<ExperienceListItem
+				icon={WebexContactCenterLogo}
+				jobTitle="Software Engineer"
+				company="Webex Contact Center"
+				url="https://www.webex.com/us/en/products/customer-experience/contact-center.html"
+				timespan={{
+					start: DateTime.fromISO("2024-03-01")
+				}}
+				skills={[
+					{ title: "Node.js", url: "https://nodejs.org/" },
+					{ title: "TypeScript", url: "https://www.typescriptlang.org/" },
+					{ title: "React", url: "https://react.dev/" },
+					{ title: "Git", url: "https://git-scm.com/" },
+					{ title: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+					{ title: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+					{ title: "Jest", url: "https://jestjs.io/" },
+					{ title: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+					{ title: "Sass", url: "https://sass-lang.com/" },
+				]}
+			>
+				<p>
+					<!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
+					Currently working on improving the quality, reliability, and feature velocity of Webex Contact Center.
+				</p>
+			</ExperienceListItem>
+
+			<ExperienceListItem
+				icon={WebexLogo}
+				jobTitle="Software Engineer"
+				company="Webex"
+				url="https://webex.com/"
+				timespan={{
+					start: DateTime.fromISO("2021-09-01"), 
+					end: DateTime.fromISO("2024-03-01")
+				}}
+				skills={[
+					{ title: "C++", url: "https://isocpp.org/" },
+					{ title: "Swift", url: "https://www.swift.org/" },
+					{ title: "Python", url: "https://www.python.org/" },
+					{ title: "Git", url: "https://git-scm.com/" },
+					{ title: "Qt", url: "https://www.qt.io/product" },
+					{ title: "CMake", url: "https://cmake.org/" },
+					{ title: "SQLite", url: "https://www.sqlite.org/index.html" },
+					{ title: "ZSH", url: "https://www.zsh.org/" }
+				]}
+			>
+				<p>
+					<!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
+					Improved the Webex desktop apps' reliability and performance by fixing bugs & servicing tech debt.
+				</p>
+				<p>
+					Delivered high-quality features from the product roadmap (along with some independently driven personal projects during hackathons) in a collaborative, fast-paced work environment.
+				</p>
+				<p>
+					Held sole responsibility for important business workflows such as: localization of the apps, & publication of version release notes.
+				</p>
+			</ExperienceListItem>
+
+			<ExperienceListItem
+				icon={WebexLogo}
+				jobTitle="Engineering Intern"
+				company="Webex"
+				url="https://webex.com/"
+				timespan={{
+					start: DateTime.fromISO("2020-01-01"), 
+					end: DateTime.fromISO("2020-09-01")
+				}}
+				skills={[
+					{ title: "C++", url: "https://isocpp.org/" },
+					{ title: "Swift", url: "https://www.swift.org/" },
+					{ title: "Git", url: "https://git-scm.com/" },
+					{ title: "Qt", url: "https://www.qt.io/product" },
+				]}
+			>
+
+				<p>
+					Worked on the desktop clients teams at Webex, with a particular focus on: Accessibility (keyboard navigation, screen-reader, localization, RTL, etc…), theming, & creating a library of reusable UI components.
+				</p>
+			</ExperienceListItem>
+		</Section>
+
+		<Section title="Education">
+			<ExperienceListItem
+				icon={UniversityOfGalwayLogo}
+				jobTitle="BSc Computer Science & IT"
+				company="University of Galway"
+				url="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html"
+				timespan={{
+					start: DateTime.fromISO("2017-09-01"), 
+					end: DateTime.fromISO("2021-06-01")
+				}}
+				skills={[
+					{ title: "C", url: "https://en.wikipedia.org/wiki/The_C_Programming_Language" },
+					{ title: "C#", url: "https://dotnet.microsoft.com/en-us/languages/csharp" },
+					{ title: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+					{ title: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+					{ title: "Java", url: "https://www.java.com/en/" },
+					{ title: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/javascript" },
+					{ title: "Racket", url: "https://racket-lang.org/" },
+					{ title: "Linux", url: "https://www.linux.org/" },
+					{ title: "MATLAB", url: "https://www.mathworks.com/products/matlab.html" },
+					{ title: "MySQL", url: "https://www.mysql.com/" },
+					{ title: "MongoDB", url: "https://www.mongodb.com/" },
+					{ title: "Node.js", url: "https://nodejs.org/en" },
+					{ title: "PHP", url: "https://www.php.net/" },
+					{ title: "Prolog", url: "https://www.swi-prolog.org/" },
+					{ title: "React", url: "https://react.dev/" },
+					{ title: "TypeScript", url: "https://www.typescriptlang.org/" },
+					{ title: "ZSH", url: "https://www.zsh.org/" },
+				]}
+			>
+				<p>
+					Graduated from the University of Galway with first-class honours (1.1) in a Bachelor's degree in Computer Science & Information Technology.
+				</p>
+			</ExperienceListItem>
+		</Section>
+
 	</main>
 </PageLayout>
 
 
 <script>
 	const secondaryButtonsRowContainer = document.querySelector<HTMLDivElement>("#secondary-buttons-row-container");
-	if(secondaryButtonsRowContainer) {
+	if (secondaryButtonsRowContainer) {
 		secondaryButtonsRowContainer.classList.add("visible");
 	}
 </script>

@@ -16,7 +16,7 @@ import MeJpg from "@/images/me.jpg";
 		grid-template-areas: "lspace avatar title title title rspace"
 		                     "lspace avatar linkedin github email rspace";
 		column-gap: 1rem;
-		row-gap: 0.5rem;
+		row-gap: 0.75rem;
 	}
 
 	#avatar-placeholder {
@@ -29,8 +29,8 @@ import MeJpg from "@/images/me.jpg";
 
 	img {
 		grid-area: avatar;
-		max-height: 6rem;
-		max-width: 6rem;
+		max-height: 5.5rem;
+		max-width: 5.5rem;
 		border-radius: 50%;
 	}
 
@@ -44,13 +44,17 @@ import MeJpg from "@/images/me.jpg";
 	}
 
 	a {
-		text-decoration-style: underline;
+		text-decoration-line: underline;
 		text-decoration-skip-ink: auto;
-		text-decoration-thickness: 1px;
+		text-decoration-thickness: 0.08em;
 		text-underline-offset: 2px;
 		align-self: start;
 		color: var(--link-text-colour, #6a6a6a);
 		text-align: center;
+
+		&:first-of-type {
+			margin-left: 6px;
+		}
 
 		&#linkedin {
 			grid-area: linkedin;
@@ -64,13 +68,23 @@ import MeJpg from "@/images/me.jpg";
 			grid-area: email;
 		}
 
-		> svg {
-			height: 1rem;
-			width: 1rem;
-			position: relative;
-			top: 4px;
-			right: 4px;
-			fill: currentColor;
+		&:hover {
+			color: var(--link-text-hover-colour, #000);
+		}
+	}
+
+	svg {
+		height: 1rem;
+		width: 1rem;
+		position: relative;
+		top: 4px;
+		right: 4px;
+		fill: currentColor;
+	}
+
+	@media print {
+		a {
+			text-decoration: none;
 		}
 	}
 </style>

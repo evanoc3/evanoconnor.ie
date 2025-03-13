@@ -9,7 +9,7 @@ import PrinterSvg from "@/icons/printer.svg";
 		display: flex;
 		flex-flow: row nowrap;
 		column-gap: 1rem;
-		padding: 1cm;
+		padding: 1cm calc(1cm + 1rem);
 
 		> div#spacer {
 			flex: 1;
@@ -26,13 +26,16 @@ import PrinterSvg from "@/icons/printer.svg";
 		> a, > button {
 			font-size: 1rem; 
 			line-height: 1;
-			padding: 1rem 1.5rem;
+			padding: .75rem 1.25rem;
 			border-radius: 2rem;
-			transition: background-color 0.5s;
+			transition: background-color 0.5s, color 0.5s, transform 0.5s;
 			cursor: pointer;
+			color: var(--secondary-button-text-colour, #4e4e4e);
 			
 			&:hover {
-				background-color: rgba(0,0,0, 0.2);
+				background-color: rgba(0,0,0, 0.15);
+				color: var(--secondary-button-hover-text-colour, #000);
+				transform: scale(1.05);
 			}
 		}
 
