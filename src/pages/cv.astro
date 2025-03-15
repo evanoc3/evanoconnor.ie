@@ -15,34 +15,13 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 <style lang="scss">
 	@use "resets";
 	@use "page";
+	@use "breakpoints";
 	
 	@include resets.global;
 	@include page.optimize-for-text;
 
-	:global(body) {
-		background-color: #ddd;
-	}
-
-	main {
-		width: 210mm;
-		height: 297mm;
-		margin: 0 auto 1in;
-		padding: 1.5cm;
-		background-color: white;
-	}
-
 	#secondary-buttons-row-container {
 		display: none;
-
-		&.visible {
-			display: block;
-		}
-	}
-
-	@media only screen {
-		main {
-			box-shadow: 0 0 1rem var(--shadow-colour, rgba(0,0,0, 0.1));
-		}
 	}
 	
 	@media only print {
@@ -50,15 +29,39 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 			size: A4;
 			margin: 1.5cm;
 		}
+	}
 
-		:global(body) {
-			background-color: unset;
+	@media only screen {
+		@include page.full-height;
+
+		main {
+			margin: 0 auto 1.5rem;
+			width: 100%;
+			padding: 1.5rem;
 		}
 
-		#secondary-buttons-row-container.visible {
-			display: none;
+		#secondary-buttons-row-container {
+			display: block;
 		}
 	}
+
+	@media (min-width: breakpoints.$A4) {
+		main {
+			margin: 0 auto 1in;
+			background-color: white;
+			box-shadow: 0 0 1rem var(--shadow-colour, rgba(0,0,0, 0.1));
+			width: 210mm;
+			height: 297mm;
+			padding: 1.5cm;
+		}
+	}
+
+	@media only screen and (min-width: breakpoints.$A4) {
+		:global(body) {
+			background-color: #ddd;
+		}
+	}
+
 </style>
 
 <PageLayout title="CV | evanoconnor.ie">
@@ -189,11 +192,3 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 
 	</main>
 </PageLayout>
-
-
-<script>
-	const secondaryButtonsRowContainer = document.querySelector<HTMLDivElement>("#secondary-buttons-row-container");
-	if (secondaryButtonsRowContainer) {
-		secondaryButtonsRowContainer.classList.add("visible");
-	}
-</script>

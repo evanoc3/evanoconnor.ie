@@ -4,12 +4,13 @@ import PrinterSvg from "@/icons/printer.svg";
 ---
 <style lang="scss">
 	@use "resets";
+	@use "breakpoints";
 
 	#secondary-buttons-row {
 		display: flex;
 		flex-flow: row nowrap;
 		column-gap: 1rem;
-		padding: 1cm calc(1cm + 1rem);
+		padding: 1rem;
 
 		> div#spacer {
 			flex: 1;
@@ -39,11 +40,26 @@ import PrinterSvg from "@/icons/printer.svg";
 			}
 		}
 
+		#print-btn {
+			display: none;
+
+			&.visible {
+				display: block;
+			}
+		}
+
 		svg {
 			height: 1rem;
 			width: 1rem;
 			position: relative;
 			top: 2px;
+		}
+	}
+
+
+	@media only screen and (min-width: breakpoints.$A4) {
+		#secondary-buttons-row {
+			padding: 1cm calc(1cm + 1rem);
 		}
 	}
 </style>
@@ -63,8 +79,10 @@ import PrinterSvg from "@/icons/printer.svg";
 </div>
 
 <script>
-	const printButton = document.querySelector("#print-btn");
+	const printButton = document.querySelector<HTMLButtonElement>("#print-btn");
 	if (printButton) {
+		printButton.classList.add("visible");
 		printButton.addEventListener("click", () => window.print());
 	}
 </script>
+

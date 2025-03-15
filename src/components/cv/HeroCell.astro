@@ -9,6 +9,8 @@ import MeJpg from "@/images/me.jpg";
 ---
 
 <style lang="scss">
+	@use "breakpoints";
+
 	#grid {
 		display: grid;
 		grid-template-columns: 1fr auto auto auto auto 1fr;
@@ -19,18 +21,10 @@ import MeJpg from "@/images/me.jpg";
 		row-gap: 0.75rem;
 	}
 
-	#avatar-placeholder {
-		grid-area: avatar;
-		background-color: rgb(7, 69, 69);
-		border-radius: 50%;
-		min-width: 5rem;
-		min-height: 5rem;
-	}
-
 	img {
 		grid-area: avatar;
-		max-height: 5.5rem;
-		max-width: 5.5rem;
+		max-height: 4rem;
+		max-width: 4rem;
 		border-radius: 50%;
 	}
 
@@ -38,7 +32,8 @@ import MeJpg from "@/images/me.jpg";
 		grid-area: title;
 		align-self: end;
 		color: var(--header-primary-text-colour, #333);
-		font-size: 2.986rem;
+		white-space: nowrap;
+
 		font-weight: 600;
 		line-height: 1;
 	}
@@ -50,11 +45,7 @@ import MeJpg from "@/images/me.jpg";
 		text-underline-offset: 2px;
 		align-self: start;
 		color: var(--link-text-colour, #6a6a6a);
-		text-align: center;
-
-		&:first-of-type {
-			margin-left: 6px;
-		}
+		justify-self: center;
 
 		&#linkedin {
 			grid-area: linkedin;
@@ -71,6 +62,10 @@ import MeJpg from "@/images/me.jpg";
 		&:hover {
 			color: var(--link-text-hover-colour, #000);
 		}
+
+		& > span.link-text {
+			display: none;
+		}
 	}
 
 	svg {
@@ -82,9 +77,32 @@ import MeJpg from "@/images/me.jpg";
 		fill: currentColor;
 	}
 
-	@media print {
+	@media only print {
 		a {
 			text-decoration: none;
+		}
+	}
+
+	@media (min-width: breakpoints.$A4) {
+		img {
+			grid-area: avatar;
+			max-height: 5.5rem;
+			max-width: 5.5rem;
+			border-radius: 50%;
+		}
+
+		h1 {
+			font-size: 2.986rem;
+		}
+
+		a {
+			&:first-of-type {
+				margin-left: 6px;
+			}
+
+			& > span.link-text {
+				display: inline;
+			}
 		}
 	}
 </style>
@@ -96,15 +114,18 @@ import MeJpg from "@/images/me.jpg";
 	<h1>Evan O'Connor</h1>
 
 	<a id="linkedin" href="https://www.linkedin.com/in/evanoc3/" title="Connect with me on LinkedIn at: https://www.linkedin.com/in/evanoc3/" target="_blank" rel="me noopener">
-		<LinkedInSvg />evanoc3
+		<LinkedInSvg />
+		<span class="link-text">evanoc3</span>
 	</a>
 
 	<a id="github" href="https://github.com/evanoc3" title="Find me on GitHub at: https://github.com/evanoc3" target="_blank" rel="me noopener">
-		<GithubSvg />evanoc3
+		<GithubSvg />
+		<span class="link-text">evanoc3</span>
 	</a>
 
 	<a id="email" href="mailto:evan@evanoconnor.ie" title="Email me at: evan@evanoconnor.ie" target="_blank">
-		<EnvelopeSvg />evan@evanconnor.ie
+		<EnvelopeSvg />
+		<span class="link-text">evan@evanconnor.ie</span>
 	</a>
 </div>
 

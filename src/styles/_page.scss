@@ -1,6 +1,8 @@
 @mixin full-height {
-	html,
-	body {
+	:global(
+		html,
+		body
+	) {
 		width: 100%;
 		height: 100vh;
 		overflow: hidden auto;
