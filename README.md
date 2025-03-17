@@ -3,22 +3,25 @@
 Written with [Astro](https://astro.build/).
 
 
-## Setup
-
-```sh
-npm install
-```
-
 ## Development
 
 ```sh
+# Setup
+npm install;
+
+# Run locally
 npm run dev
-```
 
-## Building & Deploying
-
-```sh
+# Building for production
 npm run build;
-docker build -t "evanoconnor.ie" .; 
+
+# Deploying
+docker build -t "evanoconnor.ie" .;
 fly deploy --local-only;
 ```
+
+
+## External Tools/Services
+
+* [Fly.io](https://fly.io) – hosting
+* [Umami.is](https://umami.is) – analytics
