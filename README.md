@@ -23,5 +23,7 @@ fly deploy --local-only;
 
 ## External Tools/Services
 
-* [Fly.io](https://fly.io) – hosting
-* [Umami.is](https://umami.is) – analytics
+* [LetsHost.ie](https://www.letshost.ie) – Domain name
+* [Cloudflare](https://www.cloudflare.com/) – DNS
+* [Fly.io](https://fly.io) – Hosting
+* [Umami.is](https://umami.is) – Analytics
