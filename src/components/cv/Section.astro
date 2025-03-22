@@ -1,47 +1,46 @@
 ---
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
 ---
 
 <style lang="scss">
-	@use "resets";
+  @use "resets";
 
-	.section-header {
-		display: flex;
-		flex-flow: row nowrap;
-		column-gap: 0.4rem;
-		align-items: center;
-		font-size: 1rem;
-		margin-top: 1.2rem;
+  .section-header {
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 0.4rem;
+    align-items: center;
+    font-size: 1rem;
+    margin-top: 1.2rem;
 
-		> .line {
-			flex: 1;
-			display: block;
-			height: 0.08em;
-			background-color: var(--section-title-line-colour, #969696);
-			border-radius: 999rem
-		}
+    > .line {
+      flex: 1;
+      display: block;
+      height: 0.08em;
+      background-color: var(--section-title-line-colour, #969696);
+      border-radius: 999rem
+    }
 
-		> h2 {
-			font-weight: 600;
-			font-size: 1.2em;
-			flex: 0;
-			color: var(--section-header-text-colour, #717171);
-		}
-	}
-	
+    > h2 {
+      font-weight: 600;
+      font-size: 1.2em;
+      flex: 0;
+      color: var(--section-header-text-colour, #717171);
+    }
+  }
+  
 </style>
 
 <section>
-	<div class="section-header">
-		<div class="line" />
-		<h2>{title}</h2>
-		<div class="line" />
-	</div>
+  <div class="section-header">
+    <div class="line" />
+    <h2>{title}</h2>
+    <div class="line" />
+  </div>
 
-	<slot>
-	</slot>
+  <slot></slot>
 </section>

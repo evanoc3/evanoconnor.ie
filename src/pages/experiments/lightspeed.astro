@@ -4,304 +4,304 @@ import ArrowLeftSvg from "@/icons/arrow-left.svg";
 ---
 
 <PageLayout title="Lightspeed">
-	<style lang="scss">
-		@use "resets";
-		@use "page";
+  <style lang="scss">
+    @use "resets";
+    @use "page";
 
-		@include resets.global;
-		@include resets.fonts;
+    @include resets.global;
+    @include resets.fonts;
 
-		:global(body) {
-			overflow: hidden auto;
-			height: 100vh;
-			background-color: #02031d;
-			color: white;
+    :global(body) {
+      overflow: hidden auto;
+      height: 100vh;
+      background-color: #02031d;
+      color: white;
 
-			&.scrolling {
-				color: #35365e;
-			}
-		}
+      &.scrolling {
+        color: #35365e;
+      }
+    }
 
-		a {
-			text-decoration: none;
-			position: fixed;
-			top: 0;
-			left: 0;
-			z-index: 1;
-			color: currentColor;
-			padding: 1rem;
-			display: flex;
-			flex-flow: row nowrap;
-			align-items: center;
-			column-gap: 0.5ch;
-			transition: color 0.5s;
+    a {
+      text-decoration: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      color: currentColor;
+      padding: 1rem;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      column-gap: 0.5ch;
+      transition: color 0.5s;
 
-			> svg {
-				height: 1rem;
-				width: 1rem;
-			}
-		}
+      > svg {
+        height: 1rem;
+        width: 1rem;
+      }
+    }
 
-		canvas {
-			width: 100%;
-			height: 100%;
-			display: none;
-		}
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
 
-		span#fps-label {
-			position: fixed;
-			bottom: 1rem;
-			right: 1rem;
-			transition: color 0.5s;
-		}
+    span#fps-label {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      transition: color 0.5s;
+    }
 
-		div.noscript-label {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			max-width: 100vw;
-		}
-	</style>
+    div.noscript-label {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100vw;
+    }
+  </style>
 
-	<a href="/">
-		<ArrowLeftSvg />
-		Home
-	</a>
+  <a href="/">
+    <ArrowLeftSvg />
+    Home
+  </a>
 
-	<canvas id="canvas"></canvas>
+  <canvas id="canvas"></canvas>
 
-	<span id="fps-label"></span>
+  <span id="fps-label"></span>
 
-	<noscript>
-		<div class="noscript-label">
-			JavaScript is necessary for this experiment to work. Please enable JavaScript and reload.
-		</div>
-	</noscript>
+  <noscript>
+    <div class="noscript-label">
+      JavaScript is necessary for this experiment to work. Please enable JavaScript and reload.
+    </div>
+  </noscript>
 
-	<script>
-		interface Star {
-			x: number,
-			y: number,
-			r: number
-		}
+  <script>
+    interface Star {
+      x: number,
+      y: number,
+      r: number
+    }
 
-		const DPR = window.devicePixelRatio || 1;
-		const dampeningFactor = 0.4;
+    const DPR = window.devicePixelRatio || 1;
+    const dampeningFactor = 0.4;
 
-		let canvas: HTMLCanvasElement;
-		let maxWidth: number;
-		let maxHeight: number;
-		let ctx: CanvasRenderingContext2D;
-		let stars: Star[];
-		let trail: number;
-		let frameCount: number;
-		let lastScrollTimestamp: number;
-		let isScrolling: boolean;
-		let preScrollY: number;
-		let lastDrawnFrame: number;
-		let fpsLabel: HTMLSpanElement;
-		let lastSecondIntervalFrameCount: number;
-		let lastSecondIntervalTimestamp: number;
+    let canvas: HTMLCanvasElement;
+    let maxWidth: number;
+    let maxHeight: number;
+    let ctx: CanvasRenderingContext2D;
+    let stars: Star[];
+    let trail: number;
+    let frameCount: number;
+    let lastScrollTimestamp: number;
+    let isScrolling: boolean;
+    let preScrollY: number;
+    let lastDrawnFrame: number;
+    let fpsLabel: HTMLSpanElement;
+    let lastSecondIntervalFrameCount: number;
+    let lastSecondIntervalTimestamp: number;
 
-		// Begin script execution when the page is loaded
-		window.addEventListener("load", setup);
+    // Begin script execution when the page is loaded
+    window.addEventListener("load", setup);
 
-		function setup(): void {
-			document.body.style.height = "300vh";
+    function setup(): void {
+      document.body.style.height = "300vh";
 
-			// set width & height on canvas
-			canvas = document.querySelector<HTMLCanvasElement>("canvas")!;
-			canvas.style.display = "block";
-			const canvasRect = canvas.getBoundingClientRect();
-			maxWidth = canvasRect.width * DPR;
-			maxHeight = canvasRect.height * DPR;
-			canvas.width = maxWidth;
-			canvas.height = maxHeight;
+      // set width & height on canvas
+      canvas = document.querySelector<HTMLCanvasElement>("canvas")!;
+      canvas.style.display = "block";
+      const canvasRect = canvas.getBoundingClientRect();
+      maxWidth = canvasRect.width * DPR;
+      maxHeight = canvasRect.height * DPR;
+      canvas.width = maxWidth;
+      canvas.height = maxHeight;
 
-			// variable initialization
-			stars = createStars(0);
-			trail = 0;
-			lastScrollTimestamp = performance.now();
-			isScrolling = false;
-			preScrollY = getScrollY();
-			lastDrawnFrame = 0;
-			frameCount = 0;
-			fpsLabel = document.querySelector<HTMLSpanElement>("#fps-label")!;
-			lastSecondIntervalFrameCount = 0;
-			lastSecondIntervalTimestamp = 0;
+      // variable initialization
+      stars = createStars(0);
+      trail = 0;
+      lastScrollTimestamp = performance.now();
+      isScrolling = false;
+      preScrollY = getScrollY();
+      lastDrawnFrame = 0;
+      frameCount = 0;
+      fpsLabel = document.querySelector<HTMLSpanElement>("#fps-label")!;
+      lastSecondIntervalFrameCount = 0;
+      lastSecondIntervalTimestamp = 0;
 
-			// get canvas rendering context
-			ctx = canvas.getContext("2d")!;
+      // get canvas rendering context
+      ctx = canvas.getContext("2d")!;
 
-			// scale the context by the device pixel ratio
-			ctx.scale(DPR, DPR);
+      // scale the context by the device pixel ratio
+      ctx.scale(DPR, DPR);
 
-			// register handler for events
-			window.addEventListener("scroll", onScroll);
-			window.addEventListener("resize", onResize);
-			
-			// begin animation loop
-			requestAnimationFrame(drawFrame);
+      // register handler for events
+      window.addEventListener("scroll", onScroll);
+      window.addEventListener("resize", onResize);
+      
+      // begin animation loop
+      requestAnimationFrame(drawFrame);
 
-			// setup FPS label
-			setInterval(onInterval, 250);
-		}
+      // setup FPS label
+      setInterval(onInterval, 250);
+    }
 
-		function createStars(x: number): Star[] {
-			const newStarPoints: Star[] = [];
-			let y: number, r: number;
+    function createStars(x: number): Star[] {
+      const newStarPoints: Star[] = [];
+      let y: number, r: number;
 
-			while(x < maxWidth) {
-				r = Math.round(Math.random() * 2) + 1;
-				x += Math.round(Math.random() * 25) - 8;
-				y = Math.round(Math.random() * (maxHeight - r)) + r;
+      while(x < maxWidth) {
+        r = Math.round(Math.random() * 2) + 1;
+        x += Math.round(Math.random() * 25) - 8;
+        y = Math.round(Math.random() * (maxHeight - r)) + r;
 
-				newStarPoints.push({x, y, r});
-			}
+        newStarPoints.push({x, y, r});
+      }
 
-			return newStarPoints;
-		}
+      return newStarPoints;
+    }
 
-		function drawFrame(): void {
-			if(getScrollY() !== preScrollY || trail !== 0 || lastDrawnFrame === 0) {
-				ctx.clearRect(0, 0, maxWidth, maxHeight);
+    function drawFrame(): void {
+      if(getScrollY() !== preScrollY || trail !== 0 || lastDrawnFrame === 0) {
+        ctx.clearRect(0, 0, maxWidth, maxHeight);
 
-				drawStars();
+        drawStars();
 
-				// if scrolling hasn't happened in the last 75 milliseconds, presume that we're done scrolling
-				if(isScrolling && performance.now() > lastScrollTimestamp + 75) {
-					isScrolling = false;
-					preScrollY = getScrollY();
-				}
+        // if scrolling hasn't happened in the last 75 milliseconds, presume that we're done scrolling
+        if(isScrolling && performance.now() > lastScrollTimestamp + 75) {
+          isScrolling = false;
+          preScrollY = getScrollY();
+        }
 
-				// decay the trail by a factor
-				if(!isScrolling && (trail > 1 || trail < -1)) { 
-					trail *= 0.9;
-				}
-				// if the trail is sub-pixel, then set it to 0
-				if(trail < 1 && trail > -1) { 
-					trail = 0;
-				}
-			}
+        // decay the trail by a factor
+        if(!isScrolling && (trail > 1 || trail < -1)) { 
+          trail *= 0.9;
+        }
+        // if the trail is sub-pixel, then set it to 0
+        if(trail < 1 && trail > -1) { 
+          trail = 0;
+        }
+      }
 
-			// increment the frame counter, and request to draw the next frame
-			frameCount++;
-			requestAnimationFrame(drawFrame);
-		}
+      // increment the frame counter, and request to draw the next frame
+      frameCount++;
+      requestAnimationFrame(drawFrame);
+    }
 
-		function drawStars(): void {
-			for(const star of stars) {
-				ctx.beginPath();
-				const lightness = 73 + (star.r * 5);
-				ctx.fillStyle = `hsl(53, 85%, ${lightness}%)`;
+    function drawStars(): void {
+      for(const star of stars) {
+        ctx.beginPath();
+        const lightness = 73 + (star.r * 5);
+        ctx.fillStyle = `hsl(53, 85%, ${lightness}%)`;
 
-				if(trail < 0.5 && trail > -0.5) {
-					ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-					ctx.fill();
-					trail = 0;
-				}
-				else {
-					const leftX = star.x - star.r;
-					const rightX = star.x + star.r;
+        if(trail < 0.5 && trail > -0.5) {
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fill();
+          trail = 0;
+        }
+        else {
+          const leftX = star.x - star.r;
+          const rightX = star.x + star.r;
 
-					let topY: number, bottomY: number;
+          let topY: number, bottomY: number;
 
-					// if star is above trail
-					if(trail > 0) { 
-						topY = star.y;
-						bottomY = star.y + trail;
-					}
-					// if star is below trail
-					else { 
-						topY = star.y + trail;
-						bottomY = star.y;
-					}
+          // if star is above trail
+          if(trail > 0) { 
+            topY = star.y;
+            bottomY = star.y + trail;
+          }
+          // if star is below trail
+          else { 
+            topY = star.y + trail;
+            bottomY = star.y;
+          }
 
-					ctx.arc(star.x, topY, star.r, Math.PI, Math.PI * 2);
-					ctx.fill();
-					ctx.arc(star.x, bottomY, star.r, 0, Math.PI);
-					ctx.fill();
-					ctx.fillRect(leftX, topY, (rightX - leftX), (bottomY - topY));
-				}
-			}
-		}
+          ctx.arc(star.x, topY, star.r, Math.PI, Math.PI * 2);
+          ctx.fill();
+          ctx.arc(star.x, bottomY, star.r, 0, Math.PI);
+          ctx.fill();
+          ctx.fillRect(leftX, topY, (rightX - leftX), (bottomY - topY));
+        }
+      }
+    }
 
-		function onScroll(): void {
-			document.body.classList.add("scrolling");
+    function onScroll(): void {
+      document.body.classList.add("scrolling");
 
-			lastScrollTimestamp = performance.now();
-			if(!isScrolling) {
-				isScrolling = true;
-			}
+      lastScrollTimestamp = performance.now();
+      if(!isScrolling) {
+        isScrolling = true;
+      }
 
-			let yDelta: number;
+      let yDelta: number;
 
-			if(getScrollY() < preScrollY) { // i.e. you've scrolled up
-				yDelta = (preScrollY - getScrollY()) * -1;
-			} else { // i.e. you've scrolled down
-				yDelta = getScrollY() - preScrollY;
-			}
+      if(getScrollY() < preScrollY) { // i.e. you've scrolled up
+        yDelta = (preScrollY - getScrollY()) * -1;
+      } else { // i.e. you've scrolled down
+        yDelta = getScrollY() - preScrollY;
+      }
 
-			trail = yDelta * dampeningFactor;
-		}
+      trail = yDelta * dampeningFactor;
+    }
 
-		function getScrollY(): number {
-			// @ts-ignore
-			return window.scrollY || (document.documentElement || document.body.parentNode || document.body).scrollTop;
-		}
+    function getScrollY(): number {
+      // @ts-ignore
+      return window.scrollY || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    }
 
-		function onResize(): void {
-			const newWidth = canvas.clientWidth;
-			const newHeight = canvas.clientHeight;
+    function onResize(): void {
+      const newWidth = canvas.clientWidth;
+      const newHeight = canvas.clientHeight;
 
-			const oldWidth = maxWidth;
+      const oldWidth = maxWidth;
 
-			maxWidth = newWidth;
-			maxHeight = newHeight;
+      maxWidth = newWidth;
+      maxHeight = newHeight;
 
-			canvas.width = maxWidth;
-			canvas.height = maxHeight;
+      canvas.width = maxWidth;
+      canvas.height = maxHeight;
 
 
-			// screen has grown – add new stars in the new X space
-			if(newWidth > oldWidth) {
-				const furthestX = stars[stars.length - 1].x;
+      // screen has grown – add new stars in the new X space
+      if(newWidth > oldWidth) {
+        const furthestX = stars[stars.length - 1].x;
 
-				stars = [...stars, ...createStars(furthestX)];
-			}
-			// screen has shrunk – remove any stars that were in the X space that was cut off
-			else {
-				let newEndIndex: number | null = null;
-				for(let i = 0; i < stars.length; i++) {
-					const star = stars[i];
-					if(star.x > newWidth) {
-						newEndIndex = i;
-						break;
-					}
-				}
-				if(newEndIndex !== null) {
-					stars = stars.slice(0, newEndIndex);
-				}
-			}
-		}
+        stars = [...stars, ...createStars(furthestX)];
+      }
+      // screen has shrunk – remove any stars that were in the X space that was cut off
+      else {
+        let newEndIndex: number | null = null;
+        for(let i = 0; i < stars.length; i++) {
+          const star = stars[i];
+          if(star.x > newWidth) {
+            newEndIndex = i;
+            break;
+          }
+        }
+        if(newEndIndex !== null) {
+          stars = stars.slice(0, newEndIndex);
+        }
+      }
+    }
 
-		function onInterval(): void {
-			const now = performance.now();
-			
-			// fps label
-			const timeDelta = (now - lastSecondIntervalTimestamp) / 1000;
-			const frameDelta = frameCount - lastSecondIntervalFrameCount;
+    function onInterval(): void {
+      const now = performance.now();
+      
+      // fps label
+      const timeDelta = (now - lastSecondIntervalTimestamp) / 1000;
+      const frameDelta = frameCount - lastSecondIntervalFrameCount;
 
-			fpsLabel.innerText = `${Math.round(frameDelta / timeDelta)} fps`;
+      fpsLabel.innerText = `${Math.round(frameDelta / timeDelta)} fps`;
 
-			lastSecondIntervalFrameCount = frameCount;
-			lastSecondIntervalTimestamp = now;
+      lastSecondIntervalFrameCount = frameCount;
+      lastSecondIntervalTimestamp = now;
 
-			// scrolling class on <body />
-			if(now - lastScrollTimestamp > 250) {
-				document.body.classList.remove("scrolling");
-			}
-		}
-	</script>
+      // scrolling class on <body />
+      if(now - lastScrollTimestamp > 250) {
+        document.body.classList.remove("scrolling");
+      }
+    }
+  </script>
 </PageLayout>
