@@ -3,24 +3,24 @@ import PageLayout from "@/components/PageLayout.astro";
 ---
 
 <style lang="scss">
-  @use "resets";
   @use "page";
+  @use "resets";
 
-  @include resets.global;
   @include page.full-height;
   @include page.optimize-for-text;
+  @include resets.global;
 
   main {
-    width: min(75ch, 100vw);
-    margin: 25vh auto 0;
     font-size: 1.15rem;
     line-height: 1.4;
+    margin: 25vh auto 0;
     padding: 1rem;
+    width: min(75ch, 100vw);
   }
 
   ul {
-    list-style: none;
     font-family: monospace;
+    list-style: none;
   }
 </style>
 

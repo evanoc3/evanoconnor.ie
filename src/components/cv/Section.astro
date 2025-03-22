@@ -7,32 +7,29 @@ const { title } = Astro.props;
 ---
 
 <style lang="scss">
-  @use "resets";
-
   .section-header {
+    align-items: center;
+    column-gap: 0.4rem;
     display: flex;
     flex-flow: row nowrap;
-    column-gap: 0.4rem;
-    align-items: center;
     font-size: 1rem;
     margin-top: 1.2rem;
 
     > .line {
-      flex: 1;
-      display: block;
-      height: 0.08em;
       background-color: var(--section-title-line-colour, #969696);
-      border-radius: 999rem
+      border-radius: 999rem;
+      display: block;
+      flex: 1;
+      height: 0.08em;
     }
 
     > h2 {
-      font-weight: 600;
-      font-size: 1.2em;
-      flex: 0;
       color: var(--section-header-text-colour, #717171);
+      flex: 0;
+      font-size: 1.2em;
+      font-weight: 600;
     }
   }
-  
 </style>
 
 <section>

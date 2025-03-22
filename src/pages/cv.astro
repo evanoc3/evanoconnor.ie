@@ -13,12 +13,12 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 ---
 
 <style lang="scss">
-  @use "resets";
-  @use "page";
   @use "breakpoints";
+  @use "page";
+  @use "resets";
   
-  @include resets.global;
   @include page.optimize-for-text;
+  @include resets.global;
 
   #secondary-buttons-row-container {
     display: none;
@@ -26,8 +26,8 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
   
   @media only print {
     @page {
-      size: A4;
       margin: 1.5cm;
+      size: A4;
     }
   }
 
@@ -36,8 +36,8 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 
     main {
       margin: 0 auto 1.5rem;
-      width: 100%;
       padding: 1.5rem;
+      width: 100%;
     }
 
     #secondary-buttons-row-container {
@@ -47,12 +47,12 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 
   @media (min-width: breakpoints.$A4) {
     main {
-      margin: 0 auto 1in;
       background-color: white;
       box-shadow: 0 0 1rem var(--shadow-colour, rgba(0,0,0, 0.1));
-      width: 210mm;
       height: 297mm;
+      margin: 0 auto 1in;
       padding: 1.5cm;
+      width: 210mm;
     }
   }
 
@@ -61,7 +61,6 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
       background-color: #ddd;
     }
   }
-
 </style>
 
 <PageLayout title="CV | evanoconnor.ie">
@@ -189,6 +188,5 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
         </p>
       </ExperienceListItem>
     </Section>
-
   </main>
 </PageLayout>

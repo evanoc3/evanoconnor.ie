@@ -2,12 +2,11 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
+  devToolbar: { enabled: false },
+  experimental: {
+    svg: true
+  },
   vite: {
-    resolve: {
-      alias: {
-        "@": "/src"
-      }
-    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -15,10 +14,11 @@ export default defineConfig({
           loadPaths: ["./src/styles"]
         }
       }
+    },
+    resolve: {
+      alias: {
+        "@": "/src"
+      }
     }
-  },
-  devToolbar: { enabled: false },
-  experimental: {
-    svg: true
   }
 });

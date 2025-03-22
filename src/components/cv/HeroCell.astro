@@ -12,52 +12,23 @@ import MeJpg from "@/images/me.jpg";
   @use "breakpoints";
 
   #grid {
+    column-gap: 1rem;
     display: grid;
-    grid-template-columns: 1fr auto auto auto auto 1fr;
-    grid-template-rows: auto auto;
     grid-template-areas: "lspace avatar title title title rspace"
                          "lspace avatar linkedin github email rspace";
-    column-gap: 1rem;
+    grid-template-columns: 1fr auto auto auto auto 1fr;
+    grid-template-rows: auto auto;
     row-gap: 0.75rem;
   }
 
-  img {
-    grid-area: avatar;
-    max-height: 4rem;
-    max-width: 4rem;
-    border-radius: 50%;
-  }
-
-  h1 {
-    grid-area: title;
-    align-self: end;
-    color: var(--header-primary-text-colour, #333);
-    white-space: nowrap;
-
-    font-weight: 600;
-    line-height: 1;
-  }
-
   a {
-    text-decoration-line: underline;
-    text-decoration-skip-ink: auto;
-    text-decoration-thickness: 0.08em;
-    text-underline-offset: 2px;
     align-self: start;
     color: var(--link-text-colour, #6a6a6a);
     justify-self: center;
-
-    &#linkedin {
-      grid-area: linkedin;
-    }
-
-    &#github {
-      grid-area: github;
-    }
-
-    &#email {
-      grid-area: email;
-    }
+    text-decoration-line: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.08rem;
 
     &:hover {
       color: var(--link-text-hover-colour, #000);
@@ -66,15 +37,43 @@ import MeJpg from "@/images/me.jpg";
     & > span.link-text {
       display: none;
     }
+
+    &#email {
+      grid-area: email;
+    }
+
+    &#github {
+      grid-area: github;
+    }
+
+    &#linkedin {
+      grid-area: linkedin;
+    }
+  }
+
+  h1 {
+    align-self: end;
+    color: var(--header-primary-text-colour, #333);
+    font-weight: 600;
+    grid-area: title;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  img {
+    border-radius: 50%;
+    grid-area: avatar;
+    max-height: 4rem;
+    max-width: 4rem;
   }
 
   svg {
-    height: 1rem;
-    width: 1rem;
-    position: relative;
-    top: 4px;
-    right: 4px;
     fill: currentColor;
+    height: 1rem;
+    position: relative;
+    right: 4px;
+    top: 4px;
+    width: 1rem;
   }
 
   @media only print {
@@ -84,17 +83,6 @@ import MeJpg from "@/images/me.jpg";
   }
 
   @media (min-width: breakpoints.$A4) {
-    img {
-      grid-area: avatar;
-      max-height: 5.5rem;
-      max-width: 5.5rem;
-      border-radius: 50%;
-    }
-
-    h1 {
-      font-size: 2.986rem;
-    }
-
     a {
       &:first-of-type {
         margin-left: 6px;
@@ -103,6 +91,17 @@ import MeJpg from "@/images/me.jpg";
       & > span.link-text {
         display: inline;
       }
+    }
+
+    h1 {
+      font-size: 2.986rem;
+    }
+
+    img {
+      border-radius: 50%;
+      grid-area: avatar;
+      max-height: 5.5rem;
+      max-width: 5.5rem;
     }
   }
 </style>
@@ -113,19 +112,33 @@ import MeJpg from "@/images/me.jpg";
 
   <h1>Evan O'Connor</h1>
 
-  <a id="linkedin" href="https://www.linkedin.com/in/evanoc3/" title="Connect with me on LinkedIn at: https://www.linkedin.com/in/evanoc3/" target="_blank" rel="me noopener">
-    <LinkedInSvg />
-    <span class="link-text">evanoc3</span>
+  <a
+    href="https://www.linkedin.com/in/evanoc3/"
+    id="linkedin"
+    rel="me noopener"
+    target="_blank"
+    title="Connect with me on LinkedIn at: https://www.linkedin.com/in/evanoc3/"
+  >
+    <LinkedInSvg /><span class="link-text">evanoc3</span>
   </a>
 
-  <a id="github" href="https://github.com/evanoc3" title="Find me on GitHub at: https://github.com/evanoc3" target="_blank" rel="me noopener">
-    <GithubSvg />
-    <span class="link-text">evanoc3</span>
+  <a
+    href="https://github.com/evanoc3"
+    id="github"
+    rel="me noopener"
+    target="_blank"
+    title="Find me on GitHub at: https://github.com/evanoc3"
+>
+    <GithubSvg /><span class="link-text">evanoc3</span>
   </a>
 
-  <a id="email" href="mailto:evan@evanoconnor.ie" title="Email me at: evan@evanoconnor.ie" target="_blank">
-    <EnvelopeSvg />
-    <span class="link-text">evan@evanconnor.ie</span>
+  <a
+    href="mailto:evan@evanoconnor.ie"
+    id="email"
+    target="_blank"
+    title="Email me at: evan@evanoconnor.ie"
+  >
+    <EnvelopeSvg /><span class="link-text">evan@evanconnor.ie</span>
   </a>
 </div>
 
