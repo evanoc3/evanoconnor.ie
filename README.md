@@ -21,9 +21,12 @@ fly deploy --local-only;
 ```
 
 
-## External Tools/Services
+## External Tools & Services
 
 * [LetsHost.ie](https://www.letshost.ie) – Domain name
 * [Cloudflare](https://www.cloudflare.com/) – DNS
 * [Fly.io](https://fly.io) – Hosting
 * [Umami.is](https://umami.is) – Analytics
+* [Google search](https://search.google.com/search-console) – Search
+* [Mailgun](https://www.mailgun.com/) – API for sending email
+* [Zoho Mail](https://www.zoho.com/mail/) – Email inbox
