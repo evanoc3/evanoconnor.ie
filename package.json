@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@types/luxon": "^3.4.2",
-    "astro": "^5.5.2",
+    "astro": "^5.5.4",
     "luxon": "^3.5.0",
     "sass-embedded": "^1.86.0"
   }
