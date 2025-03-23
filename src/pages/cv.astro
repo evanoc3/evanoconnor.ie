@@ -20,8 +20,31 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
   @include page.optimize-for-text;
   @include resets.global;
 
+  :global(body) {
+    --badge-background-colour: #e1e1e1;
+    --badge-background-hover-colour: #c4c4c4;
+    --button-secondary-background-hover-colour: rgba(0,0,0, 0.15);
+    --button-secondary-text-colour: #4e4e4e;
+    --button-secondary-text-hover-colour: #333;
+    --header-text-colour: #333;
+    --link-text-colour: #6a6a6a;
+    --link-text-hover-colour: #333;
+    --page-background-primary-colour: white;
+    --page-background-secondary-colour: #ddd;
+    --section-header-line-colour: #969696;
+    --section-header-text-colour: #717171;
+    --shadow-colour: rgba(0,0,0, 0.1);
+    --text-primary-colour: #333;
+    --text-secondary-colour: #4e4e4e;
+    --transition-duration: calc(1s / 3);
+  }
+
   #secondary-buttons-row-container {
     display: none;
+  }
+
+  p {
+    color: var(--primary-text-colour);
   }
   
   @media only print {
@@ -47,8 +70,8 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 
   @media (min-width: breakpoints.$A4) {
     main {
-      background-color: white;
-      box-shadow: 0 0 1rem var(--shadow-colour, rgba(0,0,0, 0.1));
+      background-color: var(--page-background-primary-colour);
+      box-shadow: 0 0 1rem var(--shadow-colour);
       height: 297mm;
       margin: 0 auto 1in;
       padding: 1.5cm;
@@ -58,7 +81,7 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 
   @media only screen and (min-width: breakpoints.$A4) {
     :global(body) {
-      background-color: #ddd;
+      background-color: var(--page-background-secondary-colour);
     }
   }
 </style>

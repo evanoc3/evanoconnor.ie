@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 
-import LinkedInSvg from "@/icons/linkedin.svg";
-import GithubSvg from "@/icons/github.svg";
-import EnvelopeSvg from "@/icons/envelope-fill.svg";
+import LinkedInSvg from "bootstrap-icons/icons/linkedin.svg";
+import GithubSvg from "bootstrap-icons/icons/github.svg";
+import EnvelopeSvg from "bootstrap-icons/icons/envelope-fill.svg";
 
 import MeJpg from "@/images/me.jpg";
 ---
@@ -23,15 +23,16 @@ import MeJpg from "@/images/me.jpg";
 
   a {
     align-self: start;
-    color: var(--link-text-colour, #6a6a6a);
+    color: var(--link-text-colour);
     justify-self: center;
     text-decoration-line: underline;
     text-decoration-skip-ink: auto;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.08rem;
+    transition: color var(--transition-duration);
 
     &:hover {
-      color: var(--link-text-hover-colour, #000);
+      color: var(--link-text-hover-colour);
     }
 
     & > span.link-text {
@@ -53,7 +54,7 @@ import MeJpg from "@/images/me.jpg";
 
   h1 {
     align-self: end;
-    color: var(--header-primary-text-colour, #333);
+    color: var(--header-text-colour);
     font-weight: 600;
     grid-area: title;
     line-height: 1;

@@ -1,18 +1,18 @@
 ---
-import ArrowLeftSvg from "@/icons/arrow-left.svg";
-import PrinterSvg from "@/icons/printer.svg";
+import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
+import PrinterSvg from "feather-icons/dist/icons/printer.svg";
 ---
 <style lang="scss">
   @use "resets";
   @use "breakpoints";
 
-  #secondary-buttons-row {
+  .secondary-buttons-row {
     column-gap: 1rem;
     display: flex;
     flex-flow: row nowrap;
     padding: 1rem;
 
-    > div#spacer {
+    > .spacer {
       flex: 1;
     }
 
@@ -26,22 +26,26 @@ import PrinterSvg from "@/icons/printer.svg";
     
     > a, > button {
       border-radius: 2rem;
-      color: var(--secondary-button-text-colour, #4e4e4e);
+      color: var(--button-secondary-text-colour);
       cursor: pointer;
       font-size: 1rem; 
       line-height: 1;
       padding: .75rem 1.25rem;
-      transition: background-color 0.5s, color 0.5s, transform 0.5s;
+      transition: background-color var(--transition-duration),
+                  color var(--transition-duration),
+                  transform var(--transition-duration);
       
       &:hover {
-        background-color: rgba(0,0,0, 0.15);
-        color: var(--secondary-button-hover-text-colour, #000);
+        background-color: var(--button-secondary-background-hover-colour);
+        color: var(--button-secondary-text-hover-colour);
         transform: scale(1.05);
       }
     }
 
-    #print-btn {
-      display: none;
+    button {
+      &.hidden-by-default:not(.visible) {
+        display: none;
+      }
 
       &.visible {
         display: block;
@@ -63,25 +67,26 @@ import PrinterSvg from "@/icons/printer.svg";
   }
 </style>
 
-<div id="secondary-buttons-row">
+<div class="secondary-buttons-row">
   <a href="/">
     <ArrowLeftSvg />
     Go Back
   </a>
 
-  <div id="spacer"></div>
+  <div class="spacer"></div>
 
-  <button id="print-btn">
+  <button class="print-btn hidden-by-default">
     <PrinterSvg />
     Print
   </button>
 </div>
 
 <script>
-  const printButton = document.querySelector<HTMLButtonElement>("#print-btn");
+  // setup print button
+  const printButton = document.querySelector<HTMLButtonElement>(".print-btn");
   if (printButton) {
-    printButton.classList.add("visible");
     printButton.addEventListener("click", () => window.print());
+    printButton.classList.add("visible");
   }
 </script>
 

@@ -44,6 +44,7 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
 
   h3 {
     align-self: center;
+    color: var(--header-text-colour);
     grid-area: title;
     line-height: 1.4;
   }
@@ -54,7 +55,7 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
 
   a.company {
     align-self: center;
-    color: var(--link-text-colour, #6a6a6a);
+    color: var(--link-text-colour);
     font-size: 1.2rem;
     font-weight: 500;
     grid-area: location;
@@ -64,6 +65,11 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
     text-decoration-skip-ink: auto;
     text-decoration-thickness: 0.08em;
     text-underline-offset: 2px;
+    transition: color var(--transition-duration);
+
+    &:hover {
+      color: var(--link-text-hover-colour);
+    }
   }
 
   div.desc {
@@ -74,12 +80,15 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
 
   span.timespan {
     align-self: center;
-    color: var(--secondary-text-colour, #4e4e4e);
+    color: var(--text-secondary-colour);
     font-style: italic;
     grid-area: timespan;
     justify-self: end;
   }
-  :global(div.desc p:not(:first-of-type)) {
+
+  :global(
+    div.desc p:not(:first-of-type)
+  ) {
     margin-top: 0.375rem;
   }
 
@@ -89,22 +98,22 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
   }
 
   .skill {
-    background-color: var(--badge-background-colour, #e1e1e1);
+    background-color: var(--badge-background-colour);
     border-radius: 999rem;
-    color: var(--primary-text-colour, #333);
+    color: var(--text-primary-colour);
     font-size: 0.833rem;
     padding: .2rem .5rem;
-    transition: background-color 0.33s;
+    transition: background-color var(--transition-duration);
 
     &:hover {
-      background-color: var(--badge-background-hovered-colour, #c4c4c4);
+      background-color: var(--badge-background-hover-colour);
     }
   }
 
   ul {
     display: flex;
     flex-flow: row wrap;
-    gap: .33rem;
+    gap: calc(1rem / 3);
     grid-area: skills;
     list-style: none;
     margin-top: 0.5rem;
@@ -127,7 +136,7 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
 
     span.bullet {
       align-self: center;
-      color: var(--secondary-text-colour, #4e4e4e);
+      color: var(--text-secondary-colour);
       display: block;
       font-size: 1.2rem;
       font-weight: 500;
