@@ -5,23 +5,28 @@ import PageLayout from "@/components/PageLayout.astro";
 <style lang="scss">
   @use "page";
   @use "resets";
+  @use "theme";
 
   @include page.full-height;
   @include page.optimize-for-text;
   @include resets.global;
 
-  :global(body) {
-    --background-colour: white;
-    --text-colour: #222;
-  }
-
-  @media(prefers-color-scheme: dark) {
-    :global(body) {
-      --background-colour: #222;
-      --text-colour: #eee;
-      --link-colour: #0ff;
-    }
-  }
+  @include theme.colours(
+    $light-theme-colours: (
+      --background-colour: white,
+      --text-colour: #222,
+      --link-colour: LinkText,
+      --link-visited-colour: VisitedText,
+      --link-active-colour: ActiveText
+    ),
+    $dark-theme-colours: (
+      --background-colour: #181818,
+      --text-colour: #eee,
+      --link-colour: #0ff,
+      --link-visited-colour: #099,
+      --link-active-colour: #0ff
+    )
+  );
 
   :global(body) {
     background-color: var(--background-colour);
@@ -42,7 +47,15 @@ import PageLayout from "@/components/PageLayout.astro";
   }
 
   a {
-    color: var(--link-colour, revert);
+    color: var(--link-colour);
+
+    &:visited {
+      color: var(--link-visited-colour);
+    }
+
+    &:active {
+      color: var(--link-active-colour);
+    }
   }
 </style>
 
