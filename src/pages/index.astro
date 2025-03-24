@@ -10,17 +10,39 @@ import PageLayout from "@/components/PageLayout.astro";
   @include page.optimize-for-text;
   @include resets.global;
 
+  :global(body) {
+    --background-colour: white;
+    --text-colour: #222;
+  }
+
+  @media(prefers-color-scheme: dark) {
+    :global(body) {
+      --background-colour: #222;
+      --text-colour: #eee;
+      --link-colour: #0ff;
+    }
+  }
+
+  :global(body) {
+    background-color: var(--background-colour);
+  }
+
   main {
     font-size: 1.15rem;
     line-height: 1.4;
     margin: 25vh auto 0;
     padding: 1rem;
     width: min(75ch, 100vw);
+    color: var(--text-colour);
   }
 
   ul {
     font-family: monospace;
     list-style: none;
+  }
+
+  a {
+    color: var(--link-colour, revert);
   }
 </style>
 
