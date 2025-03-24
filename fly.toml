@@ -6,16 +6,19 @@
 app = "evanoconnor-ie"
 primary_region = "lhr"
 
+[build]
+  dockerfile = "Dockerfile"
+
+[deploy]
+  strategy = "canary"
+
 [http_service]
   auto_start_machines = true
   auto_stop_machines = "stop"
   force_https = true
   internal_port = 80
   min_machines_running = 1
-  processes = ["evanoconnor_ie"]
-
-[http_service.http_options.response]
-  pristine = true
+  http_options.response.pristine = true
 
 [[vm]]
   cpu_kind = "shared"
