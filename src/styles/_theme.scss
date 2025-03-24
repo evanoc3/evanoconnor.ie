@@ -1,0 +1,29 @@
+@use "sass:map";
+
+@mixin colours($light-theme-colours, $dark-theme-colours) {
+  :global(body) {
+    @each $key, $val in $light-theme-colours {
+      #{$key}: #{$val};
+    }
+
+    &[data-theme="dark"] {
+      @each $key, $val in $dark-theme-colours {
+        #{$key}: #{$val};
+      }
+    }
+  }
+
+  @media(prefers-color-scheme: dark) {
+    :global(body) {
+      @each $key, $val in $dark-theme-colours {
+        #{$key}: #{$val};
+      }
+
+      &[data-theme="light"] {
+        @each $key, $val in $light-theme-colours {
+          #{$key}: #{$val};
+        }
+      }
+    }
+  }
+}

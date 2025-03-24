@@ -5,10 +5,32 @@ import PageLayout from "@/components/PageLayout.astro";
 <style lang="scss">
   @use "page";
   @use "resets";
+  @use "theme";
 
   @include page.full-height;
   @include page.optimize-for-text;
   @include resets.global;
+
+  @include theme.colours(
+    $light-theme-colours: (
+      --background-colour: white,
+      --text-colour: #222,
+      --link-colour: LinkText,
+      --link-visited-colour: VisitedText,
+      --link-active-colour: ActiveText
+    ),
+    $dark-theme-colours: (
+      --background-colour: #181818,
+      --text-colour: #eee,
+      --link-colour: #0ff,
+      --link-visited-colour: #099,
+      --link-active-colour: #0ff
+    )
+  );
+
+  :global(body) {
+    background-color: var(--background-colour);
+  }
 
   main {
     font-size: 1.15rem;
@@ -16,11 +38,24 @@ import PageLayout from "@/components/PageLayout.astro";
     margin: 25vh auto 0;
     padding: 1rem;
     width: min(75ch, 100vw);
+    color: var(--text-colour);
   }
 
   ul {
     font-family: monospace;
     list-style: none;
+  }
+
+  a {
+    color: var(--link-colour);
+
+    &:visited {
+      color: var(--link-visited-colour);
+    }
+
+    &:active {
+      color: var(--link-active-colour);
+    }
   }
 </style>
 

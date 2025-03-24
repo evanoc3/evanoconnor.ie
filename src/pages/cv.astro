@@ -16,26 +16,35 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
   @use "breakpoints";
   @use "page";
   @use "resets";
+  @use "theme";
   
   @include page.optimize-for-text;
   @include resets.global;
 
+  @include theme.colours(
+    $light-theme-colours: (
+      --badge-background-colour: #e1e1e1,
+      --badge-background-hover-colour: #c4c4c4,
+      --button-secondary-background-hover-colour: rgba(0,0,0, 0.15),
+      --button-secondary-text-colour: #4e4e4e,
+      --button-secondary-text-hover-colour: #333,
+      --header-text-colour: #333,
+      --link-text-colour: #6a6a6a,
+      --link-text-hover-colour: #333,
+      --page-background-primary-colour: white,
+      --page-background-secondary-colour: #ddd,
+      --section-header-line-colour: #969696,
+      --section-header-text-colour: #717171,
+      --shadow-colour: rgba(0,0,0, 0.1),
+      --text-primary-colour: #333,
+      --text-secondary-colour: #4e4e4e
+    ),
+    $dark-theme-colours: (
+
+    )
+  );
+
   :global(body) {
-    --badge-background-colour: #e1e1e1;
-    --badge-background-hover-colour: #c4c4c4;
-    --button-secondary-background-hover-colour: rgba(0,0,0, 0.15);
-    --button-secondary-text-colour: #4e4e4e;
-    --button-secondary-text-hover-colour: #333;
-    --header-text-colour: #333;
-    --link-text-colour: #6a6a6a;
-    --link-text-hover-colour: #333;
-    --page-background-primary-colour: white;
-    --page-background-secondary-colour: #ddd;
-    --section-header-line-colour: #969696;
-    --section-header-text-colour: #717171;
-    --shadow-colour: rgba(0,0,0, 0.1);
-    --text-primary-colour: #333;
-    --text-secondary-colour: #4e4e4e;
     --transition-duration: calc(1s / 3);
   }
 
@@ -142,7 +151,6 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
         ]}
       >
         <p>
-          <!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
           Improved the Webex desktop apps' reliability and performance by fixing bugs & servicing tech debt.
         </p>
         <p>
