@@ -7,10 +7,10 @@ app = "evanoconnor-ie"
 primary_region = "cdg"
 
 [http_service]
-  internal_port = 80
-  force_https = true
-  auto_stop_machines = "stop"
   auto_start_machines = true
+  auto_stop_machines = "stop"
+  force_https = true
+  internal_port = 80
   min_machines_running = 1
   processes = ["app"]
 
@@ -21,10 +21,10 @@ primary_region = "cdg"
   grace_period = "30s"
   interval = "1m"
   method = "GET"
-  timeout = "5s"
   path = "/"
+  timeout = "5s"
 
 [[vm]]
-  memory = "1gb"
   cpu_kind = "shared"
   cpus = 1
+  memory = "1gb"

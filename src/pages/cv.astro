@@ -13,182 +13,203 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 ---
 
 <style lang="scss">
-	@use "resets";
-	@use "page";
-	@use "breakpoints";
-	
-	@include resets.global;
-	@include page.optimize-for-text;
+  @use "breakpoints";
+  @use "page";
+  @use "resets";
+  
+  @include page.optimize-for-text;
+  @include resets.global;
 
-	#secondary-buttons-row-container {
-		display: none;
-	}
-	
-	@media only print {
-		@page {
-			size: A4;
-			margin: 1.5cm;
-		}
-	}
+  :global(body) {
+    --badge-background-colour: #e1e1e1;
+    --badge-background-hover-colour: #c4c4c4;
+    --button-secondary-background-hover-colour: rgba(0,0,0, 0.15);
+    --button-secondary-text-colour: #4e4e4e;
+    --button-secondary-text-hover-colour: #333;
+    --header-text-colour: #333;
+    --link-text-colour: #6a6a6a;
+    --link-text-hover-colour: #333;
+    --page-background-primary-colour: white;
+    --page-background-secondary-colour: #ddd;
+    --section-header-line-colour: #969696;
+    --section-header-text-colour: #717171;
+    --shadow-colour: rgba(0,0,0, 0.1);
+    --text-primary-colour: #333;
+    --text-secondary-colour: #4e4e4e;
+    --transition-duration: calc(1s / 3);
+  }
 
-	@media only screen {
-		@include page.full-height;
+  #secondary-buttons-row-container {
+    display: none;
+  }
 
-		main {
-			margin: 0 auto 1.5rem;
-			width: 100%;
-			padding: 1.5rem;
-		}
+  p {
+    color: var(--primary-text-colour);
+  }
+  
+  @media only print {
+    @page {
+      margin: 1.5cm;
+      size: A4;
+    }
+  }
 
-		#secondary-buttons-row-container {
-			display: block;
-		}
-	}
+  @media only screen {
+    @include page.full-height;
 
-	@media (min-width: breakpoints.$A4) {
-		main {
-			margin: 0 auto 1in;
-			background-color: white;
-			box-shadow: 0 0 1rem var(--shadow-colour, rgba(0,0,0, 0.1));
-			width: 210mm;
-			height: 297mm;
-			padding: 1.5cm;
-		}
-	}
+    main {
+      margin: 0 auto 1.5rem;
+      padding: 1.5rem;
+      width: 100%;
+    }
 
-	@media only screen and (min-width: breakpoints.$A4) {
-		:global(body) {
-			background-color: #ddd;
-		}
-	}
+    #secondary-buttons-row-container {
+      display: block;
+    }
+  }
 
+  @media (min-width: breakpoints.$A4) {
+    main {
+      background-color: var(--page-background-primary-colour);
+      box-shadow: 0 0 1rem var(--shadow-colour);
+      height: 297mm;
+      margin: 0 auto 1in;
+      padding: 1.5cm;
+      width: 210mm;
+    }
+  }
+
+  @media only screen and (min-width: breakpoints.$A4) {
+    :global(body) {
+      background-color: var(--page-background-secondary-colour);
+    }
+  }
 </style>
 
 <PageLayout title="CV | evanoconnor.ie">
-	<div id="secondary-buttons-row-container">
-		<SecondaryButtonsRow />
-	</div>
+  <div id="secondary-buttons-row-container">
+    <SecondaryButtonsRow />
+  </div>
 
-	<main>
-		<HeroCell />
+  <main>
+    <HeroCell />
 
-		<Section title="Work">
-			<ExperienceListItem
-				icon={WebexContactCenterLogo}
-				jobTitle="Software Engineer"
-				company="Webex Contact Center"
-				url="https://www.webex.com/us/en/products/customer-experience/contact-center.html"
-				timespan={{
-					start: DateTime.fromISO("2024-03-01")
-				}}
-				skills={[
-					{ title: "Node.js", url: "https://nodejs.org/" },
-					{ title: "TypeScript", url: "https://www.typescriptlang.org/" },
-					{ title: "React", url: "https://react.dev/" },
-					{ title: "Git", url: "https://git-scm.com/" },
-					{ title: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-					{ title: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-					{ title: "Jest", url: "https://jestjs.io/" },
-					{ title: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-					{ title: "Sass", url: "https://sass-lang.com/" },
-				]}
-			>
-				<p>
-					<!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
-					Currently working on improving the quality, reliability, and feature velocity of Webex Contact Center.
-				</p>
-			</ExperienceListItem>
+    <Section title="Work">
+      <ExperienceListItem
+        icon={WebexContactCenterLogo}
+        jobTitle="Software Engineer"
+        company="Webex Contact Center"
+        url="https://www.webex.com/us/en/products/customer-experience/contact-center.html"
+        timespan={{
+          start: DateTime.fromISO("2024-03-01")
+        }}
+        skills={[
+          { title: "Node.js", url: "https://nodejs.org/" },
+          { title: "TypeScript", url: "https://www.typescriptlang.org/" },
+          { title: "React", url: "https://react.dev/" },
+          { title: "Git", url: "https://git-scm.com/" },
+          { title: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+          { title: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+          { title: "Jest", url: "https://jestjs.io/" },
+          { title: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+          { title: "Sass", url: "https://sass-lang.com/" },
+        ]}
+      >
+        <p>
+          <!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
+          Currently working on improving the quality, reliability, and feature velocity of Webex Contact Center.
+        </p>
+      </ExperienceListItem>
 
-			<ExperienceListItem
-				icon={WebexLogo}
-				jobTitle="Software Engineer"
-				company="Webex"
-				url="https://webex.com/"
-				timespan={{
-					start: DateTime.fromISO("2021-09-01"), 
-					end: DateTime.fromISO("2024-03-01")
-				}}
-				skills={[
-					{ title: "C++", url: "https://isocpp.org/" },
-					{ title: "Swift", url: "https://www.swift.org/" },
-					{ title: "Python", url: "https://www.python.org/" },
-					{ title: "Git", url: "https://git-scm.com/" },
-					{ title: "Qt", url: "https://www.qt.io/product" },
-					{ title: "CMake", url: "https://cmake.org/" },
-					{ title: "SQLite", url: "https://www.sqlite.org/index.html" },
-					{ title: "ZSH", url: "https://www.zsh.org/" }
-				]}
-			>
-				<p>
-					<!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
-					Improved the Webex desktop apps' reliability and performance by fixing bugs & servicing tech debt.
-				</p>
-				<p>
-					Delivered high-quality features from the product roadmap (along with some independently driven personal projects during hackathons) in a collaborative, fast-paced work environment.
-				</p>
-				<p>
-					Held sole responsibility for important business workflows such as: localization of the apps, & publication of version release notes.
-				</p>
-			</ExperienceListItem>
+      <ExperienceListItem
+        icon={WebexLogo}
+        jobTitle="Software Engineer"
+        company="Webex"
+        url="https://webex.com/"
+        timespan={{
+          start: DateTime.fromISO("2021-09-01"), 
+          end: DateTime.fromISO("2024-03-01")
+        }}
+        skills={[
+          { title: "C++", url: "https://isocpp.org/" },
+          { title: "Swift", url: "https://www.swift.org/" },
+          { title: "Python", url: "https://www.python.org/" },
+          { title: "Git", url: "https://git-scm.com/" },
+          { title: "Qt", url: "https://www.qt.io/product" },
+          { title: "CMake", url: "https://cmake.org/" },
+          { title: "SQLite", url: "https://www.sqlite.org/index.html" },
+          { title: "ZSH", url: "https://www.zsh.org/" }
+        ]}
+      >
+        <p>
+          <!-- Working on the Webex Contact Center team, building and maintaining the core platform that powers the Webex Contact Center product. -->
+          Improved the Webex desktop apps' reliability and performance by fixing bugs & servicing tech debt.
+        </p>
+        <p>
+          Delivered high-quality features from the product roadmap (along with some independently driven personal projects during hackathons) in a collaborative, fast-paced work environment.
+        </p>
+        <p>
+          Held sole responsibility for important business workflows such as: localization of the apps, & publication of version release notes.
+        </p>
+      </ExperienceListItem>
 
-			<ExperienceListItem
-				icon={WebexLogo}
-				jobTitle="Engineering Intern"
-				company="Webex"
-				url="https://webex.com/"
-				timespan={{
-					start: DateTime.fromISO("2020-01-01"), 
-					end: DateTime.fromISO("2020-09-01")
-				}}
-				skills={[
-					{ title: "C++", url: "https://isocpp.org/" },
-					{ title: "Swift", url: "https://www.swift.org/" },
-					{ title: "Git", url: "https://git-scm.com/" },
-					{ title: "Qt", url: "https://www.qt.io/product" },
-				]}
-			>
+      <ExperienceListItem
+        icon={WebexLogo}
+        jobTitle="Engineering Intern"
+        company="Webex"
+        url="https://webex.com/"
+        timespan={{
+          start: DateTime.fromISO("2020-01-01"), 
+          end: DateTime.fromISO("2020-09-01")
+        }}
+        skills={[
+          { title: "C++", url: "https://isocpp.org/" },
+          { title: "Swift", url: "https://www.swift.org/" },
+          { title: "Git", url: "https://git-scm.com/" },
+          { title: "Qt", url: "https://www.qt.io/product" },
+        ]}
+      >
 
-				<p>
-					Worked on the desktop clients teams at Webex, with a particular focus on: Accessibility (keyboard navigation, screen-reader, localization, RTL, etc…), theming, & creating a library of reusable UI components.
-				</p>
-			</ExperienceListItem>
-		</Section>
+        <p>
+          Worked on the desktop clients teams at Webex, with a particular focus on: Accessibility (keyboard navigation, screen-reader, localization, RTL, etc…), theming, & creating a library of reusable UI components.
+        </p>
+      </ExperienceListItem>
+    </Section>
 
-		<Section title="Education">
-			<ExperienceListItem
-				icon={UniversityOfGalwayLogo}
-				jobTitle="BSc Computer Science & IT"
-				company="University of Galway"
-				url="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html"
-				timespan={{
-					start: DateTime.fromISO("2017-09-01"), 
-					end: DateTime.fromISO("2021-06-01")
-				}}
-				skills={[
-					{ title: "C", url: "https://en.wikipedia.org/wiki/The_C_Programming_Language" },
-					{ title: "C#", url: "https://dotnet.microsoft.com/en-us/languages/csharp" },
-					{ title: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-					{ title: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-					{ title: "Java", url: "https://www.java.com/en/" },
-					{ title: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/javascript" },
-					{ title: "Racket", url: "https://racket-lang.org/" },
-					{ title: "Linux", url: "https://www.linux.org/" },
-					{ title: "MATLAB", url: "https://www.mathworks.com/products/matlab.html" },
-					{ title: "MySQL", url: "https://www.mysql.com/" },
-					{ title: "MongoDB", url: "https://www.mongodb.com/" },
-					{ title: "Node.js", url: "https://nodejs.org/en" },
-					{ title: "PHP", url: "https://www.php.net/" },
-					{ title: "Prolog", url: "https://www.swi-prolog.org/" },
-					{ title: "React", url: "https://react.dev/" },
-					{ title: "TypeScript", url: "https://www.typescriptlang.org/" },
-					{ title: "ZSH", url: "https://www.zsh.org/" },
-				]}
-			>
-				<p>
-					Graduated from the University of Galway with first-class honours (1.1) in a Bachelor's degree in Computer Science & Information Technology.
-				</p>
-			</ExperienceListItem>
-		</Section>
-
-	</main>
+    <Section title="Education">
+      <ExperienceListItem
+        icon={UniversityOfGalwayLogo}
+        jobTitle="BSc Computer Science & IT"
+        company="University of Galway"
+        url="https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html"
+        timespan={{
+          start: DateTime.fromISO("2017-09-01"), 
+          end: DateTime.fromISO("2021-06-01")
+        }}
+        skills={[
+          { title: "C", url: "https://en.wikipedia.org/wiki/The_C_Programming_Language" },
+          { title: "C#", url: "https://dotnet.microsoft.com/en-us/languages/csharp" },
+          { title: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+          { title: "HTML", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+          { title: "Java", url: "https://www.java.com/en/" },
+          { title: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/javascript" },
+          { title: "Racket", url: "https://racket-lang.org/" },
+          { title: "Linux", url: "https://www.linux.org/" },
+          { title: "MATLAB", url: "https://www.mathworks.com/products/matlab.html" },
+          { title: "MySQL", url: "https://www.mysql.com/" },
+          { title: "MongoDB", url: "https://www.mongodb.com/" },
+          { title: "Node.js", url: "https://nodejs.org/en" },
+          { title: "PHP", url: "https://www.php.net/" },
+          { title: "Prolog", url: "https://www.swi-prolog.org/" },
+          { title: "React", url: "https://react.dev/" },
+          { title: "TypeScript", url: "https://www.typescriptlang.org/" },
+          { title: "ZSH", url: "https://www.zsh.org/" },
+        ]}
+      >
+        <p>
+          Graduated from the University of Galway with first-class honours (1.1) in a Bachelor's degree in Computer Science & Information Technology.
+        </p>
+      </ExperienceListItem>
+    </Section>
+  </main>
 </PageLayout>

@@ -3,52 +3,55 @@ import PageLayout from "@/components/PageLayout.astro";
 ---
 
 <style lang="scss">
-	@use "resets";
-	@use "page";
+  @use "page";
+  @use "resets";
 
-	@include resets.global;
-	@include page.full-height;
-	@include page.optimize-for-text;
+  @include page.full-height;
+  @include page.optimize-for-text;
+  @include resets.global;
 
-	main {
-		width: min(75ch, 100vw);
-		margin: 25vh auto 0;
-		font-size: 1.15rem;
-		line-height: 1.4;
-		padding: 1rem;
-	}
+  main {
+    font-size: 1.15rem;
+    line-height: 1.4;
+    margin: 25vh auto 0;
+    padding: 1rem;
+    width: min(75ch, 100vw);
+  }
 
-	ul {
-		list-style: none;
-		font-family: monospace;
-	}
+  ul {
+    font-family: monospace;
+    list-style: none;
+  }
 </style>
 
-<PageLayout title="evanoconnor.ie">
-	<main>
-		<p>
-			Hi there!
-			<br />
-			I'm Evan O'Connor.
-		  <br />
-			A software engineer at Cisco in Galway, Ireland.
-		</p>
+<PageLayout
+  title="evanoconnor.ie"
+  description="Evan O'Connor's personal website"
+>
+  <main>
+    <p>
+      Hi there!
+      <br />
+      I'm Evan O'Connor.
+      <br />
+      A software engineer at Cisco in Galway, Ireland.
+    </p>
 
-		<br />
+    <br />
 
-		<p>
-			You'll have to forgive the mess.
-			<br />
-			I'm still cleaning the place up,
-			<br />
-			but feel free to have a look around!
-		</p>
+    <p>
+      You'll have to forgive the mess.
+      <br />
+      I'm still cleaning the place up,
+      <br />
+      but feel free to have a look around!
+    </p>
 
-		<br />
-		
-		<ul>
-			<li><a href="/cv">/cv</a></li>
-			<li><a href="/experiments/lightspeed">/experiments/lightspeed</a></li>
-		</ul>
-	</main>
+    <br />
+    
+    <ul>
+      <li><a href="/cv">/cv</a></li>
+      <li><a href="/experiments/lightspeed">/experiments/lightspeed</a></li>
+    </ul>
+  </main>
 </PageLayout>

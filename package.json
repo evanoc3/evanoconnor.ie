@@ -1,18 +1,27 @@
 {
-  "name": "@evanoc3/evanoconnor.ie",
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
-  "private": true,
-  "type": "module",
-  "version": "0.1.0",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "feather-icons": "^4.29.2",
+    "luxon": "^3.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.51.1",
     "@types/luxon": "^3.4.2",
+    "@types/node": "^22.13.11",
     "astro": "^5.5.4",
-    "luxon": "^3.5.0",
     "sass-embedded": "^1.86.0"
-  }
+  },
+  "license": "MIT",
+  "name": "@evanoc3/evanoconnor.ie",
+  "private": true,
+  "scripts": {
+    "build": "astro build",
+    "clean": "rm -rf .astro dist playwright-report test-results",
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "test:e2e": "playwright test"
+  },
+  "type": "module",
+  "version": "0.1.0"
 }

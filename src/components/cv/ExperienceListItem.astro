@@ -4,179 +4,188 @@ import { Image } from "astro:assets";
 import { DateTime } from "luxon";
 
 interface Props {
-	icon: ImageMetadata;
-	jobTitle: string;
-	company: string;
-	url: string;
-	timespan: { start: DateTime, end?: DateTime,  };
-	skills: { title: string, url?: string }[];
+  icon: ImageMetadata;
+  jobTitle: string;
+  company: string;
+  url: string;
+  timespan: { start: DateTime, end?: DateTime,  };
+  skills: { title: string, url?: string }[];
 }
 
 const { icon, jobTitle, company, url, timespan, skills } = Astro.props;
 
 const humanReadableTimeSpanStart = timespan.start.toLocaleString({ year: "numeric", month: "short" });
-const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ year: "numeric", month: "short" }) : "Present";
+
+const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ year: "numeric", month: "short" })
+                                             : "Present";
 ---
 
 <style lang="scss">
-	@use "breakpoints";
+  @use "breakpoints";
 
-	div.experience-list-item {
-		display: grid;
-		grid-template-columns: 3.75rem 1fr;
-		grid-template-rows: repeat(5, auto);
-		grid-template-areas: "timespan timespan"
-												 "icon title"
-												 "icon location"
-		                     "icon desc"
-		                     "icon skills";
-		margin-top: 1rem;
-	}
+  div.experience-list-item {
+    display: grid;
+    grid-template-areas: "timespan timespan"
+                         "icon title"
+                         "icon location"
+                         "icon desc"
+                         "icon skills";
+    grid-template-columns: 3.75rem 1fr;
+    grid-template-rows: repeat(5, auto);
+    margin-top: 1rem;
+  }
 
-	img {
-		grid-area: icon;
-		max-width: 3rem;
-		max-height: 3rem;
-		margin-right: 0.5rem;
-	}
+  img {
+    grid-area: icon;
+    margin-right: 0.5rem;
+    max-height: 3rem;
+    max-width: 3rem;
+  }
 
-	h3 {
-		grid-area: title;
-		line-height: 1.4;
-		align-self: center;
-	}
+  h3 {
+    align-self: center;
+    color: var(--header-text-colour);
+    grid-area: title;
+    line-height: 1.4;
+  }
 
-	span.bullet {
-		display: none;
-	}
+  span.bullet {
+    display: none;
+  }
 
-	a.company {
-		grid-area: location;
-		justify-self: start;
-		color: var(--link-text-colour, #6a6a6a);
-		font-size: 1.2rem;
-		font-weight: 500;
-		text-decoration-line: underline;
-		text-decoration-skip-ink: auto;
-		text-decoration-thickness: 0.08em;
-		text-underline-offset: 2px;
-		align-self: center;
-		line-height: 1.4;
-	}
+  a.company {
+    align-self: center;
+    color: var(--link-text-colour);
+    font-size: 1.2rem;
+    font-weight: 500;
+    grid-area: location;
+    justify-self: start;
+    line-height: 1.4;
+    text-decoration-line: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 2px;
+    transition: color var(--transition-duration);
 
-	span.timespan {
-		grid-area: timespan;
-		font-style: italic;
-		color: var(--secondary-text-colour, #4e4e4e);
-		align-self: center;
-		justify-self: end;
-	}	
+    &:hover {
+      color: var(--link-text-hover-colour);
+    }
+  }
 
-	div.desc {
-		grid-area: desc;
-		line-height: 1.35;
-		font-size: 0.95rem;
-	}
+  div.desc {
+    font-size: 0.95rem;
+    grid-area: desc;
+    line-height: 1.35;
+  }
 
-	:global(div.desc p:not(:first-of-type)) {
-		margin-top: 0.375rem;
-	}
+  span.timespan {
+    align-self: center;
+    color: var(--text-secondary-colour);
+    font-style: italic;
+    grid-area: timespan;
+    justify-self: end;
+  }
 
-	ul {
-		grid-area: skills;
-		display: flex;
-		flex-flow: row wrap;
-		margin-top: 0.5rem;
-		gap: .33rem;
-		list-style: none;
-	}
+  :global(
+    div.desc p:not(:first-of-type)
+  ) {
+    margin-top: 0.375rem;
+  }
 
-	.skill {
-		background-color: var(--badge-background-colour, #e1e1e1);
-		font-size: 0.833rem;
-		color: var(--primary-text-colour, #333);
-		border-radius: 999rem;
-		padding: .2rem .5rem;
-		transition: background-color 0.33s;
+  a.skill {
+    cursor: pointer;
+    text-decoration: none;
+  }
 
-		&:hover {
-			background-color: var(--badge-background-hovered-colour, #c4c4c4);
-		}
-	}
+  .skill {
+    background-color: var(--badge-background-colour);
+    border-radius: 999rem;
+    color: var(--text-primary-colour);
+    font-size: 0.833rem;
+    padding: .2rem .5rem;
+    transition: background-color var(--transition-duration);
 
-	a.skill {
-		text-decoration: none;
-		cursor: pointer;
-	}
+    &:hover {
+      background-color: var(--badge-background-hover-colour);
+    }
+  }
 
-	@media only print {
-		a.company {
-			text-decoration: none;
-		}
-	}
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    gap: calc(1rem / 3);
+    grid-area: skills;
+    list-style: none;
+    margin-top: 0.5rem;
+  }
 
-	@media (min-width: breakpoints.$A4) {
-		div.experience-list-item {
-			grid-template-columns: 3.75rem auto auto 1fr auto;
-			grid-template-rows: repeat(3, auto);
-			grid-template-areas: "icon title  bullet location timespan"
-													"icon desc   desc   desc     desc"
-													"icon skills skills skills   skills";
-		}
+  @media only print {
+    a.company {
+      text-decoration: none;
+    }
+  }
 
-		span.bullet {
-			grid-area: bullet;
-			font-size: 1.2rem;
-			padding: 0 0.5ch;
-			font-weight: 500;
-			color: var(--secondary-text-colour, #4e4e4e);
-			display: block;
-			align-self: center;
-		}
-	}
+  @media (min-width: breakpoints.$A4) {
+    div.experience-list-item {
+      grid-template-areas: "icon title  bullet location timespan"
+                           "icon desc   desc   desc     desc"
+                           "icon skills skills skills   skills";
+      grid-template-columns: 3.75rem auto auto 1fr auto;
+      grid-template-rows: repeat(3, auto);
+    }
+
+    span.bullet {
+      align-self: center;
+      color: var(--text-secondary-colour);
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 500;
+      grid-area: bullet;
+      padding: 0 0.5ch;
+    }
+  }
 </style>
 
 <div class="experience-list-item">
-	<Image src={icon} alt="" />
+  <Image src={icon} alt="" />
 
-	<h3>{ jobTitle }</h3>
+  <h3>{ jobTitle }</h3>
 
-	<span class="bullet">&bull;</span>
+  <span class="bullet">&bull;</span>
 
-	<a href={url} class="company">{ company }</a>
+  <a href={url} class="company">{ company }</a>
 
-	{
-		(timespan.end === undefined)
-			? <span class="timespan" data-timespan-start={timespan.start.toISO()}> {humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
-			: <span class="timespan" title={timespan.end.diff(timespan.start, ["months", "years"]).toHuman()}> {humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
-	}
+  {
+    (timespan.end === undefined)
+      ? <span class="timespan" data-timespan-start={timespan.start.toISO()}> {humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
+      : <span class="timespan" title={timespan.end.diff(timespan.start, ["months", "years"]).toHuman()}> {humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
+  }
 
-	<div class="desc">
-		<slot>
-		</slot>
-	</div>
+  <div class="desc">
+    <slot>
+    </slot>
+  </div>
 
-	<ul class="skills">
-		{
-			skills
-				.sort((a, b) => a.title.localeCompare(b.title))
-				.map(({ url, title }) => (
-					url
-						? <li><a class="skill" href={url}>{title}</a></li> 
-						: <li class="skill">{title}</li>
-			))
-		}
-	</ul>
+  <ul class="skills">
+    {
+      skills
+        .sort((a, b) => a.title.localeCompare(b.title))
+        .map(({ url, title }) => (
+          url ? <li><a class="skill" href={url}>{title}</a></li> 
+              : <li class="skill">{title}</li>
+      ))
+    }
+  </ul>
 </div>
 
 <script>
-	import { DateTime } from "luxon";
+  import { DateTime } from "luxon";
 
-	const ongoingExperienceTimespanLabels = document.querySelectorAll<HTMLSpanElement>(".timespan[data-timespan-start]");
+  const ongoingExperienceTimespanLabels = document.querySelectorAll<HTMLSpanElement>(".timespan[data-timespan-start]");
 
-	for(const ongoingExperienceTimespanLabel of ongoingExperienceTimespanLabels) {
-		const startDate = DateTime.fromISO(ongoingExperienceTimespanLabel.dataset.timespanStart as string);
-		const diff = DateTime.now().diff(startDate, ["months", "years"]);
-		ongoingExperienceTimespanLabel.title = diff.toHuman({ maximumFractionDigits: 0 });
-	}
+  for(const ongoingExperienceTimespanLabel of ongoingExperienceTimespanLabels) {
+    const startDate = DateTime.fromISO(ongoingExperienceTimespanLabel.dataset.timespanStart as string);
+    const diff = DateTime.now().diff(startDate, ["months", "years"]);
+    ongoingExperienceTimespanLabel.title = diff.toHuman({ maximumFractionDigits: 0 });
+  }
 </script>
