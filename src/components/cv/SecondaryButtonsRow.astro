@@ -1,6 +1,8 @@
 ---
 import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
 import PrinterSvg from "feather-icons/dist/icons/printer.svg";
+import SunSvg from "feather-icons/dist/icons/sun.svg";
+import MoonSvg from "feather-icons/dist/icons/moon.svg";
 ---
 <style lang="scss">
   @use "resets";
@@ -75,6 +77,12 @@ import PrinterSvg from "feather-icons/dist/icons/printer.svg";
 
   <div class="spacer"></div>
 
+  <button class="theme-btn hidden-by-default">
+    <SunSvg />
+    <MoonSvg />
+    Theme
+  </button>
+
   <button class="print-btn hidden-by-default">
     <PrinterSvg />
     Print
@@ -82,11 +90,37 @@ import PrinterSvg from "feather-icons/dist/icons/printer.svg";
 </div>
 
 <script>
+  import { getBrowserTheme, getUserTheme, toggleTheme, getSessionStorageTheme, getCurrentTheme, setUserTheme } from "@/utils/theme-utils";
+
   // setup print button
   const printButton = document.querySelector<HTMLButtonElement>(".print-btn");
   if (printButton) {
     printButton.addEventListener("click", () => window.print());
     printButton.classList.add("visible");
+  }
+
+  // set page theme on-load
+  document.addEventListener("DOMContentLoaded", () => {
+    const sessionStorageTheme = getSessionStorageTheme();
+    if (sessionStorageTheme) {
+      setUserTheme(sessionStorageTheme);
+    }
+  });
+
+  // on browser theme change
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    const newBrowserTheme = e.matches ? "dark" : "light";
+    setUserTheme(newBrowserTheme);
+  });
+
+  // setup theme button
+  const themeButton = document.querySelector<HTMLButtonElement>(".theme-btn");
+  if (themeButton) {
+    themeButton.addEventListener("click", () => {
+      const newTheme = toggleTheme(getUserTheme() ?? getBrowserTheme());
+      setUserTheme(newTheme);
+    });
+    themeButton.classList.add("visible");
   }
 </script>
 
