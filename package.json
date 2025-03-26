@@ -23,7 +23,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "test:e2e": "playwright test",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run -v"
   },
   "type": "module",
   "version": "0.1.0"
