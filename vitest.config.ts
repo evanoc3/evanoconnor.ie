@@ -6,6 +6,7 @@ export default getViteConfig({
     include: [
       "**/tests/unit/**/*.test.ts"
     ],
-    environment: "happy-dom"
+    environment: "happy-dom",
+    reporters: ["verbose"]
   }
 });
