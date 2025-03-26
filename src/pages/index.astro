@@ -11,7 +11,7 @@ import PageLayout from "@/components/PageLayout.astro";
   @include page.optimize-for-text;
   @include resets.global;
 
-  @include theme.colours(
+  @include theme.set-vars(
     $light-theme-colours: (
       --background-colour: white,
       --text-colour: #222,

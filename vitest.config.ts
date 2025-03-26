@@ -1,0 +1,12 @@
+import { getViteConfig } from "astro/config";
+
+
+export default getViteConfig({
+  test: {
+    include: [
+      "**/tests/unit/**/*.test.ts"
+    ],
+    environment: "happy-dom",
+    reporters: ["verbose"]
+  }
+});

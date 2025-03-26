@@ -1,29 +1,40 @@
 @use "sass:map";
 
-@mixin colours($light-theme-colours, $dark-theme-colours) {
-  :global(body) {
-    @each $key, $val in $light-theme-colours {
-      #{$key}: #{$val};
-    }
 
-    &[data-theme="dark"] {
-      @each $key, $val in $dark-theme-colours {
-        #{$key}: #{$val};
-      }
-    }
+@mixin light-theme {
+  :global(body:not([data-theme="dark"])) {
+    @content;
   }
 
   @media(prefers-color-scheme: dark) {
-    :global(body) {
-      @each $key, $val in $dark-theme-colours {
-        #{$key}: #{$val};
-      }
-
-      &[data-theme="light"] {
-        @each $key, $val in $light-theme-colours {
-          #{$key}: #{$val};
-        }
-      }
+    :global(body[data-theme="light"]) {
+      @content;
     }
   }
+}
+
+@mixin dark-theme {
+  :global(body[data-theme="dark"]) {
+    @content;
+  }
+
+  @media(prefers-color-scheme: dark) {
+    :global(body:not([data-theme="light"])) {
+      @content;
+    }
+  }
+}
+
+@mixin set-vars($light-theme-colours, $dark-theme-colours) {
+  @include light-theme {
+    @each $key, $val in $light-theme-colours {
+      #{$key}: #{$val};
+    }
+  };
+
+  @include dark-theme {
+    @each $key, $val in $dark-theme-colours {
+      #{$key}: #{$val};
+    }
+  };
 }
