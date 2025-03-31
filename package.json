@@ -3,16 +3,16 @@
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
     "feather-icons": "^4.29.2",
-    "luxon": "^3.5.0"
+    "luxon": "^3.6.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.1",
     "@types/luxon": "^3.4.2",
     "@types/node": "^22.13.14",
-    "astro": "^5.5.5",
+    "astro": "^5.5.6",
     "happy-dom": "^17.4.4",
-    "sass-embedded": "^1.86.0",
-    "vitest": "^3.0.9"
+    "sass-embedded": "^1.86.1",
+    "vitest": "^3.1.1"
   },
   "license": "MIT",
   "name": "@evanoc3/evanoconnor.ie",
