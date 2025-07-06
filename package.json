@@ -1,18 +1,18 @@
 {
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
   "dependencies": {
-    "bootstrap-icons": "^1.11.3",
+    "bootstrap-icons": "^1.13.1",
     "feather-icons": "^4.29.2",
-    "luxon": "^3.5.0"
+    "luxon": "^3.6.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.51.1",
-    "@types/luxon": "^3.4.2",
-    "@types/node": "^22.13.11",
-    "astro": "^5.5.4",
-    "happy-dom": "^17.4.4",
-    "sass-embedded": "^1.86.0",
-    "vitest": "^3.0.9"
+    "@playwright/test": "^1.53.2",
+    "@types/luxon": "^3.6.2",
+    "@types/node": "^24.0.10",
+    "astro": "^5.11.0",
+    "happy-dom": "^18.0.1",
+    "sass-embedded": "^1.89.0",
+    "vitest": "^3.2.4"
   },
   "license": "MIT",
   "name": "@evanoc3/evanoconnor.ie",
@@ -26,5 +26,5 @@
     "test:unit": "vitest run"
   },
   "type": "module",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
