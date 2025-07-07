@@ -1,14 +1,16 @@
 import { test, expect } from "@playwright/test";
 
 
-test("index page has correct page title", async ({ page }) => {
-  await page.goto("/");
+test("landing page has correct page title", async ({ page }) => {
+  const resp = (await page.goto("/"))!;
+  expect(resp).not.toBeNull();
+  expect(resp.status()).toBe(200);
 
   await expect(page).toHaveTitle(/evanoconnor\.ie/);
 });
 
 
-test("index page has links to other pages", async ({ page }) => {
+test("landing page has links to other pages", async ({ page }) => {
   await page.goto("/");
 
   const cvLink = page.getByRole("link", { name: "/cv" });
