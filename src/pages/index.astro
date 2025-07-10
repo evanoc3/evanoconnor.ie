@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@/components/PageLayout.astro";
+import { DateTime } from "luxon";
 ---
 
 <style lang="scss">
@@ -35,10 +36,11 @@ import PageLayout from "@/components/PageLayout.astro";
   main {
     font-size: 1.15rem;
     line-height: 1.4;
-    margin: 25vh auto 0;
-    padding: 1rem;
+    padding: 25vh 1rem 0;
+    margin: 0 auto;
     width: min(75ch, 100vw);
     color: var(--text-colour);
+    min-height: 100vh;
   }
 
   ul {
