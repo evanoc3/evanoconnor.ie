@@ -1,6 +1,5 @@
 ---
 import PageLayout from "@/components/PageLayout.astro";
-import { DateTime } from "luxon";
 ---
 
 <style lang="scss">
@@ -90,5 +89,41 @@ import { DateTime } from "luxon";
       <li><a href="/cv">/cv</a></li>
       <li><a href="/experiments/lightspeed">/experiments/lightspeed</a></li>
     </ul>
+
+    <div id="last-built-time-label" hidden>
+      <br />
+      This site was last built: <time></time>
+    </div>
   </main>
+
+  <script>
+    import { getHumanReadableShortDuration } from "@/utils/date-utils";
+    import { DateTime } from "luxon";
+
+    window.addEventListener("load", () => {
+      setLastBuildTimeLabel();
+    });
+
+    function setLastBuildTimeLabel(): void {
+      const metaTag = document.querySelector("meta[name=\"x-last-built-time\"]");
+      if(!metaTag)
+        return;
+      const metaTagContent = metaTag.getAttribute("content");
+      if(!metaTagContent)
+        return;
+      const lastBuiltTime = DateTime.fromISO(metaTagContent).toLocal() as DateTime<true>;
+
+      const lastBuiltTimeLabel = document.querySelector("#last-built-time-label");
+      if(!lastBuiltTimeLabel)
+        return;
+
+      lastBuiltTimeLabel.removeAttribute("hidden");
+
+      const timeTag = lastBuiltTimeLabel.querySelector("time");
+      if(!timeTag)
+        return;
+      timeTag.textContent = getHumanReadableShortDuration(lastBuiltTime, DateTime.now());
+      timeTag.setAttribute("datetime", lastBuiltTime.toISO());
+    }
+  </script>
 </PageLayout>

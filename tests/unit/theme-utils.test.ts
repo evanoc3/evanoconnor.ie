@@ -39,7 +39,7 @@ describe("theme-utils", () => {
     });
 
     it("should return 'dark' when prefers-color-scheme is dark", () => {
-      mockWindowMatchMedia(query => ({ matches: true }));
+      mockWindowMatchMedia(() => ({ matches: true }));
       expect(getBrowserTheme()).toBe("dark");
     });
     
