@@ -1,5 +1,11 @@
 import { DateTime, type DurationUnit } from "luxon";
 
+export const lastBuildTime = DateTime
+  .now()
+  .toUTC()
+  .set({ millisecond: 0, second: 0 })
+  .toISO({ suppressMilliseconds: true });
+
 const timeUnitPairs: { minor?: DurationUnit, major: DurationUnit }[] = [
   {                   major: "seconds" },
   { minor: "seconds", major: "minutes" },

@@ -5,13 +5,7 @@ interface Props {
 }
 const { title, description } = Astro.props;
 
-import { DateTime } from "luxon";
-
-const lastBuildTime = DateTime
-  .now()
-  .toUTC()
-  .set({ millisecond: 0, second: 0 })
-  .toISO({ suppressMilliseconds: true });
+import { lastBuildTime } from "@/utils/date-utils";
 ---
 
 <!DOCTYPE html>

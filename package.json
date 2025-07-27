@@ -8,8 +8,8 @@
   "devDependencies": {
     "@playwright/test": "^1.54.1",
     "@types/luxon": "^3.6.2",
-    "@types/node": "^24.0.14",
-    "astro": "^5.12.0",
+    "@types/node": "^24.1.0",
+    "astro": "^5.12.3",
     "happy-dom": "^18.0.1",
     "sass-embedded": "^1.89.2",
     "vitest": "^3.2.4"
