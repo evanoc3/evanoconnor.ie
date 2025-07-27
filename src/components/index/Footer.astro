@@ -1,3 +1,6 @@
+---
+import { lastBuildTime } from "@/utils/date-utils";
+---
 <style lang="scss">
   @use "theme";
 
@@ -31,7 +34,7 @@
 <footer hidden>
   
   <span id="last-built-time-label">
-    Last updated <time></time>
+    Last updated <time datetime={lastBuildTime}></time>
   </span>
 
 </footer>
@@ -39,7 +42,7 @@
 
 <script>
   import { DateTime } from "luxon";
-  import { lastBuildTime, getHumanReadableShortDuration } from "@/utils/date-utils";
+  import { getHumanReadableShortDuration } from "@/utils/date-utils";
 
   window.addEventListener("load", () => {
     showFooter();
@@ -52,16 +55,13 @@
   }
 
   function setLastBuildTimeLabel(): void {
-    const lastBuiltTime = DateTime.fromISO(lastBuildTime).toLocal();
-    if(!lastBuiltTime.isValid)
-      return;
-
     const timeTag = document.querySelector("#last-built-time-label > time");
     if(!timeTag)
       return;
 
+    const lastBuiltTime = DateTime.fromISO(timeTag.getAttribute("datetime")!);
+
     const lastBuiltAgoDuration = getHumanReadableShortDuration(lastBuiltTime, DateTime.now());
     timeTag.textContent = lastBuiltAgoDuration === "now" ? lastBuiltAgoDuration : `${lastBuiltAgoDuration} ago`;
-    timeTag.setAttribute("datetime", lastBuiltTime.toISO());
   }
 </script>
