@@ -38,4 +38,22 @@ test.describe("index page", () => {
     await expect(lightspeedLink).toHaveAttribute("href", "/experiments/lightspeed");
   });
 
+  test("footer is visible (with JS enabled)", async ({ page }) => {
+    await page.goto("/");
+
+    const footer = page.locator("footer");
+    await expect(footer).toBeVisible();
+  });
+
+  test.describe("with JS disabled", () => {
+    test.use({ javaScriptEnabled: false });
+
+    test("footer is hidden", async ({ page }) => {
+      await page.goto("/");
+
+      const footer = page.locator("footer");
+      await expect(footer).toBeHidden();
+    });
+  });
+
 });
