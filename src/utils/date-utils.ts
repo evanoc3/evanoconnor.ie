@@ -1,5 +1,12 @@
 import { DateTime, type DurationUnit } from "luxon";
 
+/**
+ * Singleton which stores the 'now' value at build-time. This can then be used to stringify and insert
+ * into HTML templates.
+ * 
+ * Note, that it can't be used directly in client-side JS or it'll be re-evaluated at runtime. It needs to
+ * be serialized into HTML and re-parsed with JS to work correctly.
+ */
 export const lastBuildTime = DateTime
   .now()
   .set({ millisecond: 0, second: 0 })
@@ -36,7 +43,7 @@ export function getHumanReadableShortDuration(startDate: DateTime, endDate: Date
       .shiftTo(...significantUnits)
       .mapUnits((val, unit) => (significantUnits.includes(unit!) ? Math.floor(val) : 0))
       .rescale()
-      .toHuman({ listStyle: "long" /* , maximumFractionDigits: 0 */ });
+      .toHuman({ listStyle: "long" });
   }
 
   return humanReadableString;
