@@ -1,0 +1,67 @@
+<style lang="scss">
+  @use "theme";
+
+  @include theme.set-vars(
+    $light-theme-colours: (
+      --background-secondary-colour: #f8f8f8,
+      --text-secondary-colour: #aaa
+    ),
+    $dark-theme-colours: (
+      --background-secondary-colour: #111,
+      --text-secondary-colour: #555
+    )
+  );
+
+
+  footer {
+    padding: 2rem;
+    background-color: var(--background-secondary-colour);
+    color: var(--text-secondary-colour);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: end;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+</style>
+
+
+<footer hidden>
+  
+  <span id="last-built-time-label">
+    Last updated <time></time>
+  </span>
+
+</footer>
+
+
+<script>
+  import { DateTime } from "luxon";
+  import { lastBuildTime, getHumanReadableShortDuration } from "@/utils/date-utils";
+
+  window.addEventListener("load", () => {
+    showFooter();
+    setLastBuildTimeLabel();
+  });
+
+  function showFooter(): void {
+    const footer = document.querySelector("footer");
+    footer?.removeAttribute("hidden");
+  }
+
+  function setLastBuildTimeLabel(): void {
+    const lastBuiltTime = DateTime.fromISO(lastBuildTime).toLocal();
+    if(!lastBuiltTime.isValid)
+      return;
+
+    const timeTag = document.querySelector("#last-built-time-label > time");
+    if(!timeTag)
+      return;
+
+    const lastBuiltAgoDuration = getHumanReadableShortDuration(lastBuiltTime, DateTime.now());
+    timeTag.textContent = lastBuiltAgoDuration === "now" ? lastBuiltAgoDuration : `${lastBuiltAgoDuration} ago`;
+    timeTag.setAttribute("datetime", lastBuiltTime.toISO());
+  }
+</script>

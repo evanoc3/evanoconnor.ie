@@ -2,6 +2,7 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { DateTime } from "luxon";
+import { getHumanReadableShortDuration } from "@/utils/date-utils";
 
 interface Props {
   icon: ImageMetadata;
@@ -157,8 +158,8 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
 
   {
     (timespan.end === undefined)
-      ? <span class="timespan" data-timespan-start={timespan.start.toISO()}> {humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
-      : <span class="timespan" title={timespan.end.diff(timespan.start, ["months", "years"]).toHuman()}> {humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
+      ? <span class="timespan" data-timespan-start={timespan.start.toISO()}>{humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
+      : <span class="timespan" title={getHumanReadableShortDuration(timespan.start, timespan.end)}>{humanReadableTimeSpanStart} &ndash; {humanReadableTimeSpanTo}</span>
   }
 
   <div class="desc">
@@ -179,13 +180,13 @@ const humanReadableTimeSpanTo = timespan.end ? timespan.end.toLocaleString({ yea
 </div>
 
 <script>
+  import { getHumanReadableShortDuration } from "@/utils/date-utils";
   import { DateTime } from "luxon";
 
-  const ongoingExperienceTimespanLabels = document.querySelectorAll<HTMLSpanElement>(".timespan[data-timespan-start]");
+  const ongoingExperienceTimespanLabels = document.querySelectorAll<HTMLElement>(".timespan[data-timespan-start]");
 
   for(const ongoingExperienceTimespanLabel of ongoingExperienceTimespanLabels) {
     const startDate = DateTime.fromISO(ongoingExperienceTimespanLabel.dataset.timespanStart as string);
-    const diff = DateTime.now().diff(startDate, ["months", "years"]);
-    ongoingExperienceTimespanLabel.title = diff.toHuman({ maximumFractionDigits: 0 });
+    ongoingExperienceTimespanLabel.title = getHumanReadableShortDuration(startDate, DateTime.now());
   }
 </script>

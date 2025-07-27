@@ -18,11 +18,16 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
       overflow: hidden auto;
 
       &.scrolling {
-      color: #35365e;
+        color: #35365e;
       }
     }
 
-    a {
+    button {
+      @include resets.button;
+      font-size: 1rem;
+    }
+
+    .back-link {
       align-items: center;
       color: currentColor;
       column-gap: 0.5ch;
@@ -35,10 +40,15 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
       top: 0;
       transition: color 0.5s;
       z-index: 1;
+      cursor: pointer;
+
+      &.hidden {
+        display: none;
+      }
 
       > svg {
-      height: 1rem;
-      width: 1rem;
+        height: 1rem;
+        width: 1rem;
       }
     }
 
@@ -64,10 +74,18 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
     }
   </style>
 
-  <a href="/">
+  <noscript>
+    <a href="/" class="back-link">
+      <ArrowLeftSvg />
+      Home
+    </a>
+  </noscript>
+
+  <button class="back-link hidden" onclick="window.history.back()">
     <ArrowLeftSvg />
-    Home
-  </a>
+    Back
+  </button>
+
 
   <canvas id="canvas"></canvas>
 
@@ -78,6 +96,16 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
       JavaScript is necessary for this experiment to work. Please enable JavaScript and reload.
     </div>
   </noscript>
+
+  <script>
+    window.addEventListener("load", () => {
+      const backButton = document.querySelector<HTMLButtonElement>("button.back-link");
+      if(backButton) {
+        backButton.classList.remove("hidden");
+        backButton.addEventListener("click", () => window.history.back());
+      }
+    });
+  </script>
 
   <script>
     interface Star {
