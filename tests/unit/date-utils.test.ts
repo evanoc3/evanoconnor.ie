@@ -46,17 +46,7 @@ describe("date-utils", () => {
       );
       expect(result).toBe(expected);
     });
-
-
-    // it("returns correct value", () => {
-    //   const startDate = DateTime.fromISO("2025-07-27T15:59:00Z");
-    //   const endDate = DateTime.fromISO("2025-08-10T19:39:00Z");
-    //   const result = getHumanReadableShortDuration(
-    //     startDate,
-    //     endDate
-    //   );
-    //   expect(result).toBe("2 weeks and 3 hours");
-    // });
+    
   });
 
 });
