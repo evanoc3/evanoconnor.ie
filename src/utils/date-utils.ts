@@ -42,8 +42,7 @@ export function getHumanReadableShortDuration(startDate: DateTime, endDate: Date
     humanReadableString = duration
       .shiftTo(...significantUnits)
       .mapUnits((val, unit) => (significantUnits.includes(unit!) ? Math.floor(val) : 0))
-      .rescale()
-      .toHuman({ listStyle: "long" });
+      .toHuman({ listStyle: "long", showZeros: false });
   }
 
   return humanReadableString;
