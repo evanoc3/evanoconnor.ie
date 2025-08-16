@@ -1,0 +1,129 @@
+---
+import PageLayout from "@/components/PageLayout.astro";
+import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
+import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
+
+const loremIpsumPara = `
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+`;
+---
+
+<style lang="scss">
+  @use "page";
+  @use "resets";
+
+  @include page.full-height;
+  @include resets.global;
+  @include resets.fonts;
+
+  button.back-link {
+    @include resets.button;
+    font-size: 1rem;
+  }
+
+  a.back-link {
+    text-decoration: none;
+  }
+
+  .back-link {
+    align-items: center;
+    column-gap: 0.5ch;
+    display: flex;
+    flex-flow: row nowrap;
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    cursor: pointer;
+
+    &[hidden] {
+      display: none;
+    }
+
+    > svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
+  div#page-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 85ch 1fr;
+    gap: 1rem;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 10rem 0;
+  }
+
+  div#left-col {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    eoc-toc {
+      margin-inline-end: 3rem;
+      border: 1px solid black;
+      position: sticky;
+      top: 10rem;
+    }
+  }
+
+  main {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    overflow: visible;
+    font-size: 1.2rem;
+
+    > p {
+      text-indent: 2rem;
+
+      &:not(:first-of-type) {
+        margin-top: 1rem;
+      }
+    }
+  }
+</style>
+
+
+<PageLayout title="table of contents component showcase">
+  <noscript>
+    <a href="/" class="back-link">
+      <ArrowLeftSvg />
+      Home
+    </a>
+  </noscript>
+
+  <button class="back-link" hidden>
+    <ArrowLeftSvg />
+    Back
+  </button>
+
+  <div id="page-container">
+    <div id="left-col">
+      <TableOfContents client:load></TableOfContents>
+    </div>
+
+    <main>
+      { Array.from({ length: 25 }, () => <p>{loremIpsumPara}</p>) }
+    </main>
+  </div>
+</PageLayout>
+
+
+<script>
+  window.addEventListener("load", () => {
+    const backButton = document.querySelector<HTMLButtonElement>("button.back-link");
+    if(backButton) {
+      backButton.removeAttribute("hidden");
+      backButton.addEventListener("click", () => window.history.back());
+    }
+  });
+</script>
