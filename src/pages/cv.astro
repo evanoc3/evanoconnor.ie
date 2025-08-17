@@ -21,30 +21,30 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
   @include page.optimize-for-text;
   @include resets.global;
 
-  :root {
-    --badge-background-colour: #e1e1e1,
-    --badge-background-hover-colour: #c4c4c4,
-    --button-secondary-background-hover-colour: rgba(0,0,0, 0.15),
-    --button-secondary-text-colour: #4e4e4e,
-    --button-secondary-text-hover-colour: #333,
-    --header-text-colour: #333,
-    --link-text-colour: #6a6a6a,
-    --link-text-hover-colour: #333,
-    --section-header-line-colour: #969696,
-    --section-header-text-colour: #717171,
-    --shadow-colour: rgba(0,0,0, 0.1),
-    --text-primary-colour: #333,
-    --text-secondary-colour: #4e4e4e
-  }
-
   @include theme.set-vars(
     $light-theme-colours: (
+      --badge-background-colour: #e1e1e1,
+      --badge-background-hover-colour: #c4c4c4,
+      --button-secondary-background-hover-colour: rgba(0,0,0, 0.15),
+      --button-secondary-text-colour: #4e4e4e,
+      --button-secondary-text-hover-colour: #333,
+      --header-text-colour: #333,
+      --link-text-colour: #6a6a6a,
+      --link-text-hover-colour: #333,
       --page-background-primary-colour: white,
       --page-background-secondary-colour: #ddd,
+      --section-header-line-colour: #969696,
+      --section-header-text-colour: #717171,
+      --shadow-colour: rgba(0,0,0, 0.1),
+      --text-primary-colour: #333,
+      --text-secondary-colour: #4e4e4e,
     ),
     $dark-theme-colours: (
-      --page-background-primary-colour: #ddd,
-      --page-background-secondary-colour: #444,
+      --badge-background-colour: #d1d1d1,
+      --button-secondary-text-colour: #ddd,
+      --button-secondary-text-hover-colour: white,
+      --page-background-primary-colour: #eee,
+      --page-background-secondary-colour: #333
     )
   );
 
