@@ -38,6 +38,9 @@ jobs:
     - name: Run E2E tests
       run: npm run test:e2e
     
+    - name: Run cloc report
+      run: npm run cloc
+    
     - name: Upload E2E test report
       uses: actions/upload-artifact@v4
       with:
