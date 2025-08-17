@@ -98,12 +98,10 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
   </noscript>
 
   <script>
+    import { setupBackButton } from "@/utils/ui-utils";
+    
     window.addEventListener("load", () => {
-      const backButton = document.querySelector<HTMLButtonElement>("button.back-link");
-      if(backButton) {
-        backButton.removeAttribute("hidden");
-        backButton.addEventListener("click", () => window.history.back());
-      }
+      setupBackButton();
     });
   </script>
 
