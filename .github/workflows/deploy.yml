@@ -29,6 +29,7 @@ jobs:
       run: npm run build
       env:
         PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.UMAMI_WEBSITE_ID }}
+        PUBLIC_WWW_HOST: ${{ vars.WWW_HOST }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4

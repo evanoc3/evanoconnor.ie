@@ -1,17 +1,17 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("toc page", () => {
+test.describe("CV page", () => {
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("/experiments/toc/", { timeout: 5000 });
+    await page.goto("/cv/", { timeout: 5000 });
   });
 
   test("has the correct page title", async ({ page }) => {
-    const resp = (await page.goto("/experiments/toc/", { timeout: 5000 }))!;
+    const resp = (await page.goto("/cv/", { timeout: 5000 }))!;
     expect(resp).not.toBeNull();
     expect(resp.status()).toBe(200);
 
-    await expect(page).toHaveTitle("Table of Contents component | evanoconnor.ie");
+    await expect(page).toHaveTitle("CV | evanoconnor.ie");
   });
 
   test("has the correct meta tags", async ({ page }) => {
@@ -23,20 +23,11 @@ test.describe("toc page", () => {
 
     const linkCanonical = page.locator("link[rel=\"canonical\"]");
     if(await linkCanonical.count() === 1) {
-      await expect(linkCanonical).toHaveAttribute("href", expect.stringMatching(/\/experiments\/toc\/$/));
+      await expect(linkCanonical).toHaveAttribute("href", expect.stringMatching(/\/cv\/$/));
     }
     else {
       expect(await linkCanonical.count()).toBe(0);
     }
-  });
-
-  test("has the eoc-toc element", async ({ page }) => {
-    const tableOfContentsElement = page.locator("eoc-toc");
-    await expect(tableOfContentsElement).toBeVisible();
-    await expect(tableOfContentsElement).toHaveAttribute("target-id", "main");
-
-    const main = page.locator("main");
-    await expect(main).toBeVisible();
   });
 
   test("has the back button (with JS enabled)", async ({ page }) => {
@@ -58,5 +49,6 @@ test.describe("toc page", () => {
       await expect(backButton).toBeHidden();
     });
   });
+
 
 });

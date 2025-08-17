@@ -13,11 +13,11 @@ import { lastBuildTime } from "@/utils/date-utils";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-        {
-      description &&
-      <meta name="description" content={description} />
-      <meta name="x-last-built-time" content={lastBuildTime} />
+    {
+      description && <meta name="description" content={description} />
     }
+    <meta name="x-last-built-time" content={lastBuildTime} />
+    <slot name="head"></slot>
     <title>{title}</title>
     {
       import.meta.env.PROD &&

@@ -65,6 +65,11 @@ import Footer from "@/components/index/Footer.astro";
   title="evanoconnor.ie"
   description="Evan O'Connor's personal website"
 >
+  {
+    import.meta.env.PUBLIC_WWW_HOST &&
+    <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}/`} />
+  }
+
   <main>
     <p>
       Hi there!
@@ -87,9 +92,9 @@ import Footer from "@/components/index/Footer.astro";
     <br />
     
     <ul>
-      <li><a href="/cv">/cv</a></li>
-      <li><a href="/experiments/lightspeed">/experiments/lightspeed</a></li>
-      <li><a href="/experiments/toc">/experiments/toc</a></li>
+      <li><a href="/cv/">/cv</a></li>
+      <li><a href="/experiments/lightspeed/">/experiments/lightspeed</a></li>
+      <li><a href="/experiments/toc/">/experiments/toc</a></li>
     </ul>
   </main>
 
