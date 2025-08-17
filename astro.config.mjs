@@ -9,7 +9,7 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           api: "modern-compiler",
-          loadPaths: ["./src/styles"]
+          loadPaths: [ "./src/styles" ]
         }
       }
     },
@@ -20,5 +20,5 @@ export default defineConfig({
     }
   },
 
-  integrations: [lit()]
+  integrations: [ lit() ]
 });
