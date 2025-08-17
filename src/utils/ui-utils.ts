@@ -1,7 +1,7 @@
-export function setupBackButton(): void {
-  const backButton = document.querySelector<HTMLButtonElement>("button.back-link");
-  if(backButton) {
-    backButton.removeAttribute("hidden");
-    backButton.addEventListener("click", () => window.history.back());
+export function showElementsRequiringJs(): void {
+  const elements = document.querySelectorAll<HTMLElement>("[data-requires-js]");
+  for(const el of elements) {
+    el.removeAttribute("hidden");
+    el.removeAttribute("data-requires-js");
   }
 }

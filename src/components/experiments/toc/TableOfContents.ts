@@ -58,6 +58,20 @@ export default class TableOfContentsElement extends LitElement {
       li {
         margin-bottom: 0.2rem;
       }
+
+      a {
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--link-colour, LinkText);
+
+        &:visited {
+          color: var(--link-visited-colour, VisitedText);
+        }
+
+        &:active {
+          color: var(--link-active-colour, ActiveText);
+        }
+      }
     `;
   }
 
@@ -107,7 +121,7 @@ export default class TableOfContentsElement extends LitElement {
 
   private get tableTemplate(): TemplateResult | typeof nothing {
     return this.model.length
-      ? html`<ol class="depth-0">${this.model.map(renderModelNode)}</ol>`
+      ? html`<ol class="depth-0">${this.model.map((node) => this.renderModelNode(node))}</ol>`
       : nothing
   }
   
@@ -151,6 +165,43 @@ export default class TableOfContentsElement extends LitElement {
     });
 
   }
+
+  private renderModelNode(node: TableOfContentsModelNode): TemplateResult {
+    return html`
+      <li>
+        ${
+          node.id 
+            ? html`<a href="#${node.id}" @click=${this.onLinkClicked}>${node.text}</a>`
+            : html`<span>${node.text}</span>`
+        }
+        </li>
+
+        ${
+          node.children.length
+            ? html`<ol class="${`depth-${node.depth + 1}`}">${node.children.map((node) => this.renderModelNode(node))}</ol>`
+            : nothing
+        }
+    `;
+  }
+
+  private onLinkClicked(e: MouseEvent): void {
+    e.preventDefault();
+
+    const eventTarget = e.currentTarget as HTMLAnchorElement;
+    const href = eventTarget.getAttribute("href") ?? "";
+    const hashIndex = href.lastIndexOf("#");
+
+    if(hashIndex === -1) {
+      return;
+    }
+
+    const targetId = href.substring(hashIndex + 1);
+    if (targetId) {
+      const targetElement = document.getElementById(targetId);
+      targetElement?.scrollIntoView({ behavior: "smooth" });
+      history.replaceState(null, "", `#${targetId}`);
+    }
+  }
 }
 
 
@@ -186,24 +237,6 @@ function buildTableOfContentsModel(target?: HTMLElement): TableOfContentsModelNo
   }
 
   return newModel;
-}
-
-function renderModelNode(node: TableOfContentsModelNode): TemplateResult {
-  return html`
-    <li>
-      ${
-        node.id 
-          ? html`<a href="#${node.id}">${node.text}</a>`
-          : html`<span>${node.text}</span>`
-      }
-      </li>
-
-      ${
-        node.children.length
-          ? html`<ol class="${`depth-${node.depth + 1}`}">${node.children.map(renderModelNode)}</ol>`
-          : nothing
-      }
-  `;
 }
 
 function getHeadingType(heading: HTMLHeadingElement): number {

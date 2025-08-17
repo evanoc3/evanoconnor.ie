@@ -8,10 +8,33 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
   <style lang="scss">
     @use "page";
     @use "resets";
+    @use "theme";
 
     @include page.full-height;
     @include resets.global;
     @include resets.fonts;
+
+    @include theme.set-vars(
+      $light-theme-colours: (
+        --background-colour: white,
+        --text-colour: #222,
+        --link-colour: LinkText,
+        --link-visited-colour: VisitedText,
+        --link-active-colour: ActiveText
+      ),
+      $dark-theme-colours: (
+        --background-colour: #181818,
+        --text-colour: #eee,
+        --link-colour: #0ff,
+        --link-visited-colour: #099,
+        --link-active-colour: #0ff
+      )
+    );
+
+    :global(body) {
+      background-color: var(--background-colour);
+      color: var(--text-colour);
+    }
 
     button.back-link {
       @include resets.button;
@@ -33,6 +56,7 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
       top: 0;
       z-index: 1;
       cursor: pointer;
+      color: inherit;
 
       &[hidden] {
         display: none;
@@ -98,7 +122,7 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
     </a>
   </noscript>
 
-  <button class="back-link" hidden>
+  <button class="back-link" hidden data-requires-js>
     <ArrowLeftSvg />
     Back
   </button>
@@ -113,7 +137,7 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
     </div>
 
     <main id="main">
-      <p>
+      <p hidden data-requires-js>
         This experiment is to demonstrate the 'Table of Contents' component on the left. It is
         a self-contained web-component which takes a HTML element's ID as its target-id attribute
         value, generates a representation of the hierarchy of headings within that target element,
@@ -121,10 +145,17 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
         which have IDs, and make the entries in the table corresponding to that heading into a link.
       </p>
 
-      <p>
+      <p hidden data-requires-js>
         The rest of the text content on this page is dynamically generated gibberish, with a number
         of headings and paragaphs to give you a better a sense of how the component works.
       </p>
+
+      <noscript>
+        <p>
+          Javascript is required to be enabled for this component to work. Please enable Javascript and
+          reload the page to view this demonstration.
+        </p>
+      </noscript>
 
       <hr />
 
@@ -133,10 +164,11 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
   </div>
 
   <script>
-    import { setupBackButton } from "@/utils/ui-utils";
+    import { showElementsRequiringJs } from "@/utils/ui-utils";
 
     window.addEventListener("load", () => {
-      setupBackButton();
+      showElementsRequiringJs();
+      document.querySelector("button.back-link")?.addEventListener("click", () => window.history.back());
     });
   </script>
 

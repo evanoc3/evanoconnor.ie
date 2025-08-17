@@ -81,7 +81,7 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
     </a>
   </noscript>
 
-  <button class="back-link" hidden>
+  <button class="back-link" hidden data-requires-js>
     <ArrowLeftSvg />
     Back
   </button>
@@ -98,10 +98,12 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
   </noscript>
 
   <script>
-    import { setupBackButton } from "@/utils/ui-utils";
+    import { showElementsRequiringJs } from "@/utils/ui-utils";
     
     window.addEventListener("load", () => {
-      setupBackButton();
+      showElementsRequiringJs();
+
+      document.querySelector("button.back-link")?.addEventListener("click", () => window.history.back());
     });
   </script>
 

@@ -1,6 +1,7 @@
 ---
 import { lastBuildTime } from "@/utils/date-utils";
 ---
+
 <style lang="scss">
   @use "theme";
 
@@ -31,7 +32,7 @@ import { lastBuildTime } from "@/utils/date-utils";
 </style>
 
 
-<footer hidden>
+<footer hidden data-requires-js>
   
   <span id="last-built-time-label">
     Last updated <time datetime={lastBuildTime}></time>
@@ -43,16 +44,12 @@ import { lastBuildTime } from "@/utils/date-utils";
 <script>
   import { DateTime } from "luxon";
   import { getHumanReadableShortDuration } from "@/utils/date-utils";
+  import { showElementsRequiringJs } from "@/utils/ui-utils";
 
   window.addEventListener("load", () => {
-    showFooter();
+    showElementsRequiringJs();
     setLastBuildTimeLabel();
   });
-
-  function showFooter(): void {
-    const footer = document.querySelector("footer");
-    footer?.removeAttribute("hidden");
-  }
 
   function setLastBuildTimeLabel(): void {
     const timeTag = document.querySelector("#last-built-time-label > time");
