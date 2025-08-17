@@ -1,10 +1,20 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false
   },
-  "exclude": ["dist"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"]
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ]
 }

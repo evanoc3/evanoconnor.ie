@@ -1,0 +1,185 @@
+---
+import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
+import PageLayout from "@/components/PageLayout.astro";
+import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
+---
+
+<PageLayout title="table of contents component showcase | evanoconnor.ie">
+  <style lang="scss">
+    @use "page";
+    @use "resets";
+
+    @include page.full-height;
+    @include resets.global;
+    @include resets.fonts;
+
+    button.back-link {
+      @include resets.button;
+      font-size: 1rem;
+    }
+
+    a.back-link {
+      text-decoration: none;
+    }
+
+    .back-link {
+      align-items: center;
+      column-gap: 0.5ch;
+      display: flex;
+      flex-flow: row nowrap;
+      left: 0;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      z-index: 1;
+      cursor: pointer;
+
+      &[hidden] {
+        display: none;
+      }
+
+      > svg {
+        height: 1rem;
+        width: 1rem;
+      }
+    }
+
+    div#page-container {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 1fr 85ch 1fr;
+      gap: 1rem;
+      min-height: 100vh;
+      width: 100vw;
+      padding: 10rem 0;
+    }
+
+    div#left-col {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      align-items: flex-start;
+
+      eoc-toc {
+        margin-inline-end: 3rem;
+        position: sticky;
+        top: 10rem;
+      }
+    }
+
+    main {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+      overflow: visible;
+      font-size: 1.2rem;
+
+      hr {
+        margin: 5rem 0;
+      }
+
+      :global(h1, h2, h3, h4, h5, h6) {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1;
+      }
+
+      :global(p) {
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+
+  <noscript>
+    <a href="/" class="back-link">
+      <ArrowLeftSvg />
+      Home
+    </a>
+  </noscript>
+
+  <button class="back-link" hidden>
+    <ArrowLeftSvg />
+    Back
+  </button>
+
+  <div id="page-container">
+    <div id="left-col">
+      <TableOfContents
+        client:only
+        target-id="main"
+        table-title="Table of Contents"
+      ></TableOfContents>
+    </div>
+
+    <main id="main">
+      <p>
+        This experiment is to demonstrate the 'Table of Contents' component on the left. It is
+        a self-contained web-component which takes a HTML element's ID as its target-id attribute
+        value, generates a representation of the hierarchy of headings within that target element,
+        and displays it as a nested list. Where possible the component will also detect headings
+        which have IDs, and make the entries in the table corresponding to that heading into a link.
+      </p>
+
+      <p>
+        The rest of the text content on this page is dynamically generated gibberish, with a number
+        of headings and paragaphs to give you a better a sense of how the component works.
+      </p>
+
+      <hr />
+
+      {/* More paragraphs will be dyanmically generated and added here by JS at runtime */}
+    </main>
+  </div>
+
+  <script>
+    import { setupBackButton } from "@/utils/ui-utils";
+
+    window.addEventListener("load", () => {
+      setupBackButton();
+    });
+  </script>
+
+  <script>
+    import { randInt, gibberish } from "@/utils/rand-utils";
+
+    window.addEventListener("load", () => {
+      const main = document.querySelector("main")!;
+      for(let i = 0; i < 20; i++) {
+        const heading = generateRandomHeading();
+        main.appendChild(heading);
+
+        const parasCount = randInt(1, 3);
+        for(let j = 0; j < parasCount; j++) {
+          const para = generateDummyParagraph();
+          main.appendChild(para);
+        }
+      }
+    });
+
+    function generateRandomHeading(): HTMLHeadingElement {
+      const level = randInt(1, 6);
+      const heading = document.createElement(`h${level}`) as HTMLHeadingElement;
+
+      if(randInt(0, 2) === 0) {
+        heading.id = gibberish();
+      }
+      
+      heading.textContent = `This is a level ${level} header`;
+      return heading;
+    }
+
+    const loremIpsumPara = `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    `;
+
+    function generateDummyParagraph(): HTMLParagraphElement {
+      const para = document.createElement("p");
+      para.textContent = loremIpsumPara;
+      return para;
+    }
+  </script>
+</PageLayout>

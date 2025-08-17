@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import lit from "@astrojs/lit";
 
 export default defineConfig({
   devToolbar: { enabled: false },
@@ -17,5 +18,7 @@ export default defineConfig({
         "@": "/src"
       }
     }
-  }
+  },
+
+  integrations: [lit()]
 });
