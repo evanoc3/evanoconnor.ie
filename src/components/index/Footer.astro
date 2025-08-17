@@ -33,7 +33,7 @@ import { lastBuildTime } from "@/utils/date-utils";
 
 
 <footer hidden data-requires-js>
-  
+
   <span id="last-built-time-label">
     Last updated <time datetime={lastBuildTime}></time>
   </span>
@@ -56,7 +56,9 @@ import { lastBuildTime } from "@/utils/date-utils";
     if(!timeTag)
       return;
 
-    const lastBuiltTime = DateTime.fromISO(timeTag.getAttribute("datetime")!);
+    const lastBuiltTime = DateTime.fromISO(timeTag.getAttribute("datetime") ?? "");
+    if (!lastBuiltTime.isValid)
+      return;
 
     const lastBuiltAgoDuration = getHumanReadableShortDuration(lastBuiltTime, DateTime.now());
     timeTag.textContent = lastBuiltAgoDuration === "now" ? lastBuiltAgoDuration : `${lastBuiltAgoDuration} ago`;
