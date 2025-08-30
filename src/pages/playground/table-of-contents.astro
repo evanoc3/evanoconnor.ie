@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/components/common/PageLayout.astro";
 import GoBack from "@/components/common/GoBack.astro";
-import TableOfContents from "@/components/playground/toc/TableOfContents.ts";
+import TableOfContentsElement from "@/components/playground/table-of-contents/TableOfContents.ts";
 ---
 
 <style lang="scss">
@@ -97,11 +97,11 @@ import TableOfContents from "@/components/playground/toc/TableOfContents.ts";
 
   <div id="page-container">
     <div id="left-col">
-      <TableOfContents
+      <TableOfContentsElement
         client:only
         target-id="main"
         table-title="Table of Contents"
-      ></TableOfContents>
+      ></TableOfContentsElement>
     </div>
 
     <main id="main">
