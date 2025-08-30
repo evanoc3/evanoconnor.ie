@@ -39,7 +39,7 @@ const requiresJs = Astro.props.requiresJs ?? true;
     {
       import.meta.env.PROD &&
       import.meta.env.PUBLIC_WWW_HOST && (
-        <link rel="sitemap" href={`${import.meta.env.PUBLIC_WWW_HOST}/sitemap-index.xml`} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
       )
     }
     {
