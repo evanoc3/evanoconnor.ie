@@ -1,12 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { hasLink, validateCanonicalLink, validateMetaTags } from "../e2e-test-utils.ts";
+import { hasLink, successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
 
-test.describe("index page", () => {
+test.describe("/", () => {
 
   test.beforeEach(async ({ page }) => {
-    const resp = (await page.goto("/", { timeout: 5000 }))!;
-    expect(resp).not.toBeNull();
-    expect(resp.status()).toBe(200);
+    await successfulNavigation(page, "/");
   });
 
   test("has the correct metadata", async ({ page }) => {
@@ -19,7 +17,13 @@ test.describe("index page", () => {
     const metaLastBuiltTime = page.locator("meta[name=\"x-last-built-time\"]");
     await expect(metaLastBuiltTime).toHaveAttribute("content", expect.stringMatching(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/));
 
-    await validateCanonicalLink(page, "/$")
+    await validateLinkTags(page, {
+      canonicalLinkValue: "/$"
+    });
+  });
+
+  test("has a valid sitemap", async ({ page }) => {
+    await validateSitemap(page);
   });
 
   test("has links to other pages", async ({ page }) => {
