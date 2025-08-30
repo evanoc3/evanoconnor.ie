@@ -1,12 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { validateLinkTags, validateMetaTags } from "../e2e-test-utils.ts";
+import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
 
 test.describe("/cv/", () => {
 
   test.beforeEach(async ({ page }) => {
-    const resp = (await page.goto("/cv/", { timeout: 5000 }))!;
-    expect(resp).not.toBeNull();
-    expect(resp.status()).toBe(200);
+    await successfulNavigation(page, "/cv/");
   });
 
   test("has the correct metadata", async ({ page }) => {
@@ -19,6 +17,10 @@ test.describe("/cv/", () => {
     await validateLinkTags(page, {
       canonicalLinkValue: "/cv/$"
     });
+  });
+
+  test("has a valid sitemap", async ({ page }) => {
+    await validateSitemap(page);
   });
 
   test("has the back button (with JS enabled)", async ({ page }) => {

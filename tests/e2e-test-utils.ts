@@ -44,15 +44,6 @@ type ValidateLinkTagsOptions = {
 }
 
 export async function validateLinkTags(page: Page, opts: ValidateLinkTagsOptions): Promise<void> {
-  // sitemap
-  const linkSitemap = page.locator("link[rel=\"sitemap\"]");
-  if(await linkSitemap.count() === 1) {
-    await expect(linkSitemap).toHaveAttribute("href", "/sitemap-index.xml");
-  }
-  else {
-    expect(await linkSitemap.count()).toBe(0);
-  }
-
   // canonical
   const linkCanonical = page.locator("link[rel=\"canonical\"]");
   if(await linkCanonical.count() === 1) {
@@ -63,10 +54,34 @@ export async function validateLinkTags(page: Page, opts: ValidateLinkTagsOptions
   }
 }
 
-
-
 export async function hasLink(page: Page, linkText: string, linkHref: string): Promise<void> {
   const link = page.getByRole("link", { name: linkText });
   await expect(link).toBeVisible();
   await expect(link).toHaveAttribute("href", linkHref);
+}
+
+export async function successfulNavigation(page: Page, url: string): Promise<void> {
+  const resp = (await page.goto(url, { timeout: 5000 }))!;
+  expect(resp).not.toBeNull();
+  expect(resp.status()).toBe(200);
+}
+
+export async function validateSitemap(page: Page): Promise<void> {
+  const startingPageUrl = page.url();
+
+  const linkSitemap = page.locator("link[rel=\"sitemap\"]");
+  if(await linkSitemap.count() === 1) {
+    await expect(linkSitemap).toHaveAttribute("href", "/sitemap-index.xml");
+  }
+  else {
+    expect(await linkSitemap.count()).toBe(0);
+    return;
+  }
+
+  await successfulNavigation(page, "/sitemap-index.xml");
+  await page.getByText("/sitemap-0.xml").count() === 1;
+
+  await successfulNavigation(page, "/sitemap-0.xml");
+
+  await successfulNavigation(page, startingPageUrl);
 }

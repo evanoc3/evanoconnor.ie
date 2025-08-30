@@ -1,11 +1,12 @@
 // @ts-check
-import process from "node:process";
 import { defineConfig } from "astro/config";
 import lit from "@astrojs/lit";
 import sitemap from "@astrojs/sitemap";
 
+const site = process.env.WWW_HOST || undefined;
+
 export default defineConfig({
-  site: process.env.PUBLIC_WWW_HOST,
+  site,
   devToolbar: { enabled: false },
   trailingSlash: "always",
   vite: {

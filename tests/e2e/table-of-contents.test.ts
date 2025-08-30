@@ -1,12 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { hasLink, validateLinkTags, validateMetaTags } from "../e2e-test-utils.ts";
+import { hasLink, successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
 
 test.describe("/playground/table-of-contents/", () => {
 
   test.beforeEach(async ({ page }) => {
-    const resp = (await page.goto("/playground/table-of-contents/", { timeout: 5000 }))!;
-    expect(resp).not.toBeNull();
-    expect(resp.status()).toBe(200);
+    await successfulNavigation(page, "/playground/table-of-contents/");
   });
 
   test("has the correct meta tags", async ({ page }) => {
@@ -20,6 +18,10 @@ test.describe("/playground/table-of-contents/", () => {
     await validateLinkTags(page, {
       canonicalLinkValue: "/playground/toc/$"
     });
+  });
+
+  test("has a valid sitemap", async ({ page }) => {
+    await validateSitemap(page);
   });
 
   test("has the eoc-toc element", async ({ page }) => {

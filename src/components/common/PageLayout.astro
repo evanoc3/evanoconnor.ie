@@ -31,14 +31,13 @@ const requiresJs = Astro.props.requiresJs ?? true;
     <meta name="x-last-built-time" content={lastBuildTime} />
     <title> { Astro.props.title } </title>
     {
-      import.meta.env.PUBLIC_WWW_HOST && (
-        <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}${Astro.url.pathname}`} />
-
+      Astro.site && (
+        <link slot="head" rel="canonical" href={`${Astro.site.origin}${Astro.url.pathname}`} />
       )
     }
     {
       import.meta.env.PROD &&
-      import.meta.env.PUBLIC_WWW_HOST && (
+      Astro.site && (
         <link rel="sitemap" href="/sitemap-index.xml" />
       )
     }
