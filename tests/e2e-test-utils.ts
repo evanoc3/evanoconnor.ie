@@ -39,15 +39,26 @@ export async function validateMetaTags(page: Page, opts?: validateMetaTagsOption
   }
 }
 
-export async function validateCanonicalLink(page: Page, canonicalLinkValue: string | RegExp): Promise<void> {
+type ValidateLinkTagsOptions = {
+  canonicalLinkValue: string | RegExp;
+}
+
+export async function validateLinkTags(page: Page, opts: ValidateLinkTagsOptions): Promise<void> {
+  // sitemap
+  const linkSitemap = page.locator("link[rel=\"sitemap\"]");
+  await expect(linkSitemap).toHaveAttribute("href", "/sitemap-index.xml");
+
+  // canonical
   const linkCanonical = page.locator("link[rel=\"canonical\"]");
   if(await linkCanonical.count() === 1) {
-    await expect(linkCanonical).toHaveAttribute("href", expect.stringMatching(canonicalLinkValue));
+    await expect(linkCanonical).toHaveAttribute("href", expect.stringMatching(opts.canonicalLinkValue));
   }
   else {
     expect(await linkCanonical.count()).toBe(0);
   }
 }
+
+
 
 export async function hasLink(page: Page, linkText: string, linkHref: string): Promise<void> {
   const link = page.getByRole("link", { name: linkText });

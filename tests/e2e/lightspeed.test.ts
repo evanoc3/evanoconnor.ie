@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { hasLink, validateCanonicalLink, validateMetaTags } from "../e2e-test-utils.ts";
+import { hasLink, validateLinkTags, validateMetaTags } from "../e2e-test-utils.ts";
 
-test.describe("lightspeed page", () => {
+test.describe("/playground/lightspeed/", () => {
 
   test.beforeEach(async ({ page }) => {
     const resp = (await page.goto("/playground/lightspeed/", { timeout: 5000 }))!;
@@ -17,7 +17,9 @@ test.describe("lightspeed page", () => {
       keywords: ["lightspeed", "scroll", "animation", "canvas", "JavaScript", "JS"]
     });
 
-    await validateCanonicalLink(page, "/playground/lightspeed/$");
+    await validateLinkTags(page, {
+      canonicalLinkValue: "/playground/lightspeed/$"
+    });
   });
 
   test("has the back button (with JS enabled)", async ({ page }) => {

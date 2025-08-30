@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { validateCanonicalLink, validateMetaTags } from "../e2e-test-utils.ts";
+import { validateLinkTags, validateMetaTags } from "../e2e-test-utils.ts";
 
-test.describe("CV page", () => {
+test.describe("/cv/", () => {
 
   test.beforeEach(async ({ page }) => {
     const resp = (await page.goto("/cv/", { timeout: 5000 }))!;
@@ -16,7 +16,9 @@ test.describe("CV page", () => {
       description: "Evan O'Connor's CV"
     });
 
-    await validateCanonicalLink(page, "/cv/$");
+    await validateLinkTags(page, {
+      canonicalLinkValue: "/cv/$"
+    });
   });
 
   test("has the back button (with JS enabled)", async ({ page }) => {
