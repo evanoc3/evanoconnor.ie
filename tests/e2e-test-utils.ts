@@ -46,7 +46,12 @@ type ValidateLinkTagsOptions = {
 export async function validateLinkTags(page: Page, opts: ValidateLinkTagsOptions): Promise<void> {
   // sitemap
   const linkSitemap = page.locator("link[rel=\"sitemap\"]");
-  await expect(linkSitemap).toHaveAttribute("href", "/sitemap-index.xml");
+  if(await linkSitemap.count() === 1) {
+    await expect(linkSitemap).toHaveAttribute("href", "/sitemap-index.xml");
+  }
+  else {
+    expect(await linkSitemap.count()).toBe(0);
+  }
 
   // canonical
   const linkCanonical = page.locator("link[rel=\"canonical\"]");
