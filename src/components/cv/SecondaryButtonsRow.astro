@@ -1,9 +1,10 @@
 ---
-import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
-import PrinterSvg from "feather-icons/dist/icons/printer.svg";
-import SunSvg from "feather-icons/dist/icons/sun.svg";
-import MoonSvg from "feather-icons/dist/icons/moon.svg";
+import PrinterIcon from "feather-icons/dist/icons/printer.svg";
+import SunIcon from "feather-icons/dist/icons/sun.svg";
+import MoonIcon from "feather-icons/dist/icons/moon.svg";
+import GoBack from "@/components/common/GoBack.astro";
 ---
+
 <style lang="scss">
   @use "resets";
   @use "breakpoints";
@@ -27,7 +28,7 @@ import MoonSvg from "feather-icons/dist/icons/moon.svg";
       display: inline-block;
     }
     
-    a, > button {
+    :global(a), :global(> button) {
       border-radius: 2rem;
       color: var(--button-secondary-text-colour);
       cursor: pointer;
@@ -61,43 +62,30 @@ import MoonSvg from "feather-icons/dist/icons/moon.svg";
 </style>
 
 <div class="secondary-buttons-row">
-  <noscript>
-    <a href="/">
-      <ArrowLeftSvg />
-      Home
-    </a>
-  </noscript>
-
-  <button id="back-btn" hidden data-requires-js>
-    <ArrowLeftSvg />
-    Back
-  </button>
+  <GoBack />
 
   <div class="spacer"></div>
 
   <button id="theme-btn" hidden>
-    <SunSvg />
-    <MoonSvg />
+    <SunIcon />
+    <MoonIcon />
     Theme
   </button>
 
   <button id="print-btn" hidden data-requires-js>
-    <PrinterSvg />
+    <PrinterIcon />
     Print
   </button>
 </div>
 
 <script>
   import { getBrowserTheme, getUserTheme, toggleTheme, getSessionStorageTheme, setUserTheme } from "@/utils/theme-utils";
-  import { showElementsRequiringJs } from "@/utils/ui-utils";
 
   window.addEventListener("load", () => {
-    showElementsRequiringJs();
-
-    const backButton = document.querySelector(".secondary-buttons-row #back-btn");
+    const backButton = document.querySelector("#back-btn");
     backButton?.addEventListener("click", () => history.back());
 
-    const printButton = document.querySelector(".secondary-buttons-row #print-btn");
+    const printButton = document.querySelector("#print-btn");
     printButton?.addEventListener("click", () => print());
 
     const sessionStorageTheme = getSessionStorageTheme();
@@ -105,7 +93,7 @@ import MoonSvg from "feather-icons/dist/icons/moon.svg";
       setUserTheme(sessionStorageTheme);
     }
 
-    const themeButton = document.querySelector(".secondary-buttons-row #theme-btn");
+    const themeButton = document.querySelector("#theme-btn");
     themeButton?.addEventListener("click", () => {
       const newTheme = toggleTheme(getUserTheme() ?? getBrowserTheme());
       setUserTheme(newTheme);

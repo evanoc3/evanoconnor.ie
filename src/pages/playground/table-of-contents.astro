@@ -1,7 +1,7 @@
 ---
-import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
-import PageLayout from "@/components/PageLayout.astro";
-import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
+import PageLayout from "@/components/common/PageLayout.astro";
+import GoBack from "@/components/common/GoBack.astro";
+import TableOfContentsElement from "@/components/playground/table-of-contents/TableOfContents.ts";
 ---
 
 <style lang="scss">
@@ -35,36 +35,10 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
     color: var(--text-colour);
   }
 
-  button.back-link {
-    @include resets.button;
-    font-size: 1rem;
-  }
-
-  a.back-link {
-    text-decoration: none;
-  }
-
-  .back-link {
-    align-items: center;
-    column-gap: 0.5ch;
-    display: flex;
-    flex-flow: row nowrap;
-    left: 0;
-    padding: 1rem;
+  :global(.go-back) {
     position: fixed;
-    top: 0;
-    z-index: 1;
-    cursor: pointer;
-    color: inherit;
-
-    &[hidden] {
-      display: none;
-    }
-
-    > svg {
-      height: 1rem;
-      width: 1rem;
-    }
+    top: 1rem;
+    left: 1rem;
   }
 
   div#page-container {
@@ -74,7 +48,7 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
     gap: 1rem;
     min-height: 100vh;
     width: 100vw;
-    padding: 10rem 0;
+    padding: 10rem 0 5rem;
   }
 
   div#left-col {
@@ -114,31 +88,20 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
   }
 </style>
 
-<PageLayout title="Table of Contents component | evanoconnor.ie">
-  {
-    import.meta.env.PUBLIC_WWW_HOST &&
-    <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}/experiments/toc/`} />
-  }
-
-  <noscript>
-    <a href="/" class="back-link">
-      <ArrowLeftSvg />
-      Home
-    </a>
-  </noscript>
-
-  <button class="back-link" hidden data-requires-js>
-    <ArrowLeftSvg />
-    Back
-  </button>
+<PageLayout
+  title="Table of Contents component | evanoconnor.ie"
+  description="Demonstration of a Table of Contents component built with Lit."
+  keywords={["custom component", "Lit", "TypeScript"]}
+>
+  <GoBack />
 
   <div id="page-container">
     <div id="left-col">
-      <TableOfContents
+      <TableOfContentsElement
         client:only
         target-id="main"
         table-title="Table of Contents"
-      ></TableOfContents>
+      ></TableOfContentsElement>
     </div>
 
     <main id="main">
@@ -169,16 +132,7 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
   </div>
 
   <script>
-    import { showElementsRequiringJs } from "@/utils/ui-utils";
-
-    window.addEventListener("load", () => {
-      showElementsRequiringJs();
-      document.querySelector("button.back-link")?.addEventListener("click", () => window.history.back());
-    });
-  </script>
-
-  <script>
-    import { randInt, gibberish } from "@/utils/rand-utils";
+    import { randInt, generateGibberish } from "@/utils/rand-utils";
 
     window.addEventListener("load", () => {
       const main = document.querySelector("main")!;
@@ -198,8 +152,9 @@ import TableOfContents from "@/components/experiments/toc/TableOfContents.ts";
       const level = randInt(1, 6);
       const heading = document.createElement(`h${level}`) as HTMLHeadingElement;
 
-      if(randInt(0, 2) === 0) {
-        heading.id = gibberish();
+      const chanceHeadingHasId = 0.5;
+      if(Math.random() < chanceHeadingHasId) {
+        heading.id = generateGibberish();
       }
       
       heading.textContent = `This is a level ${level} header`;

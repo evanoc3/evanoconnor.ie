@@ -8,7 +8,7 @@ import {
   getCurrentTheme,
   isValidTheme,
   type Theme
-} from "@/utils/theme-utils";
+} from "@/utils/theme-utils.ts";
 
 
 function mockWindowMatchMedia(mockImplementation: (query: string) => Partial<MediaQueryList>): void {

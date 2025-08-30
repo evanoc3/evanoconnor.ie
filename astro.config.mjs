@@ -3,7 +3,9 @@ import { defineConfig } from "astro/config";
 import lit from "@astrojs/lit";
 
 export default defineConfig({
+  site: import.meta.env.PUBLIC_WWW_HOST,
   devToolbar: { enabled: false },
+  trailingSlash: "always",
   vite: {
     css: {
       preprocessorOptions: {
@@ -19,6 +21,5 @@ export default defineConfig({
       }
     }
   },
-
   integrations: [ lit() ]
 });

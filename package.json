@@ -9,13 +9,13 @@
     "luxon": "^3.7.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.54.2",
+    "@playwright/test": "^1.55.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "^24.3.0",
-    "astro": "^5.13.2",
+    "astro": "^5.13.5",
     "cloc": "^2.11.0",
     "happy-dom": "^18.0.1",
-    "sass-embedded": "^1.90.0",
+    "sass-embedded": "^1.91.0",
     "vitest": "^3.2.4"
   },
   "license": "MIT",

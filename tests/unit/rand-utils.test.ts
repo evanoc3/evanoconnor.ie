@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { randInt, gibberish } from "@/utils/rand-utils";
+import { randInt, generateGibberish } from "@/utils/rand-utils.ts";
 
 describe("rand-utils", () => {
 
@@ -15,14 +15,14 @@ describe("rand-utils", () => {
     });
   });
 
-  describe("gibberish()", () => {
+  describe("generateGibberish()", () => {
     it("should return a string of the correct length", () => {
-      expect(gibberish()).toHaveLength(5);
-      expect(gibberish(100)).toHaveLength(100);
+      expect(generateGibberish()).toHaveLength(5);
+      expect(generateGibberish(100)).toHaveLength(100);
     });
 
     it("should only return alphanumeric characters", () => {
-      expect(gibberish(100)).toMatch(/^[a-zA-Z0-9]{100}$/);
+      expect(generateGibberish(100)).toMatch(/^[a-zA-Z0-9]{100}$/);
     });
   });
 

@@ -1,5 +1,4 @@
-import { html, LitElement, css, nothing } from "lit";
-import type { TemplateResult, CSSResult, PropertyValues } from "lit";
+import { html, LitElement, css, nothing, type TemplateResult, type CSSResult, type PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
 
@@ -27,7 +26,7 @@ export default class TableOfContentsElement extends LitElement {
   @state() private model: TableOfContentsModelNode[] = [];
   private mutationObserver?: MutationObserver;
 
- // Lit lifecycle
+  // Lit lifecycle
 
   public static get styles(): CSSResult {
     return css`

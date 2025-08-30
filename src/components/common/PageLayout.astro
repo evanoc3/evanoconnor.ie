@@ -1,0 +1,56 @@
+---
+import RequiresJs from "@/components/common/RequiresJs.astro";
+import { lastBuildTime } from "@/utils/date-utils.ts";
+
+interface Props {
+  title: string;
+  description: string
+  keywords?: string[]
+  requiresJs?: boolean
+}
+
+const requiresJs = Astro.props.requiresJs ?? true;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Evan O'Connor" />
+    {
+      Astro.props.description && (
+        <meta name="description" content={Astro.props.description} />
+      )
+    }
+    {
+      Astro.props.keywords?.length && (
+        <meta name="keywords" content={Astro.props.keywords.join(", ")} />
+      )
+    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-last-built-time" content={lastBuildTime} />
+    <title> { Astro.props.title } </title>
+    {
+      import.meta.env.PUBLIC_WWW_HOST && (
+        <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}${Astro.url.pathname}`} />
+      )
+    }
+    {
+      import.meta.env.PROD &&
+      import.meta.env.PUBLIC_UMAMI_WEBSITE_ID && (
+        <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}></script>
+      )
+    }
+    <slot name="head"></slot>
+  </head>
+
+  <body>
+    <slot></slot>
+  </body>
+
+  {
+    requiresJs && (
+      <RequiresJs />
+    )
+  }
+</html>
