@@ -1,0 +1,60 @@
+---
+import ArrowLeftIcon from "feather-icons/dist/icons/arrow-left.svg";
+---
+
+
+<style lang="scss">
+  @use "resets";
+
+  button.go-back {
+    @include resets.button;
+    font-size: 1rem;
+  }
+
+  a.go-back {
+    text-decoration: none;
+  }
+
+  .go-back {
+    align-items: center;
+    color: currentColor;
+    column-gap: 0.5ch;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 1rem;
+    text-decoration: none;
+    transition: color 0.5s;
+    z-index: 1;
+    cursor: pointer;
+
+    &[hidden] {
+      display: none;
+    }
+
+    > svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+</style>
+
+<noscript>
+  <a href="/" class="go-back">
+    <ArrowLeftIcon />
+    Home
+  </a>
+</noscript>
+
+<button class="go-back" hidden data-requires-js>
+  <ArrowLeftIcon />
+  Back
+</button>
+
+
+<script>
+  window.addEventListener("load", () => {
+    const backButton = document.querySelector("button.go-back");
+    backButton?.addEventListener("click", () => window.history.back());
+  });
+</script>
+

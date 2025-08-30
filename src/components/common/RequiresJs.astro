@@ -1,0 +1,9 @@
+<script>
+  window.addEventListener("load", () => {
+    const requiringJsElements = document.querySelectorAll<HTMLElement>("[data-requires-js]");
+
+    for(const requiringJsElement of requiringJsElements) {
+      requiringJsElement.removeAttribute("hidden");
+    }
+  });
+</script>

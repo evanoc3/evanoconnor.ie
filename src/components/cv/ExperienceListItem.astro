@@ -2,14 +2,14 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { DateTime } from "luxon";
-import { getHumanReadableShortDuration } from "@/utils/date-utils";
+import { getHumanReadableShortDuration } from "@/utils/date-utils.ts";
 
 interface Props {
   icon: ImageMetadata;
   jobTitle: string;
   company: string;
   url: string;
-  timespan: { start: DateTime, end?: DateTime,  };
+  timespan: { start: DateTime, end?: DateTime };
   skills: { title: string, url?: string }[];
 }
 

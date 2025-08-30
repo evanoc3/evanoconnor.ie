@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DateTime } from "luxon";
-import { getHumanReadableShortDuration } from "@/utils/date-utils";
+import { getHumanReadableShortDuration } from "@/utils/date-utils.ts";
 
 describe("date-utils", () => {
 

@@ -1,33 +1,22 @@
 import { test, expect } from "@playwright/test";
+import { validateCanonicalLink, validateMetaTags } from "../e2e-test-utils.ts";
 
 test.describe("CV page", () => {
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("/cv/", { timeout: 5000 });
-  });
-
-  test("has the correct page title", async ({ page }) => {
     const resp = (await page.goto("/cv/", { timeout: 5000 }))!;
     expect(resp).not.toBeNull();
     expect(resp.status()).toBe(200);
-
-    await expect(page).toHaveTitle("CV | evanoconnor.ie");
   });
 
-  test("has the correct meta tags", async ({ page }) => {
-    const metaCharset = page.locator("meta[charset]");
-    await expect(metaCharset).toHaveAttribute("charset", "UTF-8");
+  test("has the correct metadata", async ({ page }) => {
+    await expect(page).toHaveTitle("CV | evanoconnor.ie");
 
-    const metaViewport = page.locator("meta[name=\"viewport\"]");
-    await expect(metaViewport).toHaveAttribute("content", expect.stringContaining("width=device-width"));
+    await validateMetaTags(page, {
+      description: "Evan O'Connor's CV"
+    });
 
-    const linkCanonical = page.locator("link[rel=\"canonical\"]");
-    if(await linkCanonical.count() === 1) {
-      await expect(linkCanonical).toHaveAttribute("href", expect.stringMatching(/\/cv\/$/));
-    }
-    else {
-      expect(await linkCanonical.count()).toBe(0);
-    }
+    await validateCanonicalLink(page, "/cv/$");
   });
 
   test("has the back button (with JS enabled)", async ({ page }) => {
@@ -49,6 +38,5 @@ test.describe("CV page", () => {
       await expect(backButton).toBeHidden();
     });
   });
-
 
 });

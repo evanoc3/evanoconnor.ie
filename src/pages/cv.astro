@@ -1,15 +1,13 @@
 ---
 import { DateTime } from "luxon";
-
-import PageLayout from "@/components/PageLayout.astro";
+import WebexContactCenterLogo from "@/images/wxcc.png";
+import WebexLogo from "@/images/webex.svg";
+import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
+import PageLayout from "@/components/common/PageLayout.astro";
 import SecondaryButtonsRow from "@/components/cv/SecondaryButtonsRow.astro";
 import HeroCell from "@/components/cv/HeroCell.astro";
 import Section from "@/components/cv/Section.astro";
 import ExperienceListItem from "@/components/cv/ExperienceListItem.astro";
-
-import WebexContactCenterLogo from "@/images/wxcc.png";
-import WebexLogo from "@/images/webex.svg";
-import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
 ---
 
 <style lang="scss">
@@ -99,12 +97,10 @@ import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
   }
 </style>
 
-<PageLayout title="CV | evanoconnor.ie">
-  {
-    import.meta.env.PUBLIC_WWW_HOST &&
-    <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}/cv/`} />
-  }
-
+<PageLayout
+  title="CV | evanoconnor.ie"
+  description="Evan O'Connor's CV"
+>
   <div id="secondary-buttons-row-container">
     <SecondaryButtonsRow />
   </div>

@@ -1,5 +1,5 @@
 ---
-import { lastBuildTime } from "@/utils/date-utils";
+import { lastBuildTime } from "@/utils/date-utils.ts";
 ---
 
 <style lang="scss">
@@ -44,10 +44,8 @@ import { lastBuildTime } from "@/utils/date-utils";
 <script>
   import { DateTime } from "luxon";
   import { getHumanReadableShortDuration } from "@/utils/date-utils";
-  import { showElementsRequiringJs } from "@/utils/ui-utils";
 
   window.addEventListener("load", () => {
-    showElementsRequiringJs();
     setLastBuildTimeLabel();
   });
 

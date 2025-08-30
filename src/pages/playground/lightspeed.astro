@@ -1,6 +1,6 @@
 ---
-import PageLayout from "@/components/PageLayout.astro";
-import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
+import PageLayout from "@/components/common/PageLayout.astro";
+import GoBack from "@/components/common/GoBack.astro";
 ---
 
 <style lang="scss">
@@ -10,45 +10,27 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
   @include resets.global;
   @include resets.fonts;
 
+  :root {
+    --background-colour: #02031d;
+    --text-colour: white;
+    --text-colour-scrolling: #35365e;
+  }
+
   :global(body) {
-    background-color: #02031d;
-    color: white;
+    background-color: var(--background-colour);
+    color: var(--text-colour);
     height: 100vh;
     overflow: hidden auto;
 
     &.scrolling {
-      color: #35365e;
+      color: var(--text-colour-scrolling);
     }
   }
 
-  button {
-    @include resets.button;
-    font-size: 1rem;
-  }
-
-  .back-link {
-    align-items: center;
-    color: currentColor;
-    column-gap: 0.5ch;
-    display: flex;
-    flex-flow: row nowrap;
-    left: 0;
-    padding: 1rem;
+  :global(.go-back) {
     position: fixed;
-    text-decoration: none;
-    top: 0;
-    transition: color 0.5s;
-    z-index: 1;
-    cursor: pointer;
-
-    &[hidden] {
-      display: none;
-    }
-
-    > svg {
-      height: 1rem;
-      width: 1rem;
-    }
+    top: 1rem;
+    left: 1rem;
   }
 
   canvas {
@@ -73,24 +55,12 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
   }
 </style>
 
-<PageLayout title="Lightspeed scroll animation | evanoconnor.ie">
-  {
-    import.meta.env.PUBLIC_WWW_HOST &&
-    <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}/experiments/lightspeed/`} />
-  }
-
-  <noscript>
-    <a href="/" class="back-link">
-      <ArrowLeftSvg />
-      Home
-    </a>
-  </noscript>
-
-  <button class="back-link" hidden data-requires-js>
-    <ArrowLeftSvg />
-    Back
-  </button>
-
+<PageLayout
+  title="Lightspeed scroll animation | evanoconnor.ie"
+  description="Demonstration of a 'lightspeed' scroll animation effect using canvas and JavaScript."
+  keywords={["lightspeed", "scroll", "animation", "canvas", "JavaScript", "JS"]}
+>
+  <GoBack />
 
   <canvas id="canvas"></canvas>
 
@@ -101,16 +71,6 @@ import ArrowLeftSvg from "feather-icons/dist/icons/arrow-left.svg";
       JavaScript is necessary for this experiment to work. Please enable JavaScript and reload.
     </div>
   </noscript>
-
-  <script>
-    import { showElementsRequiringJs } from "@/utils/ui-utils";
-    
-    window.addEventListener("load", () => {
-      showElementsRequiringJs();
-
-      document.querySelector("button.back-link")?.addEventListener("click", () => window.history.back());
-    });
-  </script>
 
   <script>
     interface Star {

@@ -1,5 +1,5 @@
 ---
-import PageLayout from "@/components/PageLayout.astro";
+import PageLayout from "@/components/common/PageLayout.astro";
 import Footer from "@/components/index/Footer.astro";
 ---
 
@@ -63,13 +63,8 @@ import Footer from "@/components/index/Footer.astro";
 
 <PageLayout
   title="evanoconnor.ie"
-  description="Evan O'Connor's personal website"
+  description="Homepage of Evan O'Connor's personal website"
 >
-  {
-    import.meta.env.PUBLIC_WWW_HOST &&
-    <link slot="head" rel="canonical" href={`${import.meta.env.PUBLIC_WWW_HOST}/`} />
-  }
-
   <main>
     <p>
       Hi there!
@@ -93,10 +88,10 @@ import Footer from "@/components/index/Footer.astro";
     
     <ul>
       <li><a href="/cv/">/cv</a></li>
-      <li><a href="/experiments/lightspeed/">/experiments/lightspeed</a></li>
-      <li><a href="/experiments/toc/">/experiments/toc</a></li>
+      <li><a href="/playground/lightspeed/">/playground/lightspeed</a></li>
+      <li><a href="/playground/table-of-contents/">/playground/table-of-contents</a></li>
     </ul>
   </main>
 
-  <Footer></Footer>
+  <Footer />
 </PageLayout>

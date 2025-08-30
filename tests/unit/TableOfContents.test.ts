@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { type TableOfContentsModelNode } from "@/components/experiments/toc/TableOfContents";
-import { nextEventLoop } from "../test-utils";
+import type { TableOfContentsModelNode } from "@/components/playground/toc/TableOfContents.ts";
+import { nextEventLoop } from "../unit-test-utils.ts";
 
 
 function setupTest(): void {
