@@ -1,9 +1,11 @@
 // @ts-check
+import process from "node:process";
 import { defineConfig } from "astro/config";
 import lit from "@astrojs/lit";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: import.meta.env.PUBLIC_WWW_HOST,
+  site: process.env.PUBLIC_WWW_HOST,
   devToolbar: { enabled: false },
   trailingSlash: "always",
   vite: {
@@ -21,5 +23,5 @@ export default defineConfig({
       }
     }
   },
-  integrations: [ lit() ]
+  integrations: [ lit(), sitemap() ]
 });
