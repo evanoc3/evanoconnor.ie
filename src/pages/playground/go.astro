@@ -1,0 +1,28 @@
+---
+import PageLayout from "@/components/common/PageLayout.astro";
+import GoBoard from "@/components/playground/go/GoBoard.ts";
+import GoBack from "@/components/common/GoBack.astro";
+---
+
+
+<style lang="scss">
+  @use "resets";
+
+  @include resets.global;
+</style>
+
+
+<PageLayout
+  title="Go Game | evanoconnor.ie"
+  description=""
+>
+  <GoBack />
+
+  <noscript>
+  </noscript>
+
+  <div>
+    <GoBoard />
+  </div>
+
+</PageLayout>
