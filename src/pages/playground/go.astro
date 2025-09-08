@@ -9,6 +9,11 @@ import GoBack from "@/components/common/GoBack.astro";
   @use "resets";
 
   @include resets.global;
+
+  eoc-goboard {
+    width: 80vw;
+    height: 80vh;
+  }
 </style>
 
 
@@ -22,7 +27,7 @@ import GoBack from "@/components/common/GoBack.astro";
   </noscript>
 
   <div>
-    <GoBoard />
+    <GoBoard client:only />
   </div>
 
 </PageLayout>

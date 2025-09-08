@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { GoBoardSize, GoTurn, GoBoardDimensions, GoStoneColour } from "./Go.types.ts";
+import type { GoBoardSize, GoTurn, GoBoardDimensions, GoStoneColour, GoPosition, GoStone } from "./Go.types.ts";
 
 
 type GoGameConstructorParameters  = Partial<{
@@ -15,6 +15,7 @@ export class GoGame {
   public readonly createdAt: Date;
   public readonly boardDimensions: GoBoardDimensions;
   public readonly turns: GoTurn[];
+  private stones = new Map<string, GoStone>();
 
   constructor(args?: GoGameConstructorParameters) {
     const id = args?.id ?? randomUUID();
@@ -37,5 +38,11 @@ export class GoGame {
       return "black";
     }
     return lastTurn.player === "black" ? "white" : "black";
+  }
+
+  public getStoneAt(pos: GoPosition): GoStone | undefined {
+    const mapKey = `${pos.x},${pos.y}`;
+    const stone = this.stones.get(mapKey);
+    return stone;
   }
 }
