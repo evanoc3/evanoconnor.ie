@@ -27,7 +27,21 @@ import GoBack from "@/components/common/GoBack.astro";
   </noscript>
 
   <div>
-    <GoBoard client:only />
+    <GoBoard 
+      client:only
+      data-stones={`[
+        { "x": 0, "y": 0, "colour": "white" },
+        { "x": 15, "y": 15, "colour": "white" },
+        { "x": 3, "y": 15, "colour": "black" },
+        { "x": 15, "y": 3, "colour": "white" },
+        { "x": 9, "y": 9, "colour": "black" },
+        { "x": 10, "y": 9, "colour": "white" },
+        { "x": 9, "y": 10, "colour": "black" },
+        { "x": 6, "y": 12, "colour": "white" },
+        { "x": 5, "y": 11, "colour": "black" },
+        { "x": 12, "y": 6, "colour": "white" }
+      ]`}
+    />
   </div>
 
 </PageLayout>

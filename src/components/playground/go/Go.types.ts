@@ -1,4 +1,3 @@
-
 export type GoBoardSize = 9 | 13 | 19;
 
 export interface GoBoardDimensions {
