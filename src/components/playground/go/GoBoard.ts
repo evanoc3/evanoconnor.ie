@@ -1,5 +1,5 @@
 import { css, html, LitElement, nothing, svg, type CSSResultGroup, type TemplateResult } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import type { GoBoardDimensions, GoPosition, GoStone } from "./Go.types.ts";
 
 
@@ -20,6 +20,14 @@ export default class GoBoardElement extends LitElement {
   public static get styles(): CSSResultGroup {
     return css`
       :host {
+        --board-background-colour: #deb887;
+        --board-line-colour: black;
+        --white-stone-colour: white;
+        --white-stone-border-colour: #eee;
+        --black-stone-colour: black;
+        --black-stone-border-colour: #111;
+        --highlighted-point-marker-colour: rgba(255, 0, 255, 0.4);
+
         display: block;
         box-sizing: border-box;
       }
@@ -49,16 +57,19 @@ export default class GoBoardElement extends LitElement {
   @property({ type: Object, attribute: "board-dimensions" }) public boardDimensions: GoBoardDimensions = { width: 19, height: 19 };
   @property({ type: Array, attribute: "data-stones" }) public stones: GoStone[] = [];
   @property({ type: Boolean, attribute: "data-editable" }) public editable = false;
+  @state() private nearestBoardPoint?: Coordinates;
+  @query("div#board") private boardElement!: HTMLDivElement;
 
   public render(): TemplateResult {
     return html`
     <div id="container">
-      <div id="board">
+      <div id="board" @mousemove=${this.onMouseMove} @mouseleave=${this.onMouseLeave}>
         <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
           ${ this.backgroundTemplate }
           ${ this.gridLinesTemplate }
           ${ this.starPointsTemplate }
           ${ this.stonesTemplate }
+          ${ this.nearestBoardPointMarkerTemplate }
         </svg>
       </div>
     </div>
@@ -67,7 +78,7 @@ export default class GoBoardElement extends LitElement {
 
   private get backgroundTemplate(): TemplateResult {
     return svg`
-      <rect width="100%" height="100%" fill="#deb887" />
+      <rect width="100%" height="100%" fill="var(--board-background-colour)" />
     `;
   }
 
@@ -76,20 +87,20 @@ export default class GoBoardElement extends LitElement {
 
     // Vertical lines
     for (let x = 0; x < this.boardDimensions.width; x++) {
-      const { x: x1, y: y1 } = this.mapBoardPositionToSvg({ x, y: 0 });
-      const { x: x2, y: y2 } = this.mapBoardPositionToSvg({ x, y: this.boardDimensions.height - 1 });
+      const { x: x1, y: y1 } = this.getSvgCoordsForBoardPosition({ x, y: 0 });
+      const { x: x2, y: y2 } = this.getSvgCoordsForBoardPosition({ x, y: this.boardDimensions.height - 1 });
       lines.push(svg`<line x1="${x1}" x2="${x2}" y1="${y1}" y2="${y2}" />`);
     }
     
     // Horizontal lines
     for (let y = 0; y < this.boardDimensions.height; y++) {
-      const { x: x1, y: y1 } = this.mapBoardPositionToSvg({ x: 0, y });
-      const { x: x2, y: y2 } = this.mapBoardPositionToSvg({ x: this.boardDimensions.width - 1, y });
+      const { x: x1, y: y1 } = this.getSvgCoordsForBoardPosition({ x: 0, y });
+      const { x: x2, y: y2 } = this.getSvgCoordsForBoardPosition({ x: this.boardDimensions.width - 1, y });
       lines.push(svg`<line x1="${x1}" x2="${x2}" y1="${y1}" y2="${y2}" />`);
     }
     
     return svg`
-      <g id="grid-lines" stroke="#000000" stroke-width="1" stroke-linecap="round">
+      <g id="grid-lines" stroke="var(--board-line-colour)" stroke-width="1" stroke-linecap="round">
         ${ lines }
       </g>
     `;
@@ -107,25 +118,21 @@ export default class GoBoardElement extends LitElement {
     }
 
     const stoneTemplates = filteredStones.map(stone => {
-      const { x, y } = this.mapBoardPositionToSvg(stone);
-      return svg`<circle cx="${x}" cy="${y}" r="6" fill="${stone.colour}" />`;
+      const { x, y } = this.getSvgCoordsForBoardPosition(stone);
+      const bgColour = stone.colour === "white"
+        ? "var(--white-stone-colour)"
+        : "var(--black-stone-colour)";
+      const borderColour = stone.colour === "white"
+        ? "var(--white-stone-border-colour)"
+        : "var(--black-stone-border-colour)";
+      return svg`<circle cx="${x}" cy="${y}" r="6" fill="${bgColour}" stroke="${borderColour}" />`;
     });
 
     return svg`
-      <g id="stones" stroke="#000000" stroke-width="1" stroke-linecap="round">
+      <g id="stones" stroke-width="1" stroke-linecap="round">
         ${ stoneTemplates }
       </g>
     `;
-  }
-
-  private mapBoardPositionToSvg(pos: GoPosition): Coordinates {
-    const widthStep = 280 / (this.boardDimensions.width + 1);
-    const heightStep = 280 / (this.boardDimensions.height + 1);
-
-    return {
-      x: widthStep * (pos.x + 1),
-      y: heightStep * (pos.y + 1)
-    };
   }
 
   private get starPointsTemplate(): TemplateResult | typeof nothing {
@@ -138,17 +145,90 @@ export default class GoBoardElement extends LitElement {
         { x: 3, y: 15 }, { x: 9, y: 15 }, { x: 15, y: 15 }
       ];
       const starTemplates = starPositions.map(pos => {
-        const { x, y } = this.mapBoardPositionToSvg(pos);
-        return svg`<circle cx="${x}" cy="${y}" r="2" fill="#333"/>`;
+        const { x, y } = this.getSvgCoordsForBoardPosition(pos);
+        return svg`<circle cx="${x}" cy="${y}" r="2" />`;
       });
       return svg`
-        <g id="star-points" fill="#000000">
+        <g id="star-points" fill="var(--board-line-colour)">
           ${ starTemplates }
         </g>
       `;
     }
 
     return nothing;
+  }
+
+  private get nearestBoardPointMarkerTemplate(): TemplateResult | typeof nothing {
+    if(!this.nearestBoardPoint) {
+      return nothing;
+    }
+
+    return svg`
+      <circle cx="${this.nearestBoardPoint.x}" cy="${this.nearestBoardPoint.y}" r="5" fill="var(--highlighted-point-marker-colour)" />
+    `;
+  }
+
+  private onMouseMove(e: MouseEvent): void {
+    if(!this.editable) return;
+
+    const rect = this.boardElement.getBoundingClientRect();
+    const svgCoords = this.mapPixelCoordsToSvgCoords({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    const nearestBoardPosition = this.getNearestBoardPoint(svgCoords);
+
+    this.nearestBoardPoint = !this.hasStoneAt(nearestBoardPosition)
+      ? this.getSvgCoordsForBoardPosition(nearestBoardPosition)
+      : undefined;
+  }
+
+  private onMouseLeave(_e: MouseEvent): void {
+    this.nearestBoardPoint = undefined;
+  }
+
+  private getSvgCoordsForBoardPosition(pos: GoPosition): Coordinates {
+    const widthStep = 280 / (this.boardDimensions.width + 1);
+    const heightStep = 280 / (this.boardDimensions.height + 1);
+
+    return {
+      x: widthStep * (pos.x + 1),
+      y: heightStep * (pos.y + 1)
+    };
+  }
+
+  private mapPixelCoordsToSvgCoords(pxCoords: Coordinates): Coordinates {
+    const svgWidth = 280;
+    const svgHeight = 280;
+
+    const boardElRect = this.boardElement.getBoundingClientRect();
+
+    return {
+      x: (pxCoords.x / boardElRect.width) * svgWidth,
+      y: (pxCoords.y / boardElRect.height) * svgHeight
+    };
+  }
+
+  private getNearestBoardPoint(svgCoords: Coordinates): GoPosition {
+    let nearestPosition: GoPosition | undefined;
+    let nearestPositionDistance: number | undefined;
+
+    for(let x = 0; x < this.boardDimensions.width; x++) {
+      for(let y = 0; y < this.boardDimensions.height; y++) {
+
+        const { x: svgX, y: svgY } = this.getSvgCoordsForBoardPosition({ x, y });
+        const distance = Math.hypot(svgX - svgCoords.x, svgY - svgCoords.y);
+        
+        if(!nearestPositionDistance || distance < nearestPositionDistance) {
+          nearestPositionDistance = distance;
+          nearestPosition = { x, y };
+        }
+
+      }
+    }
+
+    return nearestPosition!;
+  }
+
+  private hasStoneAt(pos: GoPosition): boolean {
+    return this.stones.some(stone => stone.x === pos.x && stone.y === pos.y);
   }
 
 }
