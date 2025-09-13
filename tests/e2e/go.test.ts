@@ -1,22 +1,21 @@
 import { test, expect } from "@playwright/test";
-import { hasLink, successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
+import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
 
-test.describe("/playground/lightspeed/", () => {
+test.describe("/cv/", () => {
 
   test.beforeEach(async ({ page }) => {
-    await successfulNavigation(page, "/playground/lightspeed/");
+    await successfulNavigation(page, "/playground/go/");
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("Lightspeed scroll animation | evanoconnor.ie");
+    await expect(page).toHaveTitle("Go Game | evanoconnor.ie");
 
     await validateMetaTags(page, {
-      description: "Demonstration of a 'lightspeed' scroll animation effect using HTML canvas and JavaScript.",
-      keywords: ["lightspeed", "scroll", "animation", "canvas", "JavaScript", "JS"]
+      description: "Demonstration of aninteractive Go board component"
     });
 
     await validateLinkTags(page, {
-      canonicalLinkValue: "/playground/lightspeed/$"
+      canonicalLinkValue: "/playground/go/$"
     });
   });
 
@@ -29,11 +28,18 @@ test.describe("/playground/lightspeed/", () => {
     await expect(backButton).toBeVisible();
   });
 
+  test("has the <eoc-goboard /> tag", async ({ page }) => {
+    const goBoardElement = page.locator("eoc-goboard");
+    await expect(goBoardElement).toBeVisible();
+  });
+
   test.describe("with JS disabled", () => {
     test.use({ javaScriptEnabled: false });
 
     test("has the home link", async ({ page }) => {
-      await hasLink(page, "Home", "/");
+      const homeLink = page.getByRole("link", { name: "Home" });
+      await expect(homeLink).toBeVisible();
+      await expect(homeLink).toHaveAttribute("href", "/");
     });
 
     test("the back button is hidden", async ({ page }) => {

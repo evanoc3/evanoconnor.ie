@@ -4,5 +4,7 @@
 	"editor.codeActionsOnSave": {
 		"source.removeUnusedImports": "always"
 	},
-	"editor.wordWrap": "off"
+	"editor.wordWrap": "off",
+	"typescript.preferences.preferTypeOnlyAutoImports": true,
+	"typescript.preferences.importModuleSpecifierEnding": "js"
 }

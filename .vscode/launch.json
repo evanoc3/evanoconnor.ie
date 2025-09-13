@@ -2,18 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "./node_modules/.bin/astro dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "name": "Development server",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node"
     },
-
-
     {
-      "command": "./node_modules/.bin/vitest",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test:unit"],
       "name": "Unit tests",
       "request": "launch",
-      "type": "node-terminal",
+      "type": "node",
     }
   ]
 }
