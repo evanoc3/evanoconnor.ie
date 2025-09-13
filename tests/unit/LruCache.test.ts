@@ -28,4 +28,29 @@ describe("LruCache", () => {
     expect(cache.get("b")).toBe("B");
   });
 
+  it("evicts the least used entries when capacity is downsized", () => {
+    const cache = new LruCache<string>(4);
+
+    cache.set("a", "A");
+    cache.set("b", "B");
+    cache.set("c", "C");
+    cache.set("d", "D");
+
+    expect(cache.size).toBe(4);
+
+    cache.capacity = 3;
+    expect(cache.size).toBe(3);
+    expect(cache.get("a")).toBeUndefined();
+    expect(cache.get("b")).toBe("B");
+    expect(cache.get("c")).toBe("C");
+    expect(cache.get("d")).toBe("D");
+
+    cache.capacity = 1;
+    expect(cache.size).toBe(1);
+    expect(cache.get("a")).toBeUndefined();
+    expect(cache.get("b")).toBeUndefined();
+    expect(cache.get("c")).toBeUndefined();
+    expect(cache.get("d")).toBe("D");
+  });
+
 });

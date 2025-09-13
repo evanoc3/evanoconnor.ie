@@ -28,6 +28,11 @@ test.describe("/cv/", () => {
     await expect(backButton).toBeVisible();
   });
 
+  test("has the <eoc-goboard /> tag", async ({ page }) => {
+    const goBoardElement = page.locator("eoc-goboard");
+    await expect(goBoardElement).toBeVisible();
+  });
+
   test.describe("with JS disabled", () => {
     test.use({ javaScriptEnabled: false });
 

@@ -31,12 +31,14 @@ export class TypedEventEmitter<EM extends object> {
     eventName: N,
     ...args: EM[N] extends undefined ? [] : [EM[N]]
   ): void {
-    const event = (!args.length
-      ? { type: eventName }
-      : { type: eventName, details: args[0] }) as Event<EM, N>;
-
-    const listeners = this.listeners[eventName];
-    listeners?.forEach(listener => listener(event));
+    setTimeout(() => {
+      const event = (!args.length
+        ? { type: eventName }
+        : { type: eventName, details: args[0] }) as Event<EM, N>;
+  
+      const listeners = this.listeners[eventName];
+      listeners?.forEach(listener => listener(event));
+    }, 0);
   }
 
 }
