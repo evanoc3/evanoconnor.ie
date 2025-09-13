@@ -1,0 +1,20 @@
+---
+import PageLayout from "@/components/common/PageLayout.astro";
+import GoBack from "@/components/common/GoBack.astro";
+---
+
+
+<style lang="scss">
+  @use "resets";
+
+  @include resets.global;
+  @include resets.fonts;
+</style>
+
+
+<PageLayout
+  title="Wordle | evanoconnor.ie"
+  description="Clone of Wordle"
+>
+  <GoBack />
+</PageLayout>
