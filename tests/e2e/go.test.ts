@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
 
-test.describe("/cv/", () => {
+test.describe("/playground/go/", () => {
 
   test.beforeEach(async ({ page }) => {
     await successfulNavigation(page, "/playground/go/");
