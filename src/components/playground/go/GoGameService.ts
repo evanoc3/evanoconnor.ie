@@ -4,7 +4,7 @@ import { LruCache } from "./LruCache.ts";
 
 
 type GoGameServiceEventMap = {
-  gameCreated: { gameId: string }
+  "new-game-created": { gameId: string }
 };
 
 
@@ -17,7 +17,7 @@ export class GoGameService extends TypedEventEmitter<GoGameServiceEventMap> {
     const game = new GoGame(args);
 
     this.gamesCache.set(game.id, game);
-    this.dispatchEvent("gameCreated", { gameId: game.id });
+    this.dispatchCustomEvent("new-game-created", { gameId: game.id });
     return game;
   }
 

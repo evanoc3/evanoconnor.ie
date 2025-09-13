@@ -27,7 +27,7 @@ export class TypedEventEmitter<EM extends object> {
     }
   }
 
-  protected dispatchEvent<N extends keyof EM>(
+  protected dispatchCustomEvent<N extends keyof EM>(
     eventName: N,
     ...args: EM[N] extends undefined ? [] : [EM[N]]
   ): void {

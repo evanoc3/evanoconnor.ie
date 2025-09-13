@@ -1,4 +1,4 @@
-import { css, html, nothing, svg, type CSSResultGroup, type TemplateResult } from "lit";
+import { css, html, nothing, svg, type CSSResultGroup, type PropertyValues, type TemplateResult } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import type { GoBoardDimensions, GoPosition, GoStone } from "./Go.types.ts";
 import { BaseLitElement } from "@/components/common/BaseLitElement.ts";
@@ -114,6 +114,14 @@ export class GoBoardElement extends BaseLitElement {
     `;
   }
 
+  public willUpdate(changedProperties: PropertyValues): void {
+    super.willUpdate(changedProperties);
+
+    if(changedProperties.has("stones")) {
+      this.onStonesChanged(changedProperties.get("stones"));
+    }
+  }
+
   private get gridLinesTemplate(): TemplateResult {
     const lines: TemplateResult[] = [];
 
@@ -191,13 +199,19 @@ export class GoBoardElement extends BaseLitElement {
     `;
   }
 
+  private onStonesChanged(newStones: GoStone[]): void {
+    if(this.hoveredPosition && hasStoneAt(newStones, this.hoveredPosition)) {
+      this.hoveredPosition = undefined;
+    }
+  }
+
   private onMouseMove(e: MouseEvent): void {
     if(!this.editable) return;
 
     const svgCoords = this.mapPixelCoordsToSvgCoords({ x: e.clientX, y: e.clientY });
     const nearestBoardPosition = this.getNearestBoardPosition(svgCoords);
 
-    const stoneExistsAtPosition = this.hasStoneAt(nearestBoardPosition);
+    const stoneExistsAtPosition = hasStoneAt(this.stones, nearestBoardPosition);
 
     this.hoveredPosition = !stoneExistsAtPosition
       ? nearestBoardPosition
@@ -270,13 +284,14 @@ export class GoBoardElement extends BaseLitElement {
     return nearestPosition!;
   }
 
-  private hasStoneAt(pos: GoPosition): boolean {
-    return this.stones.some(stone => (
-      stone.x === pos.x &&
-      stone.y === pos.y
-    ));
-  }
-
 }
 
 export default GoBoardElement;
+
+
+function hasStoneAt(allStones: GoStone[], pos: GoPosition): boolean {
+  return allStones.some(stone => (
+    stone.x === pos.x &&
+    stone.y === pos.y
+  ));
+}

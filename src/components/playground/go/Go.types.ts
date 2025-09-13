@@ -17,7 +17,7 @@ export interface GoStone extends GoPosition {
 }
 
 export interface GoTurn {
-  player: GoStoneColour
+  colour: GoStoneColour
   createdAt: Date
   placedStone: GoStone
   removedStones: GoStone[]
