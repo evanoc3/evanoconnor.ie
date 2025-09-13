@@ -208,9 +208,6 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
 
 		const sameColourStoneGroups = this.getStoneGroups(stones).filter(group => group.colour === colour);
 		const suicideStoneGroups = sameColourStoneGroups.filter(group => this.getLiberties(group, stones) === 0);
-    if(suicideStoneGroups.length) {
-      console.debug("stones:", stones, "\nremovedStones:", removedStones, "\nsameColourStoneGroups:", sameColourStoneGroups, "\nsuicideStoneGroups:", suicideStoneGroups);
-    }
 		return suicideStoneGroups.length > 0;
 	}
 
