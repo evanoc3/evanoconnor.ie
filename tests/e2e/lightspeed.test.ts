@@ -11,7 +11,7 @@ test.describe("/playground/lightspeed/", () => {
     await expect(page).toHaveTitle("Lightspeed scroll animation | evanoconnor.ie");
 
     await validateMetaTags(page, {
-      description: "Demonstration of a 'lightspeed' scroll animation effect using canvas and JavaScript.",
+      description: "Demonstration of a 'lightspeed' scroll animation effect using HTML canvas and JavaScript.",
       keywords: ["lightspeed", "scroll", "animation", "canvas", "JavaScript", "JS"]
     });
 

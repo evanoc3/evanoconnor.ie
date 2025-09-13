@@ -11,7 +11,7 @@ test.describe("/cv/", () => {
     await expect(page).toHaveTitle("Go Game | evanoconnor.ie");
 
     await validateMetaTags(page, {
-      description: ""
+      description: "Demonstration of aninteractive Go board component"
     });
 
     await validateLinkTags(page, {
