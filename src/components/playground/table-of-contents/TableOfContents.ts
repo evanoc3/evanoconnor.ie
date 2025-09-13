@@ -1,4 +1,5 @@
-import { html, LitElement, css, nothing, type TemplateResult, type CSSResult, type PropertyValues } from "lit";
+import { BaseLitElement } from "@/components/common/BaseLitElement.ts";
+import { html, css, nothing, type TemplateResult, type CSSResult, type PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
 
@@ -18,7 +19,7 @@ declare global {
 }
 
 @customElement("eoc-toc")
-export default class TableOfContentsElement extends LitElement {
+export default class TableOfContentsElement extends BaseLitElement {
 
   @property({ type: String, attribute: "target-id" }) public targetId?: string;
   @property({ attribute: false }) public target?: HTMLElement;

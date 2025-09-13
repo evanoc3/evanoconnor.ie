@@ -17,6 +17,7 @@ export type GoGameConstructorParameters = Partial<{
 
 
 type GoGameEventMap = {
+  "made-turn": undefined
 };
 
 
@@ -62,9 +63,21 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
   }
 
   public get stones(): GoStone[] {
-    return Array.from(
-      this._stones.values()
-    );
+    return Array.from( this._stones.values() );
+  }
+
+  public newTurn(placedStone: GoStone): void {
+    this.setStone(placedStone);
+
+    const newTurn: GoTurn = {
+      player: placedStone.colour,
+      createdAt: new Date(),
+      placedStone,
+      removedStones: []
+    };
+    this.turns.push(newTurn);
+
+    this.dispatchEvent("made-turn");
   }
 
   // Private Methods
@@ -73,10 +86,14 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
     for(const stone of stones) {
       const pos: GoPosition = stone;
       if(!this.getStoneAt(pos)) {
-        const mapKey = getMapKeyForPosition(pos);
-        this._stones.set(mapKey, stone);
+        this.setStone(stone);
       }
     }
+  }
+
+  private setStone(stone: GoStone): void {
+    const mapKey = getMapKeyForPosition(stone);
+    this._stones.set(mapKey, stone);
   }
 
 }

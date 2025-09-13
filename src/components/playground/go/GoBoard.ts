@@ -1,6 +1,7 @@
-import { css, html, LitElement, nothing, svg, type CSSResultGroup, type TemplateResult } from "lit";
+import { css, html, nothing, svg, type CSSResultGroup, type TemplateResult } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import type { GoBoardDimensions, GoPosition, GoStone } from "./Go.types.ts";
+import { BaseLitElement } from "@/components/common/BaseLitElement.ts";
 
 
 interface Coordinates {
@@ -12,6 +13,10 @@ declare global {
   interface HTMLElementTagNameMap {
     "eoc-goboard": GoBoardElement;
   }
+
+  interface HTMLElementEventMap {
+    "stone-placed": CustomEvent<{ position: GoPosition }>
+  }
 }
 
 
@@ -19,7 +24,7 @@ const svgViewBoxSize = 280;
 
 
 @customElement("eoc-goboard")
-export class GoBoardElement extends LitElement {
+export class GoBoardElement extends BaseLitElement {
 
   public static get styles(): CSSResultGroup {
     return css`
@@ -85,7 +90,7 @@ export class GoBoardElement extends LitElement {
   @property({ type: Object, attribute: "board-dimensions" }) public boardDimensions: GoBoardDimensions = { width: 19, height: 19 };
   @property({ type: Array, attribute: "data-stones" }) public stones: GoStone[] = [];
   @property({ type: Boolean, attribute: "data-editable" }) public editable = false;
-  @state() private nearestBoardPoint?: Coordinates;
+  @state() private hoveredPosition?: GoPosition;
   @query("div#board") private boardElement!: HTMLDivElement;
 
   public render(): TemplateResult {
@@ -102,7 +107,7 @@ export class GoBoardElement extends LitElement {
           ${ this.gridLinesTemplate }
           ${ this.starPointsTemplate }
           ${ this.stonesTemplate }
-          ${ this.nearestBoardPointMarkerTemplate }
+          ${ this.hoveredPositionMarkerTemplate }
         </svg>
       </div>
     </div>
@@ -174,6 +179,43 @@ export class GoBoardElement extends LitElement {
     `;
   }
 
+  private get hoveredPositionMarkerTemplate(): TemplateResult | typeof nothing {
+    if(!this.hoveredPosition) {
+      return nothing;
+    }
+
+    const { x, y } = this.getSvgCoordsForBoardPosition(this.hoveredPosition);
+
+    return svg`
+      <circle id="nearest-board-point-marker" cx="${x}" cy="${y}" r="5" />
+    `;
+  }
+
+  private onMouseMove(e: MouseEvent): void {
+    if(!this.editable) return;
+
+    const svgCoords = this.mapPixelCoordsToSvgCoords({ x: e.clientX, y: e.clientY });
+    const nearestBoardPosition = this.getNearestBoardPosition(svgCoords);
+
+    const stoneExistsAtPosition = this.hasStoneAt(nearestBoardPosition);
+
+    this.hoveredPosition = !stoneExistsAtPosition
+      ? nearestBoardPosition
+      : undefined;
+  }
+
+  private onMouseLeave(_e: MouseEvent): void {
+    this.hoveredPosition = undefined;
+  }
+
+  private onClick(_e: MouseEvent): void {
+    if(!this.editable || !this.hoveredPosition) {
+      return;
+    }
+
+    this.dispatchCustomEvent("stone-placed", { position: this.hoveredPosition });
+  }
+
   private get starPointPositions(): Coordinates[] {
     const { width: boardWidth, height: boardHeight } = this.boardDimensions;
 
@@ -186,36 +228,6 @@ export class GoBoardElement extends LitElement {
     }
 
     return [];
-  }
-
-  private get nearestBoardPointMarkerTemplate(): TemplateResult | typeof nothing {
-    if(!this.nearestBoardPoint) {
-      return nothing;
-    }
-
-    return svg`
-      <circle id="nearest-board-point-marker" cx="${this.nearestBoardPoint.x}" cy="${this.nearestBoardPoint.y}" r="5" />
-    `;
-  }
-
-  private onMouseMove(e: MouseEvent): void {
-    if(!this.editable) return;
-
-    const rect = this.boardElement.getBoundingClientRect();
-    const svgCoords = this.mapPixelCoordsToSvgCoords({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    const nearestBoardPosition = this.getNearestBoardPoint(svgCoords);
-
-    this.nearestBoardPoint = !this.hasStoneAt(nearestBoardPosition)
-      ? this.getSvgCoordsForBoardPosition(nearestBoardPosition)
-      : undefined;
-  }
-
-  private onMouseLeave(_e: MouseEvent): void {
-    this.nearestBoardPoint = undefined;
-  }
-
-  private onClick(_e: MouseEvent): void {
-
   }
 
   private getSvgCoordsForBoardPosition(pos: GoPosition): Coordinates {
@@ -232,12 +244,12 @@ export class GoBoardElement extends LitElement {
     const boardElRect = this.boardElement.getBoundingClientRect();
 
     return {
-      x: (pxCoords.x / boardElRect.width) * svgViewBoxSize,
-      y: (pxCoords.y / boardElRect.height) * svgViewBoxSize
+      x: ((pxCoords.x - boardElRect.left) / boardElRect.width) * svgViewBoxSize,
+      y: ((pxCoords.y - boardElRect.top) / boardElRect.height) * svgViewBoxSize
     };
   }
 
-  private getNearestBoardPoint(svgCoords: Coordinates): GoPosition {
+  private getNearestBoardPosition(svgCoords: Coordinates): GoPosition {
     let nearestPosition: GoPosition | undefined;
     let nearestPositionDistance: number | undefined;
 
@@ -259,7 +271,10 @@ export class GoBoardElement extends LitElement {
   }
 
   private hasStoneAt(pos: GoPosition): boolean {
-    return this.stones.some(stone => stone.x === pos.x && stone.y === pos.y);
+    return this.stones.some(stone => (
+      stone.x === pos.x &&
+      stone.y === pos.y
+    ));
   }
 
 }

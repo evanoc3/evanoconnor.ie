@@ -27,42 +27,59 @@ import GoBack from "@/components/common/GoBack.astro";
   </noscript>
 
   <div>
-    <GoBoard 
-      client:only
-    />
+    <GoBoard client:only />
+    <div>Next player: <span id="next-player-label"></span></div>
   </div>
 
   <script>
     import type { GoBoardElement } from "@/components/playground/go/GoBoard.ts";
+import type { GoGame } from "@/components/playground/go/GoGame.ts";
     import { GoGameService } from "@/components/playground/go/GoGameService.ts";
 
     window.addEventListener("load", setupGoPlayground);
 
     function setupGoPlayground(): void {
       const goBoardElement = document.querySelector<GoBoardElement>("eoc-goboard");
-      if(!goBoardElement) {
+      const nextPlayerLabel = document.querySelector<HTMLSpanElement>("span#next-player-label");
+      if(!goBoardElement || !nextPlayerLabel) {
         return;
       }
 
       const goGameService = new GoGameService();
       const goGame = goGameService.newGame({
-        stones: [
-          { x: 0,  y: 0,  colour: "white" },
-          { x: 15, y: 15, colour: "white" },
-          { x: 3,  y: 15, colour: "black" },
-          { x: 15, y: 3,  colour: "white" },
-          { x: 9,  y: 9,  colour: "black" },
-          { x: 10, y: 9,  colour: "white" },
-          { x: 9,  y: 10, colour: "black" },
-          { x: 6,  y: 12, colour: "white" },
-          { x: 5,  y: 11, colour: "black" },
-          { x: 12, y: 6,  colour: "white" }
-        ]
+        // stones: [
+        //   { x: 0,  y: 0,  colour: "white" },
+        //   { x: 15, y: 15, colour: "white" },
+        //   { x: 3,  y: 15, colour: "black" },
+        //   { x: 15, y: 3,  colour: "white" },
+        //   { x: 9,  y: 9,  colour: "black" },
+        //   { x: 10, y: 9,  colour: "white" },
+        //   { x: 9,  y: 10, colour: "black" },
+        //   { x: 6,  y: 12, colour: "white" },
+        //   { x: 5,  y: 11, colour: "black" },
+        //   { x: 12, y: 6,  colour: "white" }
+        // ]
       });
-      
 
+      goBoardElement.addEventListener("stone-placed", (e) => {
+        goGame.newTurn({
+          ...e.detail.position,
+          colour: goGame.nextTurnPlayer
+        });
+      });
+
+      goGame.addEventListener("made-turn", () => {
+        updateBoard(goGame, goBoardElement, nextPlayerLabel);
+      });
+
+      updateBoard(goGame, goBoardElement, nextPlayerLabel);
+    }
+
+    function updateBoard(goGame: GoGame, goBoardElement: GoBoardElement, nextPlayerLabel: HTMLSpanElement): void {
+      nextPlayerLabel.textContent = goGame.nextTurnPlayer;
       goBoardElement.setAttribute("data-stones", JSON.stringify(goGame.stones));
       goBoardElement.setAttribute("data-editable", "");
+
     }
   </script>
 
