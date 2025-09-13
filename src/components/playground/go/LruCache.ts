@@ -1,10 +1,26 @@
 export class LruCache<T> {
-  public readonly capacity: number;
+  public _capacity: number;
   private readonly storage = new Map<string, T>();
 
-
   constructor(capacity: number) {
-    this.capacity = capacity;
+    this._capacity = capacity;
+  }
+
+  public get capacity(): number {
+    return this._capacity;
+  }
+
+  public set capacity(newValue: number) {
+    if(newValue < 1) {
+      return;
+    }
+
+    if(newValue < this._capacity) {
+      const oversizeCount = this.size - newValue;
+      this.evict(oversizeCount);
+    }
+
+    this._capacity = newValue;
   }
 
   public get(key: string): T | undefined {

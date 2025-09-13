@@ -29,20 +29,41 @@ import GoBack from "@/components/common/GoBack.astro";
   <div>
     <GoBoard 
       client:only
-      data-stones={JSON.stringify([
-        { x: 0,  y: 0,  colour: "white" },
-        { x: 15, y: 15, colour: "white" },
-        { x: 3,  y: 15, colour: "black" },
-        { x: 15, y: 3,  colour: "white" },
-        { x: 9,  y: 9,  colour: "black" },
-        { x: 10, y: 9,  colour: "white" },
-        { x: 9,  y: 10, colour: "black" },
-        { x: 6,  y: 12, colour: "white" },
-        { x: 5,  y: 11, colour: "black" },
-        { x: 12, y: 6,  colour: "white" }
-      ])}
-      data-editable
     />
   </div>
+
+  <script>
+    import type { GoBoardElement } from "@/components/playground/go/GoBoard.ts";
+    import { GoGameService } from "@/components/playground/go/GoGameService.ts";
+
+    window.addEventListener("load", setupGoPlayground);
+
+    function setupGoPlayground(): void {
+      const goBoardElement = document.querySelector<GoBoardElement>("eoc-goboard");
+      if(!goBoardElement) {
+        return;
+      }
+
+      const goGameService = new GoGameService();
+      const goGame = goGameService.newGame({
+        stones: [
+          { x: 0,  y: 0,  colour: "white" },
+          { x: 15, y: 15, colour: "white" },
+          { x: 3,  y: 15, colour: "black" },
+          { x: 15, y: 3,  colour: "white" },
+          { x: 9,  y: 9,  colour: "black" },
+          { x: 10, y: 9,  colour: "white" },
+          { x: 9,  y: 10, colour: "black" },
+          { x: 6,  y: 12, colour: "white" },
+          { x: 5,  y: 11, colour: "black" },
+          { x: 12, y: 6,  colour: "white" }
+        ]
+      });
+      
+
+      goBoardElement.setAttribute("data-stones", JSON.stringify(goGame.stones));
+      goBoardElement.setAttribute("data-editable", "");
+    }
+  </script>
 
 </PageLayout>

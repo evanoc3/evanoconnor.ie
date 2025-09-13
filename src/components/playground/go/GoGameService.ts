@@ -1,43 +1,28 @@
-import { GoGameServiceEventEmitter } from "./GoGameServiceEventEmitter.ts";
-import { GoGame } from "./GoGame.ts";
+import { TypedEventEmitter } from "./TypedEventEmitter.ts";
+import { GoGame, type GoGameConstructorParameters } from "./GoGame.ts";
+import { LruCache } from "./LruCache.ts";
 
 
-export class GoGameService extends GoGameServiceEventEmitter {
-  private readonly games: Map<string, GoGame> = new Map();
-  private _capacity = 1;
+type GoGameServiceEventMap = {
+  gameCreated: { gameId: string }
+};
+
+
+export class GoGameService extends TypedEventEmitter<GoGameServiceEventMap> {
+  private readonly gamesCache = new LruCache<GoGame>(1);
 
   // Public API
 
-  public get capacity(): number {
-    return this._capacity;
-  }
+  public newGame(args?: GoGameConstructorParameters): GoGame {
+    const game = new GoGame(args);
 
-  public set capacity(newValue: number) {
-    if(newValue < 1) {
-      return;
-    }
-
-    this._capacity = newValue;
-
-    if(this.games.size > this._capacity) {
-      const gameKeys = Array.from(this.games.keys());
-      for(let i = this.capacity; i < gameKeys.length - 1; i++) {
-        const gameKey = gameKeys[i];
-        this.games.delete(gameKey);
-      }
-    }
-  }
-
-  public newGame(): GoGame {
-    const game = new GoGame();
-
-    this.games.set(game.id, game);
+    this.gamesCache.set(game.id, game);
     this.dispatchEvent("gameCreated", { gameId: game.id });
     return game;
   }
 
   public getGame(id: string): GoGame | undefined {
-    return this.games.get(id);
+    return this.gamesCache.get(id);
   }
 
 }

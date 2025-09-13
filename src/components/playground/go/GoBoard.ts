@@ -14,20 +14,16 @@ declare global {
   }
 }
 
+
+const svgViewBoxSize = 280;
+
+
 @customElement("eoc-goboard")
-export default class GoBoardElement extends LitElement {
+export class GoBoardElement extends LitElement {
 
   public static get styles(): CSSResultGroup {
     return css`
       :host {
-        --board-background-colour: #deb887;
-        --board-line-colour: black;
-        --white-stone-colour: white;
-        --white-stone-border-colour: #eee;
-        --black-stone-colour: black;
-        --black-stone-border-colour: #111;
-        --highlighted-point-marker-colour: rgba(255, 0, 255, 0.4);
-
         display: block;
         box-sizing: border-box;
       }
@@ -50,6 +46,38 @@ export default class GoBoardElement extends LitElement {
       svg {
         width: 100%;
         height: 100%;
+        stroke-width: 1;
+        stroke-linecap: round;
+
+        rect#background {
+          width: 100%;
+          height: 100%;
+          fill: var(--go-board-background-colour, #deb887);
+        }
+
+        g#grid-lines {
+          stroke: var(--go-board-line-colour, #000);
+        }
+
+        circle {
+          &.white-stone {
+            stroke: var(--go-board-white-stone-border-colour, #eee);
+            fill: var(--go-board-white-stone-colour, #fff);
+          }
+
+          &.black-stone {
+            stroke: var(--go-board-black-stone-border-colour, #111);
+            fill: var(--go-board-black-stone-colour, #000);
+          }
+        }
+
+        g#star-points {
+          fill: var(--go-board-line-colour, #000);
+        }
+
+        circle#nearest-board-point-marker {
+          fill: var(--highlighted-point-marker-colour, #ff00ff4d);
+        }
       }
     `;
   }
@@ -63,9 +91,14 @@ export default class GoBoardElement extends LitElement {
   public render(): TemplateResult {
     return html`
     <div id="container">
-      <div id="board" @mousemove=${this.onMouseMove} @mouseleave=${this.onMouseLeave}>
-        <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
-          ${ this.backgroundTemplate }
+      <div
+        id="board"
+        @mousemove=${this.onMouseMove}
+        @mouseleave=${this.onMouseLeave}
+        @click=${this.onClick}
+      >
+        <svg viewBox="0 0 ${svgViewBoxSize} ${svgViewBoxSize}" xmlns="http://www.w3.org/2000/svg">
+          <rect id="background" />
           ${ this.gridLinesTemplate }
           ${ this.starPointsTemplate }
           ${ this.stonesTemplate }
@@ -73,12 +106,6 @@ export default class GoBoardElement extends LitElement {
         </svg>
       </div>
     </div>
-    `;
-  }
-
-  private get backgroundTemplate(): TemplateResult {
-    return svg`
-      <rect width="100%" height="100%" fill="var(--board-background-colour)" />
     `;
   }
 
@@ -100,18 +127,18 @@ export default class GoBoardElement extends LitElement {
     }
     
     return svg`
-      <g id="grid-lines" stroke="var(--board-line-colour)" stroke-width="1" stroke-linecap="round">
+      <g id="grid-lines">
         ${ lines }
       </g>
     `;
   }
 
   private get stonesTemplate(): TemplateResult | typeof nothing {
-    const filteredStones = this.stones.filter(stone => {
-      return stone.x >= 0 && stone.x < this.boardDimensions.width &&
-             stone.y >= 0 && stone.y < this.boardDimensions.height &&
-             ["black", "white"].includes(stone.colour);
-    });
+    const filteredStones = this.stones.filter(stone => (
+      stone.x >= 0 && stone.x < this.boardDimensions.width &&
+      stone. y >= 0 && stone.y < this.boardDimensions.height &&
+      ["black", "white"].includes(stone.colour)
+    ));
 
     if(!filteredStones.length) {
       return nothing;
@@ -119,43 +146,46 @@ export default class GoBoardElement extends LitElement {
 
     const stoneTemplates = filteredStones.map(stone => {
       const { x, y } = this.getSvgCoordsForBoardPosition(stone);
-      const bgColour = stone.colour === "white"
-        ? "var(--white-stone-colour)"
-        : "var(--black-stone-colour)";
-      const borderColour = stone.colour === "white"
-        ? "var(--white-stone-border-colour)"
-        : "var(--black-stone-border-colour)";
-      return svg`<circle cx="${x}" cy="${y}" r="6" fill="${bgColour}" stroke="${borderColour}" />`;
+      return svg`<circle cx="${x}" cy="${y}" r="6" class="${stone.colour}-stone" />`;
     });
 
     return svg`
-      <g id="stones" stroke-width="1" stroke-linecap="round">
+      <g id="stones">
         ${ stoneTemplates }
       </g>
     `;
   }
 
   private get starPointsTemplate(): TemplateResult | typeof nothing {
+    const starPointPositions = this.starPointPositions;
+    if(!starPointPositions.length) {
+      return nothing;
+    }
+
+    const starTemplates = starPointPositions.map(pos => {
+      const { x, y } = this.getSvgCoordsForBoardPosition(pos);
+      return svg`<circle cx="${x}" cy="${y}" r="2" />`;
+    });
+
+    return svg`
+      <g id="star-points">
+        ${ starTemplates }
+      </g>
+    `;
+  }
+
+  private get starPointPositions(): Coordinates[] {
     const { width: boardWidth, height: boardHeight } = this.boardDimensions;
 
     if(boardHeight === 19 && boardWidth === 19) {
-      const starPositions: Coordinates[] = [
+      return [
         { x: 3, y: 3  }, { x: 9, y: 3  }, { x: 15, y: 3 },
         { x: 3, y: 9  }, { x: 9, y: 9  }, { x: 15, y: 9 },
         { x: 3, y: 15 }, { x: 9, y: 15 }, { x: 15, y: 15 }
       ];
-      const starTemplates = starPositions.map(pos => {
-        const { x, y } = this.getSvgCoordsForBoardPosition(pos);
-        return svg`<circle cx="${x}" cy="${y}" r="2" />`;
-      });
-      return svg`
-        <g id="star-points" fill="var(--board-line-colour)">
-          ${ starTemplates }
-        </g>
-      `;
     }
 
-    return nothing;
+    return [];
   }
 
   private get nearestBoardPointMarkerTemplate(): TemplateResult | typeof nothing {
@@ -164,7 +194,7 @@ export default class GoBoardElement extends LitElement {
     }
 
     return svg`
-      <circle cx="${this.nearestBoardPoint.x}" cy="${this.nearestBoardPoint.y}" r="5" fill="var(--highlighted-point-marker-colour)" />
+      <circle id="nearest-board-point-marker" cx="${this.nearestBoardPoint.x}" cy="${this.nearestBoardPoint.y}" r="5" />
     `;
   }
 
@@ -184,9 +214,13 @@ export default class GoBoardElement extends LitElement {
     this.nearestBoardPoint = undefined;
   }
 
+  private onClick(_e: MouseEvent): void {
+
+  }
+
   private getSvgCoordsForBoardPosition(pos: GoPosition): Coordinates {
-    const widthStep = 280 / (this.boardDimensions.width + 1);
-    const heightStep = 280 / (this.boardDimensions.height + 1);
+    const widthStep = svgViewBoxSize / (this.boardDimensions.width + 1);
+    const heightStep = svgViewBoxSize / (this.boardDimensions.height + 1);
 
     return {
       x: widthStep * (pos.x + 1),
@@ -195,14 +229,11 @@ export default class GoBoardElement extends LitElement {
   }
 
   private mapPixelCoordsToSvgCoords(pxCoords: Coordinates): Coordinates {
-    const svgWidth = 280;
-    const svgHeight = 280;
-
     const boardElRect = this.boardElement.getBoundingClientRect();
 
     return {
-      x: (pxCoords.x / boardElRect.width) * svgWidth,
-      y: (pxCoords.y / boardElRect.height) * svgHeight
+      x: (pxCoords.x / boardElRect.width) * svgViewBoxSize,
+      y: (pxCoords.y / boardElRect.height) * svgViewBoxSize
     };
   }
 
@@ -232,3 +263,5 @@ export default class GoBoardElement extends LitElement {
   }
 
 }
+
+export default GoBoardElement;

@@ -1,35 +1,48 @@
-import { randomUUID } from "node:crypto";
+import { v7 as uuidV7 } from "uuid";
 import type { GoBoardSize, GoTurn, GoBoardDimensions, GoStoneColour, GoPosition, GoStone } from "./Go.types.ts";
+import { TypedEventEmitter } from "./TypedEventEmitter.ts";
 
 
-type GoGameConstructorParameters  = Partial<{
+export type GoGameConstructorParameters = Partial<{
   id: string
   createdAt: Date
   boardSize: GoBoardSize
+} & ({
   turns: GoTurn[]
-}>
+  stones: never
+} | {
+  turns: never
+  stones: GoStone[]
+})>
 
 
-export class GoGame {
+type GoGameEventMap = {
+};
+
+
+export class GoGame extends TypedEventEmitter<GoGameEventMap> {
   public readonly id: string;
   public readonly createdAt: Date;
   public readonly boardDimensions: GoBoardDimensions;
   public readonly turns: GoTurn[];
-  private stones = new Map<string, GoStone>();
+  private readonly _stones = new Map<string, GoStone>();
+
+  // Public API
 
   constructor(args?: GoGameConstructorParameters) {
-    const id = args?.id ?? randomUUID();
-    const createdAt = args?.createdAt ?? new Date();
-    const boardSize = args?.boardSize ?? 19;
-    const turns = args?.turns ?? [];
+    super();
 
-    this.id = id;
-    this.createdAt = createdAt;
+    this.id = args?.id ?? uuidV7();
+    this.createdAt = args?.createdAt ?? new Date();
     this.boardDimensions = {
-      width: boardSize,
-      height: boardSize
+      width: args?.boardSize ?? 19,
+      height: args?.boardSize ?? 19
     };
-    this.turns = turns;
+    this.turns = args?.turns ?? [];
+
+    if(args?.stones?.length) {
+      this.applyStones(args.stones);
+    }
   }
 
   public get nextTurnPlayer(): GoStoneColour {
@@ -37,12 +50,38 @@ export class GoGame {
     if(!lastTurn) {
       return "black";
     }
-    return lastTurn.player === "black" ? "white" : "black";
+    return lastTurn.player === "black"
+      ? "white"
+      : "black";
   }
 
   public getStoneAt(pos: GoPosition): GoStone | undefined {
-    const mapKey = `${pos.x},${pos.y}`;
-    const stone = this.stones.get(mapKey);
+    const mapKey = getMapKeyForPosition(pos);
+    const stone = this._stones.get(mapKey);
     return stone;
   }
+
+  public get stones(): GoStone[] {
+    return Array.from(
+      this._stones.values()
+    );
+  }
+
+  // Private Methods
+
+  private applyStones(stones: GoStone[]): void {
+    for(const stone of stones) {
+      const pos: GoPosition = stone;
+      if(!this.getStoneAt(pos)) {
+        const mapKey = getMapKeyForPosition(pos);
+        this._stones.set(mapKey, stone);
+      }
+    }
+  }
+
+}
+
+
+function getMapKeyForPosition(pos: GoPosition): string {
+  return `${pos.x},${pos.y}`;
 }
