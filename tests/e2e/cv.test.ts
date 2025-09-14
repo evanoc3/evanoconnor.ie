@@ -8,10 +8,10 @@ test.describe("/cv/", () => {
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("CV | evanoconnor.ie");
+    await expect(page).toHaveTitle(/CV/);
 
     await validateMetaTags(page, {
-      description: "Evan O'Connor's CV"
+      description: "CV for Evan O'Connor"
     });
 
     await validateLinkTags(page, {

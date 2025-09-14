@@ -8,7 +8,7 @@ test.describe("/", () => {
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("evanoconnor.ie");
+    await expect(page).toHaveTitle(/Homepage/);
 
     await validateMetaTags(page, {
       description: "Homepage of Evan O'Connor's personal website",

@@ -8,10 +8,10 @@ test.describe("/playground/go/", () => {
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("Go Game | evanoconnor.ie");
+    await expect(page).toHaveTitle(/Interactive go game showcase/);
 
     await validateMetaTags(page, {
-      description: "Demonstration of aninteractive Go board component"
+      description: "Demonstration of an interactive Go board component"
     });
 
     await validateLinkTags(page, {

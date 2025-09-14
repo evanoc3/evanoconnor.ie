@@ -10,6 +10,10 @@ interface Props {
 }
 
 const requiresJs = Astro.props.requiresJs ?? true;
+
+const pageTitle = Astro.site?.hostname
+  ? `${Astro.props.title} | ${Astro.site.hostname}`
+  : Astro.props.title;
 ---
 
 <!DOCTYPE html>
@@ -29,7 +33,7 @@ const requiresJs = Astro.props.requiresJs ?? true;
     }
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="x-last-built-time" content={lastBuildTime} />
-    <title> { Astro.props.title } </title>
+    <title> { pageTitle } </title>
     {
       Astro.site && (
         <link slot="head" rel="canonical" href={`${Astro.site.origin}${Astro.url.pathname}`} />

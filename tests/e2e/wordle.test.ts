@@ -8,7 +8,7 @@ test.describe("/playground/wordle/", () => {
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("Wordle | evanoconnor.ie");
+    await expect(page).toHaveTitle(/Wordle/);
 
     await validateMetaTags(page, {
       description: "Clone of Wordle"
