@@ -1,17 +1,11 @@
 import { LitElement } from "lit";
+import { dispatchCustomEvent } from "@/utils/dom-utils.ts";
 
 
 export class BaseLitElement extends LitElement {
 
-  public dispatchCustomEvent(eventName: string, detail?: object): void {
-    this.dispatchEvent(new CustomEvent(
-      eventName,
-      {
-        bubbles: true,
-        composed: true,
-        detail
-      }
-    ));
+  public dispatchCustomEvent<T extends Record<string|number|symbol, any>>(eventName: string, detail?: T): void {
+    dispatchCustomEvent<T>(this, eventName, detail);
   }
 
 }

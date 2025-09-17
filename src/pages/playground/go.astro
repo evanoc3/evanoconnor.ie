@@ -1,7 +1,8 @@
 ---
 import PageLayout from "@/components/common/PageLayout.astro";
-import GoBoard from "@/components/playground/go/GoBoard.ts";
 import GoBack from "@/components/common/GoBack.astro";
+import GoSidebar from "@/components/playground/go/GoSidebar.astro";
+import GoBoard from "@/components/playground/go/GoBoard.ts";
 ---
 
 
@@ -35,11 +36,9 @@ import GoBack from "@/components/common/GoBack.astro";
     }
   }
 
-  div#sidebar {
+  :global(div#go-sidebar) {
     grid-area: 1 / 2 / 3 / 2;
-    padding: 1rem;
   }
-
 </style>
 
 
@@ -61,47 +60,58 @@ import GoBack from "@/components/common/GoBack.astro";
       </noscript>
     </div>
 
-    <div id="sidebar" hidden data-requires-js>
-      Next turn: <span id="next-player-label"></span>
-    </div>
+    <GoSidebar />
   </div>
 
   <script>
     import type { GoBoardElement } from "@/components/playground/go/GoBoard.ts";
-    import type { GoGame } from "@/components/playground/go/GoGame.ts";
+    import type { GoPosition } from "@/components/playground/go/Go.types.ts";
     import { GoGameService } from "@/components/playground/go/GoGameService.ts";
 
-    window.addEventListener("load", setupGoPlayground);
+    const goGameService = new GoGameService();
 
-    function setupGoPlayground(): void {
-      const goBoardElement = document.querySelector<GoBoardElement>("eoc-goboard");
-      const nextPlayerLabel = document.querySelector<HTMLSpanElement>("span#next-player-label");
-      if(!goBoardElement || !nextPlayerLabel) {
-        return;
+    window.addEventListener("load", startNewGame);
+
+    function startNewGame(): void {
+      const goBoardElement = document.querySelector<GoBoardElement>("eoc-goboard")!;
+      const nextPlayerLabel = document.querySelector<HTMLSpanElement>("span#next-player-value")!;
+      const forfeitButton = document.querySelector<HTMLButtonElement>("button#forfeit-btn")!;
+
+      const game = goGameService.newGame();
+
+      function update(): void {
+        goBoardElement.setAttribute("data-stones", JSON.stringify(game.stones));
+
+        (game.state === "inProgress")
+          ? goBoardElement.setAttribute("data-editable", "")
+          : goBoardElement.removeAttribute("data-editable");
+
+        nextPlayerLabel.textContent = game.nextTurnColour;
+        forfeitButton.disabled = game.state === "ended";
       }
 
-      const goGameService = new GoGameService();
-      const goGame = goGameService.newGame();
+      function cleanup(): void {
+        document.removeEventListener("new-game-btn-click", newGameBtnClickHandler);
+        document.removeEventListener("forfeit-btn-click", forfeitBtnClickHandler);
+        game.removeEventListener("new-turn-made", newTurnMadeHandler);
+        game.removeEventListener("game-state-changed", gameStateChangedHandler);
+        goBoardElement.removeEventListener("stone-placed", stonePlacedHandler);
+      }
 
-      goBoardElement.addEventListener("stone-placed", (e) => {
-        goGame.newTurn({
-          ...e.detail.position,
-          colour: goGame.nextTurnColour
-        });
-      });
+      const newGameBtnClickHandler = () => { cleanup(); startNewGame(); };
+      const forfeitBtnClickHandler = () => game.end();
+      const newTurnMadeHandler = () => update();
+      const gameStateChangedHandler = () => update();
+      const stonePlacedHandler = (e: CustomEvent<{ position: GoPosition }>) => game.newTurn({ ...e.detail.position, colour: game.nextTurnColour });
 
-      goGame.addEventListener("new-turn-made", () => {
-        updateBoard(goGame, goBoardElement, nextPlayerLabel);
-      });
+      document.addEventListener("new-game-btn-click", newGameBtnClickHandler);
+      document.addEventListener("forfeit-btn-click", forfeitBtnClickHandler);
+      game.addEventListener("new-turn-made", newTurnMadeHandler);
+      game.addEventListener("game-state-changed", gameStateChangedHandler);
+      goBoardElement.addEventListener("stone-placed", stonePlacedHandler);
 
-      updateBoard(goGame, goBoardElement, nextPlayerLabel);
+      update();
     }
 
-    function updateBoard(goGame: GoGame, goBoardElement: GoBoardElement, nextPlayerLabel: HTMLSpanElement): void {
-      nextPlayerLabel.textContent = goGame.nextTurnColour;
-      goBoardElement.setAttribute("data-stones", JSON.stringify(goGame.stones));
-      goBoardElement.setAttribute("data-editable", "");
-
-    }
   </script>
 </PageLayout>
