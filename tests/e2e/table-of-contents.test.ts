@@ -24,10 +24,9 @@ test.describe("/playground/table-of-contents/", () => {
     await validateSitemap(page);
   });
 
-  test("has the eoc-toc element", async ({ page }) => {
-    const tableOfContentsElement = page.locator("eoc-toc");
+  test("has the div.table-of-contents element", async ({ page }) => {
+    const tableOfContentsElement = page.locator("div.table-of-contents");
     await expect(tableOfContentsElement).toBeVisible();
-    await expect(tableOfContentsElement).toHaveAttribute("target-id", "main");
 
     const main = page.locator("main");
     await expect(main).toBeVisible();

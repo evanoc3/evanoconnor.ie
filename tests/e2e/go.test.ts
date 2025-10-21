@@ -28,8 +28,8 @@ test.describe("/playground/go/", () => {
     await expect(backButton).toBeVisible();
   });
 
-  test("has the <eoc-goboard /> tag", async ({ page }) => {
-    const goBoardElement = page.locator("eoc-goboard");
+  test("has the div.go-board element", async ({ page }) => {
+    const goBoardElement = page.locator("div.go-board");
     await expect(goBoardElement).toBeVisible();
   });
 
