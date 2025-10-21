@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import lit from "@astrojs/lit";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 
 const site = process.env.WWW_HOST || undefined;
@@ -24,5 +24,5 @@ export default defineConfig({
       }
     }
   },
-  integrations: [ lit(), sitemap() ]
+  integrations: [ react(), sitemap() ]
 });

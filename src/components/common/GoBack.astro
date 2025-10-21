@@ -52,9 +52,18 @@ import ArrowLeftIcon from "feather-icons/dist/icons/arrow-left.svg";
 
 
 <script>
-  window.addEventListener("load", () => {
-    const backButton = document.querySelector("button.go-back");
-    backButton?.addEventListener("click", () => window.history.back());
-  });
+  if(document.readyState === "complete") {
+    onLoad();
+  } else {
+    window.addEventListener("load", onLoad);
+  }
+
+  function onLoad(): void {
+    const backButtons = document.querySelectorAll<HTMLButtonElement>("button.go-back");
+
+    for(const backButton of backButtons) {
+      backButton.addEventListener("click", () => window.history.back());
+    }
+  }
 </script>
 

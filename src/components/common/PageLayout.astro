@@ -7,9 +7,12 @@ interface Props {
   description: string
   keywords?: string[]
   requiresJs?: boolean
+  viewport?: string
 }
 
 const requiresJs = Astro.props.requiresJs ?? true;
+
+const viewport = Astro.props.viewport ?? "width=device-width, initial-scale=1.0";
 
 const pageTitle = Astro.site?.hostname
   ? `${Astro.props.title} | ${Astro.site.hostname}`
@@ -31,7 +34,7 @@ const pageTitle = Astro.site?.hostname
         <meta name="keywords" content={Astro.props.keywords.join(", ")} />
       )
     }
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content={viewport} />
     <meta name="x-last-built-time" content={lastBuildTime} />
     <title> { pageTitle } </title>
     {

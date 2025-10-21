@@ -1,20 +1,18 @@
 {
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
-  "devDependencies": {
-    "@astrojs/lit": "^4.3.0",
+  "dependencies": {
+    "@astrojs/react": "^4.4.0",
     "@astrojs/sitemap": "^3.5.1",
-    "@playwright/test": "^1.55.0",
+    "@playwright/test": "^1.56.1",
     "@types/luxon": "^3.7.1",
-    "@types/node": "^24.3.1",
-    "@webcomponents/template-shadowroot": "^0.2.1",
-    "astro": "^5.13.7",
+    "@types/node": "^24.9.0",
+    "astro": "^5.14.7",
     "bootstrap-icons": "^1.13.1",
     "cloc": "^2.11.0",
     "feather-icons": "^4.29.2",
     "happy-dom": "^18.0.1",
-    "lit": "^3.3.1",
     "luxon": "^3.7.2",
-    "sass-embedded": "^1.92.1",
+    "sass-embedded": "^1.93.2",
     "uuid": "^13.0.0",
     "vitest": "^3.2.4"
   },

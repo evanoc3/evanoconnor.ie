@@ -1,9 +1,15 @@
 <script>
-  window.addEventListener("load", () => {
+  function showElementsRequiringJs(): void {
     const requiringJsElements = document.querySelectorAll<HTMLElement>("[data-requires-js]");
 
     for(const requiringJsElement of requiringJsElements) {
       requiringJsElement.removeAttribute("hidden");
     }
-  });
+  }
+
+  if(document.readyState === "complete") {
+    showElementsRequiringJs();
+  } else {
+    window.addEventListener("load", showElementsRequiringJs);
+  }
 </script>
