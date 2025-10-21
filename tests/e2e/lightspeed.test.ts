@@ -8,7 +8,7 @@ test.describe("/playground/lightspeed/", () => {
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("Lightspeed scroll animation | evanoconnor.ie");
+    await expect(page).toHaveTitle(/Lightspeed scroll animation showcase/);
 
     await validateMetaTags(page, {
       description: "Demonstration of a 'lightspeed' scroll animation effect using HTML canvas and JavaScript.",

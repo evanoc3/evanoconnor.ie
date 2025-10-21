@@ -1,5 +1,5 @@
 import { v7 as uuidV7 } from "uuid";
-import type { GoBoardSize, GoTurn, GoBoardDimensions, GoStoneColour, GoPosition, GoStone } from "./Go.types.ts";
+import type { GoBoardSize, GoTurn, GoBoardDimensions, GoStoneColour, GoPosition, GoStone, GoGameState } from "./Go.types.ts";
 import { TypedEventEmitter } from "./TypedEventEmitter.ts";
 
 
@@ -7,6 +7,7 @@ export type GoGameConstructorParameters = Partial<{
   id: string
   createdAt: Date
   boardSize: GoBoardSize
+  state: GoGameState
 } & ({
   turns: GoTurn[]
   stones: never
@@ -26,8 +27,9 @@ type GoGamePlaceStoneReturnType = {
 };
 
 
-type GoGameEventMap = {
+export type GoGameEventMap = {
   "new-turn-made": { turn: GoTurn }
+  "game-state-changed": { gameState: GoGameState }
 };
 
 
@@ -42,6 +44,7 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
   public readonly createdAt: Date;
   public readonly boardDimensions: GoBoardDimensions;
   public readonly turns: GoTurn[];
+  private _state: GoGameState;
   private readonly _stones = new Map<string, GoStone>();
 
   // Public API
@@ -56,6 +59,7 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
       height: args?.boardSize ?? 19
     };
     this.turns = args?.turns ?? [];
+    this._state = args?.state ?? "inProgress";
 
     if(args?.stones?.length) {
       this.applyStones(args.stones);
@@ -102,6 +106,15 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
     this.dispatchCustomEvent("new-turn-made", { turn: newTurn });
   }
 
+  public get state(): GoGameState {
+    return this._state;
+  }
+
+  public end(): void {
+    this._state = "ended";
+    this.dispatchCustomEvent("game-state-changed", { gameState: this.state });
+  }
+
   // Private Methods
 
   private applyStones(stones: GoStone[]): void {
@@ -121,6 +134,13 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
   }
 
   private placeStone(placedStone: GoStone): GoGamePlaceStoneReturnType {
+    if(this.state !== "inProgress") {
+      return {
+        success: false,
+        errorMessage: "game is ended"
+      };
+    }
+    
     if(placedStone.colour !== this.nextTurnColour) {
       return {
         success: false,
@@ -170,7 +190,10 @@ export class GoGame extends TypedEventEmitter<GoGameEventMap> {
 
     this.removeStones(removedStones);
     
-    return { success: true, removedStones };
+    return {
+      success: true,
+      removedStones
+    };
   }
 
   private getAdjacentPositions(stoneGroup: GoStoneGroup): GoPosition[] {

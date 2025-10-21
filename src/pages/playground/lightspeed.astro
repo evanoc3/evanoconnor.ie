@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/components/common/PageLayout.astro";
 import GoBack from "@/components/common/GoBack.astro";
+import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 ---
 
 <style lang="scss">
@@ -45,32 +46,20 @@ import GoBack from "@/components/common/GoBack.astro";
     right: 1rem;
     transition: color 0.5s;
   }
-
-  div.noscript-label {
-    left: 50%;
-    max-width: 100vw;
-    position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
 </style>
 
 <PageLayout
-  title="Lightspeed scroll animation | evanoconnor.ie"
+  title="Lightspeed scroll animation showcase"
   description="Demonstration of a 'lightspeed' scroll animation effect using HTML canvas and JavaScript."
   keywords={["lightspeed", "scroll", "animation", "canvas", "JavaScript", "JS"]}
 >
   <GoBack />
 
+  <NoScriptMessage />
+
   <canvas id="canvas"></canvas>
 
   <span id="fps-label"></span>
-
-  <noscript>
-    <div class="noscript-label">
-      JavaScript is necessary for this experiment to work. Please enable JavaScript and reload.
-    </div>
-  </noscript>
 
   <script>
     interface Star {

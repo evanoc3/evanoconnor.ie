@@ -22,3 +22,5 @@ export interface GoTurn {
   placedStone: GoStone
   removedStones: GoStone[]
 }
+
+export type GoGameState = "inProgress" | "ended";

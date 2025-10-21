@@ -1,17 +1,17 @@
 import { test, expect } from "@playwright/test";
 import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
 
-test.describe("/cv/", () => {
+test.describe("/playground/go/", () => {
 
   test.beforeEach(async ({ page }) => {
     await successfulNavigation(page, "/playground/go/");
   });
 
   test("has the correct metadata", async ({ page }) => {
-    await expect(page).toHaveTitle("Go Game | evanoconnor.ie");
+    await expect(page).toHaveTitle(/Interactive go game showcase/);
 
     await validateMetaTags(page, {
-      description: "Demonstration of aninteractive Go board component"
+      description: "Demonstration of an interactive Go board component"
     });
 
     await validateLinkTags(page, {
@@ -28,8 +28,8 @@ test.describe("/cv/", () => {
     await expect(backButton).toBeVisible();
   });
 
-  test("has the <eoc-goboard /> tag", async ({ page }) => {
-    const goBoardElement = page.locator("eoc-goboard");
+  test("has the div.go-board element", async ({ page }) => {
+    const goBoardElement = page.locator("div.go-board");
     await expect(goBoardElement).toBeVisible();
   });
 

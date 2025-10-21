@@ -1,7 +1,8 @@
 ---
 import PageLayout from "@/components/common/PageLayout.astro";
 import GoBack from "@/components/common/GoBack.astro";
-import TableOfContentsElement from "@/components/playground/table-of-contents/TableOfContents.ts";
+import TableOfContentsElement from "@/components/playground/table-of-contents/TableOfContents.tsx";
+import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 ---
 
 <style lang="scss">
@@ -49,6 +50,10 @@ import TableOfContentsElement from "@/components/playground/table-of-contents/Ta
     min-height: 100vh;
     width: 100vw;
     padding: 10rem 0 5rem;
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   div#left-col {
@@ -89,23 +94,25 @@ import TableOfContentsElement from "@/components/playground/table-of-contents/Ta
 </style>
 
 <PageLayout
-  title="Table of Contents component | evanoconnor.ie"
+  title="Table of Contents component showcase"
   description="Demonstration of a Table of Contents component built with Lit."
   keywords={["custom component", "Lit", "TypeScript"]}
 >
   <GoBack />
 
-  <div id="page-container">
+  <NoScriptMessage />
+
+  <div id="page-container" data-requires-js hidden>
     <div id="left-col">
       <TableOfContentsElement
-        client:only
-        target-id="main"
-        table-title="Table of Contents"
+        client:only="react"
+        targetQuerySelector="main"
+        tableTitle="Table of Contents"
       ></TableOfContentsElement>
     </div>
 
-    <main id="main">
-      <p hidden data-requires-js>
+    <main>
+      <p>
         This experiment is to demonstrate the 'Table of Contents' component on the left. It is
         a self-contained web-component which takes a HTML element's ID as its target-id attribute
         value, generates a representation of the hierarchy of headings within that target element,
@@ -113,17 +120,10 @@ import TableOfContentsElement from "@/components/playground/table-of-contents/Ta
         which have IDs, and make the entries in the table corresponding to that heading into a link.
       </p>
 
-      <p hidden data-requires-js>
+      <p>
         The rest of the text content on this page is dynamically generated gibberish, with a number
         of headings and paragaphs to give you a better a sense of how the component works.
       </p>
-
-      <noscript>
-        <p>
-          Javascript is required to be enabled for this component to work. Please enable Javascript and
-          reload the page to view this demonstration.
-        </p>
-      </noscript>
 
       <hr />
 

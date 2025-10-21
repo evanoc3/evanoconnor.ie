@@ -1,0 +1,42 @@
+div.table-of-contents {
+  display: block;
+  height: auto;
+
+  strong {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ol.depth-1,
+  ol.depth-2,
+  ol.depth-3,
+  ol.depth-4,
+  ol.depth-5 {
+    margin-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.2rem;
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--link-colour, LinkText);
+
+    &:visited {
+      color: var(--link-visited-colour, VisitedText);
+    }
+
+    &:active {
+      color: var(--link-active-colour, ActiveText);
+    }
+  }
+}
+
