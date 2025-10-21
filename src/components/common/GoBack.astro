@@ -38,12 +38,14 @@ import ArrowLeftIcon from "feather-icons/dist/icons/arrow-left.svg";
   }
 </style>
 
+
 <noscript>
   <a href="/" class="go-back">
     <ArrowLeftIcon />
     Home
   </a>
 </noscript>
+
 
 <button class="go-back" hidden data-requires-js>
   <ArrowLeftIcon />
@@ -52,12 +54,6 @@ import ArrowLeftIcon from "feather-icons/dist/icons/arrow-left.svg";
 
 
 <script>
-  if(document.readyState === "complete") {
-    onLoad();
-  } else {
-    window.addEventListener("load", onLoad);
-  }
-
   function onLoad(): void {
     const backButtons = document.querySelectorAll<HTMLButtonElement>("button.go-back");
 
@@ -65,5 +61,12 @@ import ArrowLeftIcon from "feather-icons/dist/icons/arrow-left.svg";
       backButton.addEventListener("click", () => window.history.back());
     }
   }
-</script>
 
+  if(document.readyState === "complete") {
+    onLoad();
+  } else {
+    window.addEventListener("load", onLoad);
+  }
+
+
+</script>

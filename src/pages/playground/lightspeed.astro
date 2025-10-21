@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/components/common/PageLayout.astro";
 import GoBack from "@/components/common/GoBack.astro";
+import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 ---
 
 <style lang="scss">
@@ -45,14 +46,6 @@ import GoBack from "@/components/common/GoBack.astro";
     right: 1rem;
     transition: color 0.5s;
   }
-
-  div.noscript-label {
-    left: 50%;
-    max-width: 100vw;
-    position: fixed;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
 </style>
 
 <PageLayout
@@ -62,15 +55,11 @@ import GoBack from "@/components/common/GoBack.astro";
 >
   <GoBack />
 
+  <NoScriptMessage />
+
   <canvas id="canvas"></canvas>
 
   <span id="fps-label"></span>
-
-  <noscript>
-    <div class="noscript-label">
-      JavaScript is necessary for this experiment to work. Please enable JavaScript and reload.
-    </div>
-  </noscript>
 
   <script>
     interface Star {

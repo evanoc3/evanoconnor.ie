@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/components/common/PageLayout.astro";
 import GoBack from "@/components/common/GoBack.astro";
+import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 import GoPlayground from "@/components/playground/go/GoPlayground.tsx";
 ---
 
@@ -21,6 +22,16 @@ import GoPlayground from "@/components/playground/go/GoPlayground.tsx";
     top: 1rem;
     left: 1rem;
   }
+
+  p#no-script-msg {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(75vw, 80ch);
+    text-align: center;
+  }
 </style>
 
 
@@ -28,8 +39,10 @@ import GoPlayground from "@/components/playground/go/GoPlayground.tsx";
   title="Interactive go game showcase"
   description="Demonstration of an interactive Go board component"
 >
-  <div id="page-layout" class="no-js">
+  <div id="page-layout">
     <GoBack />
+
+    <NoScriptMessage  />
 
     <GoPlayground client:only="react" />
   </div>
