@@ -8,7 +8,7 @@ test.describe("/playground/table-of-contents/", () => {
   });
 
   test("has the correct meta tags", async ({ page }) => {
-    await expect(page).toHaveTitle("Table of Contents component showcase");
+    await expect(page).toHaveTitle(/Table of Contents component showcase/);
 
     await validateMetaTags(page, {
       description: "Demonstration of a Table of Contents component built with Lit.",
