@@ -1,0 +1,434 @@
+:root {
+	--font-colour: #222;
+	--background-colour: white;
+
+	--header-background-colour: green;
+	--header-title-font-colour: white;
+
+	--header-button-hover-background-colour: #005900;
+	--header-button-icon-colour: white;
+
+	--input-background-colour: white;
+	--input-border-colour: green;
+	--input-font-colour: black;
+
+	--input-disabled-background-colour: white;
+	--input-disabled-border-colour: #b5b5b5;
+	--input-disabled-font-colour: black;
+
+	--input-wrong-background-colour: #4b4b4b;
+	--input-wrong-border-colour: #222;
+	--input-wrong-font-colour: #222;
+
+	--input-partial-background-colour: #c2b718;
+	--input-partial-border-colour: darkgoldenrod;
+	--input-partial-font-colour: darkgoldenrod;
+
+	--input-correct-background-colour: #005700;
+	--input-correct-border-colour: #005700;
+	--input-correct-font-colour: #397639;
+
+	--keyboard-background-colour: #ddd;
+
+	--keyboard-key-background-colour: white;
+	--keyboard-key-border-colour: #d8d8d8;
+	--keyboard-key-font-colour: #222;
+
+	--keyboard-key-pressed-background-colour: #dcdcdc;
+	--keyboard-key-pressed-border-colour: #d8d8d8;
+	--keyboard-key-pressed-font-colour: black;
+
+	--keyboard-key-wrong-background-colour: #4b4b4b;
+	--keyboard-key-wrong-border-colour: #222;
+	--keyboard-key-wrong-font-colour: #222;
+
+	--keyboard-key-partial-background-colour: #c2b718;
+	--keyboard-key-partial-border-colour: darkgoldenrod;
+	--keyboard-key-partial-font-colour: darkgoldenrod;
+
+	--keyboard-key-correct-background-colour: #005700;
+	--keyboard-key-correct-border-colour: #005700;
+	--keyboard-key-correct-font-colour: #397639;
+
+	--popup-background-shadow: rgba(0,0,0, 0.5);
+	--popup-box-shadow: rgba(0,0,0, 0.3);
+
+	--distribution-graph-bar-colour: magenta;
+
+	--switch-background-colour: green;
+	--switch-button-colour: white;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--font-colour: white;
+		--background-colour: #161616;
+	
+		--input-background-colour: #6d6d6d;
+		--input-border-colour: green;
+		--input-font-colour: white;
+
+		--input-disabled-background-colour: #545454;
+		--input-disabled-border-colour: #5e5e5e;
+		--input-disabled-font-colour: #e4e4e4;
+	
+		--keyboard-background-colour: #242424;
+	
+		--keyboard-key-background-colour: #6d6d6d;
+		--keyboard-key-border-colour: #707070;
+		--keyboard-key-font-colour: #ebebeb;
+
+		--keyboard-key-pressed-background-colour: #666666;
+		--keyboard-key-pressed-border-colour: #7c7c7c;
+		--keyboard-key-pressed-font-colour: white;
+
+		--distribution-graph-bar-colour: #6f6f6f;
+	}
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	min-height: 100vh;
+}
+
+body {
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	color: var(--font-colour);
+	line-height: 1;
+	background-color: var(--background-colour);
+}
+
+
+header {
+	width: 100%;
+	background-color: var(--header-background-colour);
+	padding: env(safe-area-inset-top) 1rem 0;
+	height: calc(4rem + env(safe-area-inset-top));
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}
+
+header > h1 {
+	color: var(--header-title-font-colour);
+	font-size: 2rem;
+	flex-grow: 1;
+}
+
+header > button {
+	/* clear default button styles */
+	border: none;
+	background: none;
+	border: none;
+	outline: none;
+	/* Style from scratch */
+	cursor: pointer;
+}
+
+header > button:not(:last-of-type) {
+	margin-right: 0.5rem;
+}
+
+header > button:hover {
+	background-color: var(--header-button-hover-background-colour);
+}
+
+header > button > svg {
+	color: var(--header-button-icon-colour);
+	width: 2rem;
+	height: 2rem;
+}
+
+
+main {
+	height: calc(100vh - 4rem - env(safe-area-inset-top)); /* minus header height */
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	padding-bottom: env(safe-area-inset-bottom);
+}
+
+
+main > #guesses-container {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-flow: column nowrap;
+	row-gap: 0.25rem;
+	flex-grow: 1;
+}
+
+main > #guesses-container > .guess-row {
+	display: flex;
+	flex-flow: row nowrap;
+	column-gap: 0.25rem;
+}
+
+main > #guesses-container > .guess-row > .letter-input {
+	/* Clear default styles */
+	border-radius: 0;
+	outline: none;
+	/* Style from scratch */
+	font-size: 1.75rem;
+	width: 1.8em;
+	height: 1.8em;
+	border: 1px solid var(--input-border-colour);
+	background-color: var(--input-background-colour);
+	text-align: center;
+	color: var(--input-font-colour);
+	cursor: text;
+}
+
+main > #guesses-container > .guess-row > .letter-input:disabled {
+	background-color: var(--input-disabled-background-colour);
+	border-color: var(--input-disabled-border-colour);
+	color: var(--input-disabled-font-colour);
+	opacity: 1;
+	cursor: default;
+}
+
+main > #guesses-container > .guess-row > .letter-input.wrong {
+	background-color: var(--input-wrong-background-colour);
+	border-color: var(--input-wrong-border-colour);
+	color: var(--input-wrong-font-colour);
+}
+
+main > #guesses-container > .guess-row > .letter-input.partial {
+	background-color: var(--input-partial-background-colour);
+	border-color: var(--input-partial-border-colour);
+	color: var(--input-partial-font-colour);
+}
+
+main > #guesses-container > .guess-row > .letter-input.correct {
+	background-color: var(--input-correct-background-colour);
+	border-color: var(--input-correct-border-colour);
+	color: var(--input-correct-font-colour);
+}
+
+
+main > #keyboard-container {
+	width: 100%;
+	background-color: var(--keyboard-background-colour);
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	row-gap: 0.3rem;
+	flex-grow: 0;
+	padding: 0.5rem 0.3rem;
+}
+
+main > #keyboard-container > .keyboard-row {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	column-gap: 0.3rem;
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key {
+	/* clear default button styles */
+	border: none;
+	background: none;
+	border: none;
+	outline: none;
+	/* style from scratch */
+	width: calc(((100vw - (0.3rem * 9)) - 1rem) / 10);
+	height: calc((((100vw - (0.3rem * 9)) - 1rem) / 10) * 1.4);
+	font-size: 1.25rem;
+	color: var(--keyboard-key-font-colour);
+	background-color: var(--keyboard-key-background-colour);
+	border-radius: 0.3rem;
+	border: 1px solid var(--keyboard-key-border-colour);
+	cursor: pointer;
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key:active {
+	background-color: var(--keyboard-key-pressed-background-colour);
+	border-color: var(--keyboard-key-pressed-border-colour);
+	color: var(--keyboard-key-pressed-font-colour);
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key.correct {
+	background-color: var(--keyboard-key-correct-background-colour);
+	border-color: var(--keyboard-key-correct-border-colour);
+	color: var(--keyboard-key-correct-font-colour);
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key.partial {
+	background-color: var(--keyboard-key-partial-background-colour);
+	border-color: var(--keyboard-key-partial-border-colour);
+	color: var(--keyboard-key-partial-font-colour);
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key.wrong {
+	background-color: var(--keyboard-key-wrong-background-colour);
+	border-color: var(--keyboard-key-wrong-border-colour);
+	color: var(--keyboard-key-wrong-font-colour);
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key.special-key {
+	width: calc((((100vw - (0.3rem * 9)) - 1rem) / 10) * 1.5);
+}
+
+main > #keyboard-container > .keyboard-row > .keyboard-key.special-key > svg {
+	width: 1.25rem;
+	height: 1.25rem;
+	transform: translateY(0.2rem);
+}
+
+@media(min-width: 768px) {
+	main > #keyboard-container {
+		padding: 1rem 0;
+		row-gap: 0.75rem;
+	}
+
+	main > #keyboard-container > .keyboard-row {
+		column-gap: 0.75rem;
+	}
+
+	main > #keyboard-container > .keyboard-row > .keyboard-key {
+		width: 3.5rem;
+		height: 3.5rem;
+	}
+
+	main > #keyboard-container > .keyboard-row > .keyboard-key.special-key {
+		width: calc(3.5rem * 1.5);
+	}
+}
+
+
+.popup-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--popup-background-shadow);
+	z-index: 100;
+	display: none; /* hide by default */
+}
+
+.popup-background.showing {
+	display: block !important;
+}
+
+.popup-background > .popup {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: var(--background-colour);
+	width: 90vw;
+	height: 80vh;
+	box-shadow: 0.25rem 0.25rem 0.75rem var(--popup-box-shadow);
+	padding: 1.5rem;
+	border-radius: 0.3rem;
+}
+
+@media(min-width: 768px) {
+	.popup-background > .popup {
+		width: 30rem;
+		height: 40rem;
+	}
+}
+
+.popup-background > .popup > .popup-close-button {
+	/* clear default button styles */
+	border: none;
+	background: none;
+	border: none;
+	outline: none;
+	/* style from scratch */
+	position: absolute;
+	top: 1.5rem;
+	right: 1.5rem;
+	cursor: pointer;
+	color: var(--font-colour);
+}
+
+.popup-background > .popup > .popup-close-button > svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+
+.popup-background > #stats-popup {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.popup-background > #stats-popup > h2 {
+	flex-grow: 0;
+	margin-bottom: 1rem;
+}
+
+.popup-background > #stats-popup > h2:not(:first-of-type) {
+	margin-top: 2rem;
+}
+
+.popup-background > #stats-popup > #stats-row {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	flex-grow: 0;
+}
+
+.popup-background > #stats-popup > #stats-row > .stat-container {
+	width: 25%;
+	text-align: center;
+}
+
+.popup-background > #stats-popup > #stats-row > .stat-container > .stat {
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+}
+
+.popup-background > #stats-popup > #stats-row > .stat-container > .stat-label {
+	font-size: 0.9rem;
+}
+
+
+.popup-background > #stats-popup > #distribution-graph {
+	flex-grow: 1;
+	width: 100%;
+} 
+
+
+.switch {
+	display: none;
+	border: none;
+	background: none;
+
+	display: inline-block;
+
+	width: 3rem;
+	height: 1.5rem;
+	border-radius: 0.75rem;
+	background-color: var(--switch-background-colour);
+
+	position: relative;
+}
+
+.switch::after {
+	content: "";
+	position: absolute;
+	height: 1.3rem;
+	width: 1.3rem;
+	border-radius: calc(1.3rem / 2);
+	background-color: var(--switch-button-colour);
+	top: 0.1rem;
+	left: 0.1rem;
+	transition: left 0.25s;
+}
+
+.switch.active::after {
+	left: calc(100% - 1.3rem - 0.1rem);
+}

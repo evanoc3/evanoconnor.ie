@@ -1,0 +1,56 @@
+---
+import PageLayout from "@/components/common/PageLayout.astro";
+import GoBack from "@/components/common/GoBack.astro";
+import WordleApp from "@/components/playground/wordle/WordleApp.tsx";
+import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
+---
+
+<style lang="scss">
+  @use "page";
+  @use "resets";
+  @use "theme";
+
+  @include page.full-height;
+  @include resets.global;
+  @include resets.fonts;
+
+  @include theme.set-vars(
+    $light-theme-colours: (
+      --background-colour: white,
+      --text-colour: #222,
+      --link-colour: LinkText,
+      --link-visited-colour: VisitedText,
+      --link-active-colour: ActiveText
+    ),
+    $dark-theme-colours: (
+      --background-colour: #181818,
+      --text-colour: #eee,
+      --link-colour: #0ff,
+      --link-visited-colour: #099,
+      --link-active-colour: #0ff
+    )
+  );
+
+  :global(body) {
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+  }
+
+  :global(.go-back) {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+  }
+</style>
+
+<PageLayout
+  title="Wordle app showcase"
+  description="Demonstration of a Wordle clone built with React."
+  keywords={["Wordle", "custom component", "React", "TypeScript"]}
+>
+  <GoBack />
+
+  <NoScriptMessage />
+
+  <WordleApp client:only="react" />
+</PageLayout>
