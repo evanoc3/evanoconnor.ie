@@ -1,26 +1,26 @@
 ---
-import PageLayout from "@/components/common/PageLayout.astro";
 import GoBack from "@/components/common/GoBack.astro";
 import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
+import PageLayout from "@/components/common/PageLayout.astro";
 import GoPlayground from "@/components/playground/go/GoPlayground.tsx";
 ---
 
 
 <style lang="scss">
-  @use "resets";
+  @use "mixins";
 
-  @include resets.global;
-  @include resets.fonts;
+  @include mixins.reset($isAstroStyle: true);
+
+  @include mixins.global-style(".go-back", $isAstroStyle: true) {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+  
 
   div#page-layout {
     width: 100%;
     height: 100vh;
-  }
-
-  :global(.go-back) {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
   }
 
   p#no-script-msg {

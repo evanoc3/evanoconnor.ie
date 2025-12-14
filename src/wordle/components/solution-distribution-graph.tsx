@@ -1,11 +1,11 @@
-import type { JSX } from "react";
 import { Chart as ChartJS, registerables } from "chart.js";
+import type { JSX } from "react";
 import { Bar } from "react-chartjs-2";
 
 
-interface Props {
+type Props = Readonly<{
   data: Record<number, number>
-}
+}>;
 
 
 ChartJS.register(...registerables);

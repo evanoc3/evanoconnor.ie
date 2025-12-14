@@ -1,0 +1,30 @@
+.switch {
+	display: none;
+	border: none;
+	background: none;
+
+	display: inline-block;
+
+	width: 3rem;
+	height: 1.5rem;
+	border-radius: 0.75rem;
+	background-color: var(--switch-background-colour);
+
+	position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 1.3rem;
+    width: 1.3rem;
+    border-radius: calc(1.3rem / 2);
+    background-color: var(--switch-button-colour);
+    top: 0.1rem;
+    left: 0.1rem;
+    transition: left 0.25s;
+  }
+
+  &.active::after {
+    left: calc(100% - 1.3rem - 0.1rem);
+  }
+}

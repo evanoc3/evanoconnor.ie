@@ -6,7 +6,6 @@ import GoBack from "@/components/common/GoBack.astro";
 ---
 
 <style lang="scss">
-  @use "resets";
   @use "breakpoints";
 
   .secondary-buttons-row {
@@ -19,12 +18,7 @@ import GoBack from "@/components/common/GoBack.astro";
       flex: 1;
     }
 
-    > button {
-      @include resets.button;
-    }
-
     a {
-      @include resets.link;
       display: inline-block;
     }
     
@@ -79,7 +73,7 @@ import GoBack from "@/components/common/GoBack.astro";
 </div>
 
 <script>
-  import { getBrowserTheme, getUserTheme, toggleTheme, getSessionStorageTheme, setUserTheme } from "@/utils/theme-utils";
+  import { getBrowserTheme, getSessionStorageTheme, getUserTheme, setUserTheme, toggleTheme } from "@/utils/theme-utils";
 
   window.addEventListener("load", () => {
     const backButton = document.querySelector("#back-btn");

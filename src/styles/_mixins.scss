@@ -1,0 +1,76 @@
+@use "sass:map";
+
+@mixin global-style($selector, $isAstroStyle: false) {
+  @if $isAstroStyle {
+    :global( #{$selector} ) {
+      @content
+    }
+  }
+  @else {
+    #{$selector} {
+      @content
+    }
+  }
+};
+
+@mixin reset($isAstroStyle: false) {
+  @include global-style("*", $isAstroStyle) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100vh;
+    width: 100%;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    overflow: hidden auto;
+  }
+
+  @include global-style("button", $isAstroStyle) {
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+  @include global-style("a", $isAstroStyle) {
+    color: inherit;
+    text-decoration: none;
+  }
+};
+
+@mixin theme-vars($light-theme-colours, $dark-theme-colours: ()) {
+  body:not([data-theme="dark"]) {
+    @each $key, $val in $light-theme-colours {
+      #{$key}: #{$val};
+    }
+  }
+  @media(prefers-color-scheme: dark) {
+    body[data-theme="light"] {
+      @each $key, $val in $light-theme-colours {
+        #{$key}: #{$val};
+      }
+    }
+  }
+
+  body[data-theme="dark"] {
+    @each $key, $val in $dark-theme-colours {
+      #{$key}: #{$val};
+    }
+  }
+  @media(prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      @each $key, $val in $dark-theme-colours {
+        #{$key}: #{$val};
+      }
+    }
+  }
+};
+
+@mixin optimize-for-text {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+};

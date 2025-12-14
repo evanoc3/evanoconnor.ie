@@ -6,15 +6,10 @@ import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 ---
 
 <style lang="scss">
-  @use "page";
-  @use "resets";
-  @use "theme";
+  @use "mixins";
 
-  @include page.full-height;
-  @include resets.global;
-  @include resets.fonts;
-
-  @include theme.set-vars(
+  @include mixins.reset($isAstroStyle: true);
+  @include mixins.theme-vars(
     $light-theme-colours: (
       --background-colour: white,
       --text-colour: #222,
@@ -31,17 +26,27 @@ import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
     )
   );
 
-  :global(body) {
+  body {
     background-color: var(--background-colour);
     color: var(--text-colour);
   }
 
-  :global(.go-back) {
+  @include mixins.global-style(".go-back", $isAstroStyle: true) {
     position: fixed;
     top: 1rem;
     left: 1rem;
   }
 
+  @include mixins.global-style("h1, h2, h3, h4, h5, h6", $isAstroStyle: true) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  @include mixins.global-style("p", $isAstroStyle: true) {
+    margin-bottom: 0.5rem;
+  }
+  
   div#page-container {
     display: grid;
     grid-template-rows: auto;
@@ -79,16 +84,6 @@ import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 
     hr {
       margin: 5rem 0;
-    }
-
-    :global(h1, h2, h3, h4, h5, h6) {
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      line-height: 1;
-    }
-
-    :global(p) {
-      margin-bottom: 0.5rem;
     }
   }
 </style>
@@ -132,7 +127,7 @@ import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
   </div>
 
   <script>
-    import { randInt, generateGibberish } from "@/utils/rand-utils";
+    import { generateGibberish, randInt } from "@/utils/rand-utils";
 
     window.addEventListener("load", () => {
       const main = document.querySelector("main")!;

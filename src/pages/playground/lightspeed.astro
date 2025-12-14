@@ -5,35 +5,29 @@ import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
 ---
 
 <style lang="scss">
-  @use "resets";
-  @use "page";
+  @use "mixins";
 
-  @include resets.global;
-  @include resets.fonts;
-
-  :root {
+  @include mixins.reset($isAstroStyle: true);
+  
+  body {
     --background-colour: #02031d;
     --text-colour: white;
     --text-colour-scrolling: #35365e;
-  }
 
-  :global(body) {
     background-color: var(--background-colour);
     color: var(--text-colour);
-    height: 100vh;
-    overflow: hidden auto;
 
     &.scrolling {
       color: var(--text-colour-scrolling);
     }
   }
 
-  :global(.go-back) {
+  @include mixins.global-style(".go-back", $isAstroStyle: true) {
     position: fixed;
     top: 1rem;
     left: 1rem;
   }
-
+  
   canvas {
     display: none;
     height: 100%;

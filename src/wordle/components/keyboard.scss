@@ -1,0 +1,29 @@
+#keyboard-container {
+	width: 100%;
+	background-color: var(--keyboard-background-colour);
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	row-gap: 0.3rem;
+	flex-grow: 0;
+	padding: 0.5rem 0.3rem;
+}
+
+.keyboard-row {
+	display: inline-flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	column-gap: 0.3rem;
+}
+
+@media(min-width: 768px) {
+	#keyboard-container {
+		padding: 1rem 0;
+		row-gap: 0.75rem;
+	}
+
+	.keyboard-row {
+		column-gap: 0.75rem;
+	}
+}

@@ -3,9 +3,7 @@ export interface Props {
   message?: string
 }
 
-let { message } = Astro.props;
-
-message ??= (
+const message = Astro.props.message ?? (
   "This playground contains interactive components which require JavaScript to be enabled in order to function. " +
   "Please enable JavaScript in your browser and reload to view this playground."
 );

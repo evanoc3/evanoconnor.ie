@@ -3,9 +3,9 @@ import { lastBuildTime } from "@/utils/date-utils.ts";
 ---
 
 <style lang="scss">
-  @use "theme";
+  @use "mixins";
 
-  @include theme.set-vars(
+  @include mixins.theme-vars(
     $light-theme-colours: (
       --background-secondary-colour: #f8f8f8,
       --text-secondary-colour: #aaa
@@ -42,8 +42,8 @@ import { lastBuildTime } from "@/utils/date-utils.ts";
 
 
 <script>
-  import { DateTime } from "luxon";
   import { getHumanReadableShortDuration } from "@/utils/date-utils";
+import { DateTime } from "luxon";
 
   window.addEventListener("load", () => {
     setLastBuildTimeLabel();

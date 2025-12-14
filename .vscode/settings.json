@@ -2,7 +2,8 @@
 	"editor.tabSize": 2,
 	"editor.insertSpaces": true,
 	"editor.codeActionsOnSave": {
-		"source.removeUnusedImports": "always"
+		"source.removeUnusedImports": "always",
+		"source.organizeImports": "always"
 	},
 	"editor.wordWrap": "off",
 	"typescript.preferences.preferTypeOnlyAutoImports": true,

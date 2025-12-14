@@ -4,15 +4,10 @@ import Footer from "@/components/index/Footer.astro";
 ---
 
 <style lang="scss">
-  @use "page";
-  @use "resets";
-  @use "theme";
+  @use "mixins";
 
-  @include page.full-height;
-  @include page.optimize-for-text;
-  @include resets.global;
-
-  @include theme.set-vars(
+  @include mixins.reset($isAstroStyle: true);
+  @include mixins.theme-vars(
     $light-theme-colours: (
       --background-colour: white,
       --text-colour: #222,
@@ -28,9 +23,11 @@ import Footer from "@/components/index/Footer.astro";
       --link-active-colour: #0ff
     )
   );
-
-  :global(body) {
+  
+  body {
+    @include mixins.optimize-for-text;
     background-color: var(--background-colour);
+    
   }
 
   main {

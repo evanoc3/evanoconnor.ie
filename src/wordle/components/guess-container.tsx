@@ -1,14 +1,16 @@
 import type { JSX } from "react";
-import { GuessRow } from "./GuessRow.tsx";
-import type { PreviousGuessInfo } from "../wordle.types.ts";
+
+import "./guess-container.scss";
+
+import type { PreviousGuessInfo } from "../types/wordle-types.ts";
+import { GuessRow } from "./index.ts";
 
 
-interface Props {
+type Props = Readonly<{
   previousGuessInfo: PreviousGuessInfo[];
   guess: string;
   finished: boolean;
-  submitFunc(): void;
-}
+}>;
 
 
 export function GuessContainer(props: Props): JSX.Element {
@@ -16,8 +18,8 @@ export function GuessContainer(props: Props): JSX.Element {
   return (
     <section id="guesses-container">
       {
-        previousGuessInfo.map(previousGuessInfo => (
-          <GuessRow key={JSON.stringify(previousGuessInfo)} disabled={true} previousGuessInfo={previousGuessInfo} />
+        previousGuessInfo.map((previousGuessInfo) => (
+          <GuessRow guess={previousGuessInfo.guess} key={JSON.stringify(previousGuessInfo)} characterStates={previousGuessInfo.letters} disabled />
         ))
       }
 

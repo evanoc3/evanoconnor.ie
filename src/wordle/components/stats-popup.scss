@@ -1,0 +1,39 @@
+#stats-popup {
+	display: flex;
+	flex-flow: column nowrap;
+
+  & > h2 {
+    flex-grow: 0;
+    margin-bottom: 1rem;
+
+    &:not(:first-of-type) {
+      margin-top: 2rem;
+    }
+  }
+
+  & > #stats-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    flex-grow: 0;
+
+    & > .stat-container {
+      width: 25%;
+      text-align: center;
+
+      & > .stat {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      & > .stat-label {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  & > #distribution-graph {
+    flex-grow: 1;
+    width: 100%;
+  }
+}

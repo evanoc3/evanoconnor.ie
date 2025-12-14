@@ -1,7 +1,8 @@
 // @ts-check
-import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import { defineConfig } from "astro/config";
+import vitePluginSvgr from "vite-plugin-svgr";
 
 const site = process.env.WWW_HOST || undefined;
 
@@ -22,7 +23,8 @@ export default defineConfig({
       alias: {
         "@": "/src"
       }
-    }
+    },
+    plugins: [ vitePluginSvgr() ]
   },
   integrations: [ react(), sitemap() ]
 });

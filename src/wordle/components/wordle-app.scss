@@ -1,0 +1,107 @@
+@use "mixins";
+
+@include mixins.reset($isAstroStyle: false);
+@include mixins.theme-vars(
+	$light-theme-colours: (
+		--font-colour: #222,
+		--background-colour: white,
+
+		--header-background-colour: green,
+		--header-title-font-colour: white,
+
+		--header-button-hover-background-colour: #005900,
+		--header-button-icon-colour: white,
+
+		--input-background-colour: white,
+		--input-border-colour: green,
+		--input-font-colour: black,
+
+		--input-disabled-background-colour: white,
+		--input-disabled-border-colour: #b5b5b5,
+		--input-disabled-font-colour: black,
+
+		--input-wrong-background-colour: #4b4b4b,
+		--input-wrong-border-colour: #222,
+		--input-wrong-font-colour: #222,
+
+		--input-partial-background-colour: #c2b718,
+		--input-partial-border-colour: darkgoldenrod,
+		--input-partial-font-colour: darkgoldenrod,
+
+		--input-correct-background-colour: #005700,
+		--input-correct-border-colour: #005700,
+		--input-correct-font-colour: #397639,
+
+		--keyboard-background-colour: #ddd,
+
+		--keyboard-key-background-colour: white,
+		--keyboard-key-border-colour: #d8d8d8,
+		--keyboard-key-font-colour: #222,
+
+		--keyboard-key-pressed-background-colour: #dcdcdc,
+		--keyboard-key-pressed-border-colour: #d8d8d8,
+		--keyboard-key-pressed-font-colour: black,
+
+		--keyboard-key-wrong-background-colour: #4b4b4b,
+		--keyboard-key-wrong-border-colour: #222,
+		--keyboard-key-wrong-font-colour: #222,
+
+		--keyboard-key-partial-background-colour: #c2b718,
+		--keyboard-key-partial-border-colour: darkgoldenrod,
+		--keyboard-key-partial-font-colour: darkgoldenrod,
+
+		--keyboard-key-correct-background-colour: #005700,
+		--keyboard-key-correct-border-colour: #005700,
+		--keyboard-key-correct-font-colour: #397639,
+
+		--popup-background-shadow: rgba(0,0,0, 0.5),
+		--popup-box-shadow: rgba(0,0,0, 0.3),
+
+		--distribution-graph-bar-colour: magenta,
+
+		--switch-background-colour: green,
+		--switch-button-colour: white
+	),
+	$dark-theme-colours: (
+		--font-colour: white,
+		--background-colour: #161616,
+	
+		--input-background-colour: #6d6d6d,
+		--input-border-colour: green,
+		--input-font-colour: white,
+
+		--input-disabled-background-colour: #545454,
+		--input-disabled-border-colour: #5e5e5e,
+		--input-disabled-font-colour: #e4e4e4,
+	
+		--keyboard-background-colour: #242424,
+	
+		--keyboard-key-background-colour: #6d6d6d,
+		--keyboard-key-border-colour: #707070,
+		--keyboard-key-font-colour: #ebebeb,
+
+		--keyboard-key-pressed-background-colour: #666666,
+		--keyboard-key-pressed-border-colour: #7c7c7c,
+		--keyboard-key-pressed-font-colour: white,
+
+		--distribution-graph-bar-colour: #6f6f6f
+	)
+);
+
+body {
+	color: var(--font-colour);
+	line-height: 1;
+	background-color: var(--background-colour);
+}
+
+main {
+	height: calc(100vh - 4rem - env(safe-area-inset-top)); /* minus header height */
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	padding-bottom: env(safe-area-inset-bottom);
+}
+
+dialog.err-dialog {
+	position: absolute;
+}

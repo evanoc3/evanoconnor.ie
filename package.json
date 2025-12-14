@@ -2,24 +2,26 @@
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
   "dependencies": {
     "chart.js": "^4.5.1",
+    "immer": "^11.0.0",
     "react-chartjs-2": "^5.3.1",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.6.0",
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "^1.57.0",
     "@testing-library/react": "^16.3.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "^24.10.1",
-    "astro": "^5.16.0",
+    "astro": "^5.16.1",
     "bootstrap-icons": "^1.13.1",
     "cloc": "^2.11.0",
     "feather-icons": "^4.29.2",
     "happy-dom": "^20.0.10",
     "luxon": "^3.7.2",
     "sass-embedded": "^1.93.3",
-    "vitest": "^4.0.12"
+    "vite-plugin-svgr": "^4.5.0",
+    "vitest": "^4.0.14"
   },
   "license": "MIT",
   "name": "@evanoc3/evanoconnor.ie",

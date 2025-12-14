@@ -1,0 +1,55 @@
+#guesses-container {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-flow: column nowrap;
+	row-gap: 0.25rem;
+	flex-grow: 1;
+
+  &  > .guess-row {
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 0.25rem;
+
+    &  > .letter-input {
+      /* Clear default styles */
+      border-radius: 0;
+      outline: none;
+      /* Style from scratch */
+      font-size: 1.75rem;
+      width: 1.8em;
+      height: 1.8em;
+      border: 1px solid var(--input-border-colour);
+      background-color: var(--input-background-colour);
+      text-align: center;
+      color: var(--input-font-colour);
+      cursor: text;
+
+      &:disabled {
+        background-color: var(--input-disabled-background-colour);
+        border-color: var(--input-disabled-border-colour);
+        color: var(--input-disabled-font-colour);
+        opacity: 1;
+        cursor: default;
+      }
+
+      & .wrong {
+        background-color: var(--input-wrong-background-colour);
+        border-color: var(--input-wrong-border-colour);
+        color: var(--input-wrong-font-colour);
+      }
+
+      & .partial {
+        background-color: var(--input-partial-background-colour);
+        border-color: var(--input-partial-border-colour);
+        color: var(--input-partial-font-colour);
+      }
+
+      &.correct {
+        background-color: var(--input-correct-background-colour);
+        border-color: var(--input-correct-border-colour);
+        color: var(--input-correct-font-colour);
+      }
+    }
+  }
+}

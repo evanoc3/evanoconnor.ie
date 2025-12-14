@@ -1,25 +1,23 @@
 ---
 import { DateTime } from "luxon";
-import WebexContactCenterLogo from "@/images/wxcc.png";
-import WebexLogo from "@/images/webex.svg";
+
 import UniversityOfGalwayLogo from "@/images/university_of_galway.png";
+import WebexLogo from "@/images/webex.svg";
+import WebexContactCenterLogo from "@/images/wxcc.png";
+
 import PageLayout from "@/components/common/PageLayout.astro";
-import SecondaryButtonsRow from "@/components/cv/SecondaryButtonsRow.astro";
-import HeroCell from "@/components/cv/HeroCell.astro";
-import Section from "@/components/cv/Section.astro";
 import ExperienceListItem from "@/components/cv/ExperienceListItem.astro";
+import HeroCell from "@/components/cv/HeroCell.astro";
+import SecondaryButtonsRow from "@/components/cv/SecondaryButtonsRow.astro";
+import Section from "@/components/cv/Section.astro";
 ---
 
 <style lang="scss">
   @use "breakpoints";
-  @use "page";
-  @use "resets";
-  @use "theme";
-  
-  @include page.optimize-for-text;
-  @include resets.global;
+  @use "mixins";
 
-  @include theme.set-vars(
+  @include mixins.reset($isAstroStyle: true);
+  @include mixins.theme-vars(
     $light-theme-colours: (
       --badge-background-colour: #e1e1e1,
       --badge-background-hover-colour: #c4c4c4,
@@ -46,10 +44,18 @@ import ExperienceListItem from "@/components/cv/ExperienceListItem.astro";
     )
   );
 
-  :global(body) {
+  body {
     --transition-duration: calc(1s / 3);
+
+    @include mixins.optimize-for-text;
   }
 
+  @media only screen and (min-width: breakpoints.$A4) {
+    body {
+      background-color: var(--page-background-secondary-colour);
+    }
+  }
+  
   #secondary-buttons-row-container {
     display: none;
   }
@@ -66,8 +72,6 @@ import ExperienceListItem from "@/components/cv/ExperienceListItem.astro";
   }
 
   @media only screen {
-    @include page.full-height;
-
     main {
       margin: 0 auto 1.5rem;
       padding: 1.5rem;
@@ -87,12 +91,6 @@ import ExperienceListItem from "@/components/cv/ExperienceListItem.astro";
       margin: 0 auto 1in;
       padding: 1.5cm;
       width: 210mm;
-    }
-  }
-
-  @media only screen and (min-width: breakpoints.$A4) {
-    :global(body) {
-      background-color: var(--page-background-secondary-colour);
     }
   }
 </style>

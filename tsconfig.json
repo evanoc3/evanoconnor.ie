@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    }
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
   "extends": "astro/tsconfigs/strict",
   "include": [
     ".astro/types.d.ts",
-    "**/*"
+    "node_modules/vite-plugin-svgr/client.d.ts",
+    "playwright.config.ts",
+    "src",
+    "tests"
   ]
 }

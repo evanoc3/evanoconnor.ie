@@ -1,12 +1,15 @@
 import type { JSX } from "react";
-import { qwertyLayout, CharState } from "../wordle.constants.ts";
-import { KeyboardKey } from "./KeyboardKey.tsx";
+
+import "./keyboard.scss";
+
+import { CharacterState, qwertyKeyboardLayout } from "../constants/wordle-constants.ts";
+import { KeyboardKey } from "./index.ts";
 
 
-interface Props {
-  charStates: Readonly<Record<string, CharState>>;
+type Props = Readonly<{
+  charStates: Readonly<Record<string, CharacterState>>;
   keyDownFunc(char: string): void;
-}
+}>;
 
 
 export function Keyboard(props: Props): JSX.Element {
@@ -14,7 +17,7 @@ export function Keyboard(props: Props): JSX.Element {
     <section id="keyboard-container">
       <div className="keyboard-row">
         {
-          qwertyLayout[0].map(c => (
+          qwertyKeyboardLayout[0].map(c => (
             <KeyboardKey key={c} char={c} charState={props.charStates[c]} keyDownFunc={props.keyDownFunc} />
           ))
         }
@@ -22,7 +25,7 @@ export function Keyboard(props: Props): JSX.Element {
 
       <div className="keyboard-row">
 				{
-					qwertyLayout[1].map(c => (
+					qwertyKeyboardLayout[1].map(c => (
 						<KeyboardKey key={c} char={c} charState={props.charStates[c]} keyDownFunc={props.keyDownFunc} />
           ))
 				}
@@ -30,7 +33,7 @@ export function Keyboard(props: Props): JSX.Element {
 
 			<div className="keyboard-row">
         {
-          qwertyLayout[2].map(c => (
+          qwertyKeyboardLayout[2].map(c => (
             <KeyboardKey key={c} char={c} charState={props.charStates[c]} keyDownFunc={props.keyDownFunc} />
           ))
         }

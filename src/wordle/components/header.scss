@@ -1,0 +1,33 @@
+header {
+	width: 100%;
+	background-color: var(--header-background-colour);
+	padding: env(safe-area-inset-top) 1rem 0;
+	height: calc(4rem + env(safe-area-inset-top));
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+
+  & > h1 {
+    color: var(--header-title-font-colour);
+    font-size: 2rem;
+    flex-grow: 1;
+  }
+
+  & > button {
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background-color: var(--header-button-hover-background-colour);
+    }
+
+    & > svg {
+      color: var(--header-button-icon-colour);
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
