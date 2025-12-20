@@ -4,10 +4,10 @@ import CornerDownLeftSvg from "feather-icons/dist/icons/corner-down-left.svg?rea
 import DeleteSvg from "feather-icons/dist/icons/delete.svg?react";
 import "./keyboard-key.scss";
 
-import { CharacterState, keyboardKeys } from "@/constants/wordle-constants.ts";
-import type { KeyboardKey as KeyboardKeyType } from "@/types/wordle-types.ts";
-import { classnames } from "@/utils/class-utils.ts";
-import { isSpecialKeyboardKey } from "@/utils/wordle-utils.ts";
+import { CharacterState, keyboardKeys } from "#/constants/wordle-constants.ts";
+import type { KeyboardKey as KeyboardKeyType } from "#/types/wordle-types.ts";
+import { classnames } from "#/utils/class-utils.ts";
+import { isSpecialKeyboardKey } from "#/utils/wordle-utils.ts";
 
 
 type Props = Readonly<{

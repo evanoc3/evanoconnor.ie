@@ -1,5 +1,4 @@
-import type { JSX, MouseEvent } from "react";
-import { Fragment, StrictMode, useCallback, useEffect, useRef, useState } from "react";
+import { type JSX, type MouseEvent, Fragment, StrictMode, useCallback, useEffect, useRef, useState } from "react";
 
 import "./table-of-contents.scss";
 

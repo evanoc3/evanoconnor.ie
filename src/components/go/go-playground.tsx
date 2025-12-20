@@ -2,8 +2,8 @@ import { StrictMode, useRef, useState, type JSX } from "react";
 
 import "./go-playground.scss";
 
-import { GoGameService } from "@/services/go-game-service.ts";
-import type { GoPosition } from "@/types/go-types.ts";
+import { GoGameService } from "#/services/go-game-service.ts";
+import type { GoPosition } from "#/types/go-types.ts";
 import GoBoard from "./go-board.tsx";
 
 

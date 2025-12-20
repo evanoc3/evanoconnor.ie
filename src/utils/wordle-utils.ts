@@ -1,5 +1,5 @@
-import { characters, keyboardKeys } from "@/constants/wordle-constants.ts";
-import type { Character, KeyboardKey } from "@/types/wordle-types.ts";
+import { characters, keyboardKeys } from "#/constants/wordle-constants.ts";
+import type { Character, KeyboardKey } from "#/types/wordle-types.ts";
 
 
 export function isCharacter(c: string): c is Character {

@@ -23,6 +23,11 @@
     "vite-plugin-svgr": "^4.5.0",
     "vitest": "^4.0.16"
   },
+  "imports": {
+    "#/*": "./src/*",
+    "#static/*": "./static/*",
+    "#tests/*": "./tests/*"
+  },
   "license": "MIT",
   "name": "@evanoc3/evanoconnor.ie",
   "private": true,

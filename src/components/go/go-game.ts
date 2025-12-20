@@ -1,6 +1,6 @@
 import { v7 as uuidV7 } from "uuid";
 
-import type { GoBoardDimensions, GoBoardSize, GoGameState, GoPosition, GoStone, GoStoneColour, GoTurn } from "@/types/go-types.ts";
+import type { GoBoardDimensions, GoBoardSize, GoGameState, GoPosition, GoStone, GoStoneColour, GoTurn } from "#/types/go-types.ts";
 import { TypedEventEmitter } from "./typed-event-emitter.ts";
 
 

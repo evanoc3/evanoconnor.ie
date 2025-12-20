@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import TableOfContents from "@/components/table-of-contents/table-of-contents.tsx";
+import TableOfContents from "#/components/table-of-contents/table-of-contents.tsx";
 
 
 function setupTest(): void {

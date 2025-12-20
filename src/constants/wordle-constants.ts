@@ -1,4 +1,4 @@
-import type { KeyboardKey } from "@/types/wordle-types.ts";
+import type { KeyboardKey } from "#/types/wordle-types.ts";
 
 
 export const characters = {

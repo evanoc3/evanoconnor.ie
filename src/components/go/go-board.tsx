@@ -1,9 +1,8 @@
-import type { JSX, MouseEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { type JSX, type MouseEvent, useEffect, useRef, useState } from "react";
 
 import "./go-board.scss";
 
-import type { GoBoardDimensions, GoPosition, GoStone } from "@/types/go-types.ts";
+import type { GoBoardDimensions, GoPosition, GoStone } from "#/types/go-types.ts";
 
 
 export interface Props {

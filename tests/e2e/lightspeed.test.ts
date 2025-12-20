@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { hasLink, successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
+import { hasLink, successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "#tests/utils/e2e-test-utils.ts";
 
 
 test.describe("/playground/lightspeed/", () => {

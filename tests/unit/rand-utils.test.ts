@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { generateGibberish, randInt } from "@/utils/rand-utils.ts";
+import { generateGibberish, randInt } from "#/utils/rand-utils.ts";
 
 
 describe("rand-utils", () => {

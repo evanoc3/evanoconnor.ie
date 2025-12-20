@@ -2,8 +2,8 @@ import { StrictMode, useEffect, useRef, useState, type JSX } from "react";
 
 import "./wordle-app.scss";
 
-import { AppStateReducerActionType, keyboardKeys } from "@/constants/wordle-constants.ts";
-import { isKeyboardKey } from "@/utils/wordle-utils.ts";
+import { AppStateReducerActionType, keyboardKeys } from "#/constants/wordle-constants.ts";
+import { isKeyboardKey } from "#/utils/wordle-utils.ts";
 import { GuessContainer, Header, Keyboard, MorePopup, StatsPopup, useAppStateReducer, useCurrentGameState, WordleAppContextProvider } from "./index.ts";
 
 

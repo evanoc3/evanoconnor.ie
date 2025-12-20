@@ -1,9 +1,9 @@
 import { produce } from "immer";
 import { createContext, useContext, useReducer, type ActionDispatch, type JSX, type PropsWithChildren } from "react";
 
-import { AppStateReducerActionType, CharacterState, keyboardKeys } from "@/constants/wordle-constants.ts";
-import wordleGameService from "@/services/wordle-game-service.ts";
-import type { AppState, Character, GameState, KeyboardKey } from "@/types/wordle-types.ts";
+import { AppStateReducerActionType, CharacterState, keyboardKeys } from "#/constants/wordle-constants.ts";
+import wordleGameService from "#/services/wordle-game-service.ts";
+import type { AppState, Character, GameState, KeyboardKey } from "#/types/wordle-types.ts";
 
 
 const AppStateContext = createContext<AppState>(wordleGameService.defaultAppState);

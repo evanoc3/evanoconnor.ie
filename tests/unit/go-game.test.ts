@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { GoGame } from "@/components/go/go-game.ts";
-import { nextEventLoop } from "../unit-test-utils.ts";
+import { GoGame } from "#/components/go/go-game.ts";
+import { nextEventLoop } from "#tests/utils/unit-test-utils.ts";
 
 
 describe("GoGame", () => {

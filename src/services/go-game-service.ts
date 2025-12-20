@@ -1,6 +1,6 @@
-import { GoGame, type GoGameConstructorParameters } from "@/components/go/go-game.ts";
-import { LruCache } from "@/components/go/lru-cache.ts";
-import { TypedEventEmitter } from "@/components/go/typed-event-emitter.ts";
+import { GoGame, type GoGameConstructorParameters } from "#/components/go/go-game.ts";
+import { LruCache } from "#/components/go/lru-cache.ts";
+import { TypedEventEmitter } from "#/components/go/typed-event-emitter.ts";
 
 
 type GoGameServiceEventMap = {

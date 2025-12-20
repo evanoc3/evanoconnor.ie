@@ -3,7 +3,7 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { DateTime } from "luxon";
 
-import { getHumanReadableShortDuration } from "@/utils/date-utils.ts";
+import { getHumanReadableShortDuration } from "#/utils/date-utils.ts";
 
 
 interface Props {
@@ -184,7 +184,7 @@ const humanReadableTimeSpanTo = timespan.end
 </div>
 
 <script>
-  import { getHumanReadableShortDuration } from "@/utils/date-utils";
+  import { getHumanReadableShortDuration } from "#/utils/date-utils";
 import { DateTime } from "luxon";
 
   const ongoingExperienceTimespanLabels = document.querySelectorAll<HTMLElement>(".timespan[data-timespan-start]");

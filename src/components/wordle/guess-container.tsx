@@ -2,7 +2,7 @@ import type { JSX } from "react";
 
 import "./guess-container.scss";
 
-import type { PreviousGuessInfo } from "@/types/wordle-types.ts";
+import type { PreviousGuessInfo } from "#/types/wordle-types.ts";
 import { GuessRow } from "./index.ts";
 
 

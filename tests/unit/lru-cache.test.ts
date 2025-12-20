@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { LruCache } from "@/components/go/lru-cache.ts";
+import { LruCache } from "#/components/go/lru-cache.ts";
 
 
 describe("LruCache", () => {

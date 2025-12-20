@@ -1,8 +1,8 @@
 ---
-import PageLayout from "@/components/common/page-layout.astro";
-import GoBack from "@/components/common/go-back.astro";
-import TableOfContentsElement from "@/components/table-of-contents/table-of-contents.tsx";
-import NoScriptMessage from "@/components/common/no-script-message.astro";
+import PageLayout from "#/components/common/page-layout.astro";
+import GoBack from "#/components/common/go-back.astro";
+import TableOfContentsElement from "#/components/table-of-contents/table-of-contents.tsx";
+import NoScriptMessage from "#/components/common/no-script-message.astro";
 ---
 
 
@@ -128,7 +128,7 @@ import NoScriptMessage from "@/components/common/no-script-message.astro";
   </div>
 
   <script>
-    import { generateGibberish, randInt } from "@/utils/rand-utils";
+    import { generateGibberish, randInt } from "#/utils/rand-utils";
 
     window.addEventListener("load", () => {
       const main = document.querySelector("main")!;

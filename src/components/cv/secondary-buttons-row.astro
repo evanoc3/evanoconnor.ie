@@ -1,5 +1,5 @@
 ---
-import GoBack from "@/components/common/go-back.astro";
+import GoBack from "#/components/common/go-back.astro";
 
 import PrinterIcon from "feather-icons/dist/icons/printer.svg";
 import SunIcon from "feather-icons/dist/icons/sun.svg";
@@ -75,7 +75,7 @@ import MoonIcon from "feather-icons/dist/icons/moon.svg";
 </div>
 
 <script>
-  import { getBrowserTheme, getSessionStorageTheme, getUserTheme, setUserTheme, toggleTheme } from "@/utils/theme-utils";
+  import { getBrowserTheme, getSessionStorageTheme, getUserTheme, setUserTheme, toggleTheme } from "#/utils/theme-utils";
 
   window.addEventListener("load", () => {
     const backButton = document.querySelector("#back-btn");

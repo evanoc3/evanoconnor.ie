@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { TypedEventEmitter } from "@/components/go/typed-event-emitter.ts";
-import { nextEventLoop } from "../unit-test-utils.ts";
+import { TypedEventEmitter } from "#/components/go/typed-event-emitter.ts";
+import { nextEventLoop } from "#tests/utils/unit-test-utils.ts";
 
 
 class TestEventEmitter extends TypedEventEmitter<{ "test-event": undefined }> {

@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 
-import wordleDictionary from "@/static/wordle-dictionary.json" assert { type: "json" };
-import wordleWords from "@/static/wordle-words.json" assert { type: "json" };
+import wordleDictionary from "#static/wordle-dictionary.json" assert { type: "json" };
+import wordleWords from "#static/wordle-words.json" assert { type: "json" };
 
-import { characters, CharacterState } from "@/constants/wordle-constants.ts";
-import type { AppState, Character, GameState } from "@/types/wordle-types.ts";
+import { characters, CharacterState } from "#/constants/wordle-constants.ts";
+import type { AppState, Character, GameState } from "#/types/wordle-types.ts";
 
 
 const localStorageKey = "ie.evanoconnor.wordle";

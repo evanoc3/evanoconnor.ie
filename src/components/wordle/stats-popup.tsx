@@ -2,7 +2,7 @@ import type { JSX } from "react";
 
 import "./stats-popup.scss";
 
-import wordleGameService from "@/services/wordle-game-service.ts";
+import wordleGameService from "#/services/wordle-game-service.ts";
 import { PopupBase, SolutionDistributionGraph, useAppState } from "./index.ts";
 
 

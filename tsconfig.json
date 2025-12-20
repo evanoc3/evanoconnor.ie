@@ -3,8 +3,14 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "paths": {
-      "@/*": [
+      "#/*": [
         "./src/*"
+      ],
+      "#static/*": [
+        "./static/*"
+      ],
+      "#tests/*": [
+        "./tests/*"
       ]
     }
   },

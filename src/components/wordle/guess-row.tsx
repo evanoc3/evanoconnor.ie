@@ -2,9 +2,9 @@ import type { JSX } from "react";
 
 import "./guess-row.scss";
 
-import type { CharacterState } from "@/constants/wordle-constants.ts";
-import type { Character } from "@/types/wordle-types.ts";
-import { classnames } from "@/utils/class-utils.ts";
+import type { CharacterState } from "#/constants/wordle-constants.ts";
+import type { Character } from "#/types/wordle-types.ts";
+import { classnames } from "#/utils/class-utils.ts";
 
 
 type Props = Readonly<({

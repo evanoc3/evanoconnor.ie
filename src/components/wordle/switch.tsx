@@ -2,7 +2,7 @@ import { useState, type JSX, type MouseEvent } from "react";
 
 import "./switch.scss";
 
-import { classnames } from "@/utils/class-utils";
+import { classnames } from "#/utils/class-utils";
 
 
 interface Props {

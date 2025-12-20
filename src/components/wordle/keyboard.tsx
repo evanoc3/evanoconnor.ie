@@ -2,7 +2,7 @@ import type { JSX } from "react";
 
 import "./keyboard.scss";
 
-import { CharacterState, qwertyKeyboardLayout } from "@/constants/wordle-constants.ts";
+import { CharacterState, qwertyKeyboardLayout } from "#/constants/wordle-constants.ts";
 import { KeyboardKey } from "./index.ts";
 
 

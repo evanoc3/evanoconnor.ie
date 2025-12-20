@@ -9,7 +9,7 @@ import {
   setUserTheme,
   toggleTheme,
   type Theme
-} from "@/utils/theme-utils.ts";
+} from "#/utils/theme-utils.ts";
 
 
 function mockWindowMatchMedia(mockImplementation: (query: string) => Partial<MediaQueryList>): void {
