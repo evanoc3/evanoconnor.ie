@@ -1,17 +1,19 @@
 ---
-import GoBack from "@/components/common/GoBack.astro";
-import NoScriptMessage from "@/components/common/NoScriptMessage.astro";
-import PageLayout from "@/components/common/PageLayout.astro";
-import { WordleApp } from "@/wordle/index.ts";
+import GoBack from "@/components/common/go-back.astro";
+import NoScriptMessage from "@/components/common/no-script-message.astro";
+import PageLayout from "@/components/common/page-layout.astro";
+import { WordleApp } from "@/components/wordle/index.ts";
 ---
+
 
 <style lang="scss">
   @use "mixins";
 
   @include mixins.global-style(".go-back", $isAstroStyle: true) {
     position: fixed;
-    top: 1rem;
-    left: 1rem;
+    top: 6.5px;
+    left: 6.5px;
+    color: var(--header-button-icon-colour, white) !important;
   }
 </style>
 

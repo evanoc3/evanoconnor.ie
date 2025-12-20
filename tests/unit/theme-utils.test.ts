@@ -1,12 +1,13 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
 import {
   getBrowserTheme,
-  getSessionStorageTheme,
-  setUserTheme,
-  getUserTheme,
-  toggleTheme,
   getCurrentTheme,
+  getSessionStorageTheme,
+  getUserTheme,
   isValidTheme,
+  setUserTheme,
+  toggleTheme,
   type Theme
 } from "@/utils/theme-utils.ts";
 

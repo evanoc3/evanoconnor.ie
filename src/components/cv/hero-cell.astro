@@ -1,0 +1,145 @@
+---
+import { Image } from "astro:assets";
+
+import MeJpg from "@/static/me.jpg";
+import EnvelopeIcon from "bootstrap-icons/icons/envelope-fill.svg";
+import GithubIcon from "bootstrap-icons/icons/github.svg";
+import LinkedInIcon from "bootstrap-icons/icons/linkedin.svg";
+---
+
+
+<style lang="scss">
+  @use "breakpoints";
+
+  #grid {
+    column-gap: 1rem;
+    display: grid;
+    grid-template-areas: "lspace avatar title title title rspace"
+                         "lspace avatar linkedin github email rspace";
+    grid-template-columns: 1fr auto auto auto auto 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 0.75rem;
+  }
+
+  a {
+    align-self: start;
+    color: var(--link-text-colour);
+    justify-self: center;
+    text-decoration-line: underline;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.08rem;
+    transition: color var(--transition-duration);
+
+    &:hover {
+      color: var(--link-text-hover-colour);
+    }
+
+    & > span.link-text {
+      display: none;
+    }
+
+    &#email {
+      grid-area: email;
+    }
+
+    &#github {
+      grid-area: github;
+    }
+
+    &#linkedin {
+      grid-area: linkedin;
+    }
+  }
+
+  h1 {
+    align-self: end;
+    color: var(--header-text-colour);
+    font-weight: 600;
+    grid-area: title;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  img {
+    border-radius: 50%;
+    grid-area: avatar;
+    max-height: 4rem;
+    max-width: 4rem;
+  }
+
+  svg {
+    fill: currentColor;
+    height: 1rem;
+    position: relative;
+    right: 4px;
+    top: 4px;
+    width: 1rem;
+  }
+
+  @media only print {
+    a {
+      text-decoration: none;
+    }
+  }
+
+  @media (min-width: breakpoints.$A4) {
+    a {
+      &:first-of-type {
+        margin-left: 6px;
+      }
+
+      & > span.link-text {
+        display: inline;
+      }
+    }
+
+    h1 {
+      font-size: 2.986rem;
+    }
+
+    img {
+      border-radius: 50%;
+      grid-area: avatar;
+      max-height: 5.5rem;
+      max-width: 5.5rem;
+    }
+  }
+</style>
+
+
+<div id="grid">
+  <Image src={MeJpg} alt="" />
+
+  <h1>Evan O'Connor</h1>
+
+  <a
+    href="https://www.linkedin.com/in/evanoc3/"
+    id="linkedin"
+    rel="me noopener"
+    target="_blank"
+    title="Connect with me on LinkedIn at: https://www.linkedin.com/in/evanoc3/"
+  >
+    <LinkedInIcon /><span class="link-text">evanoc3</span>
+  </a>
+
+  <a
+    href="https://github.com/evanoc3"
+    id="github"
+    rel="me noopener"
+    target="_blank"
+    title="Find me on GitHub at: https://github.com/evanoc3"
+>
+    <GithubIcon /><span class="link-text">evanoc3</span>
+  </a>
+
+  <a
+    href="mailto:evan@evanoconnor.ie"
+    id="email"
+    target="_blank"
+    title="Email me at: evan@evanoconnor.ie"
+  >
+    <EnvelopeIcon /><span class="link-text">evan@evanconnor.ie</span>
+  </a>
+</div>
+

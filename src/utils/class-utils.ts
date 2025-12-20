@@ -5,7 +5,7 @@ type PrimitiveValue =
   null |
   undefined;
 
-  
+
 type ClassnamesArgumentValue = 
   PrimitiveValue |
   PrimitiveValue[] |

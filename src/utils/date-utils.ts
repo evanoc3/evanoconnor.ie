@@ -1,5 +1,6 @@
 import { DateTime, type DurationUnit } from "luxon";
 
+
 /**
  * Singleton which stores the 'now' value at build-time. This can then be used to stringify and insert
  * into HTML templates.
