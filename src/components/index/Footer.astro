@@ -43,12 +43,9 @@ import { lastBuildTime } from "#/utils/date-utils.ts";
 
 
 <script>
-  import { getHumanReadableShortDuration } from "#/utils/date-utils";
-import { DateTime } from "luxon";
+  import { DateTime } from "luxon";
 
-  window.addEventListener("load", () => {
-    setLastBuildTimeLabel();
-  });
+  import { getHumanReadableShortDuration } from "#/utils/date-utils";
 
   function setLastBuildTimeLabel(): void {
     const timeTag = document.querySelector("#last-built-time-label > time");
@@ -56,10 +53,15 @@ import { DateTime } from "luxon";
       return;
 
     const lastBuiltTime = DateTime.fromISO(timeTag.getAttribute("datetime") ?? "");
-    if (!lastBuiltTime.isValid)
+    if (!lastBuiltTime.isValid) {
       return;
+    }
 
     const lastBuiltAgoDuration = getHumanReadableShortDuration(lastBuiltTime, DateTime.now());
     timeTag.textContent = lastBuiltAgoDuration === "now" ? lastBuiltAgoDuration : `${lastBuiltAgoDuration} ago`;
   }
+
+  window.addEventListener("load", () => {
+    setLastBuildTimeLabel();
+  });
 </script>

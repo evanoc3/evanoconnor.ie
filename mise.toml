@@ -1,0 +1,5 @@
+[tools]
+node = "lts-lithium"
+
+[env]
+PUBLIC_UMAMI_WEBSITE_ID = { required = true }
