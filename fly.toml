@@ -1,26 +1,20 @@
-# fly.toml app configuration file generated for evanoconnor-ie on 2024-03-29T00:19:09Z
+# fly.toml app configuration file generated for evanoconnor-ie on 2026-11-09T23:47:31Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "evanoconnor-ie"
-primary_region = "ams"
+app = 'evanoconnor-ie'
+primary_region = 'lhr'
 
 [build]
-  dockerfile = "Dockerfile"
-
-[deploy]
-  strategy = "canary"
-
 [http_service]
-  auto_start_machines = true
-  auto_stop_machines = "stop"
-  force_https = true
   internal_port = 80
-  min_machines_running = 1
-  http_options.response.pristine = true
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-  cpu_kind = "shared"
+  memory = '256mb'
   cpus = 1
-  memory = "512mb"

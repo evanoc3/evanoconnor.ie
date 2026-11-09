@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
-    - name: Setup Node
-      uses: actions/setup-node@v4
+    - name: Setup node
+      uses: actions/setup-node@v7
       with:
-        node-version-file: '.nvmrc'
+        node-version-file: 'mise.toml'
         cache: 'npm'
     
     - name: Install dependencies
@@ -26,15 +26,15 @@ jobs:
 
     - name: Run NPM audit
       run: npm audit
-
-    - name: Run unit tests
-      run: npm run test:unit
     
     - name: Build
       run: npm run build
 
+    - name: Run unit tests
+      run: npm run test:unit
+
     - name: Upload build artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: dist
         path: ./dist
@@ -49,7 +49,7 @@ jobs:
       run: npm run test:e2e
     
     - name: Upload E2E test report artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: playwright-report
         path: playwright-report/
