@@ -2,6 +2,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
+    "noEmit": true,
     "paths": {
       "#/*": [
         "./src/*"
@@ -19,6 +20,7 @@
     ".astro/types.d.ts",
     "node_modules/vite-plugin-svgr/client.d.ts",
     "playwright.config.ts",
+    "astro.config.mjs",
     "src",
     "tests"
   ]

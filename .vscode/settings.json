@@ -1,11 +1,11 @@
 {
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": "always",
-		"source.removeUnusedImports": "always"
+		"source.removeUnusedImports": "always",
+		"source.sort.json": "always"
 	},
 	"editor.insertSpaces": true,
 	"editor.tabSize": 2,
-	"editor.wordWrap": "off",
-	"typescript.preferences.importModuleSpecifierEnding": "js",
-	"typescript.preferences.preferTypeOnlyAutoImports": true
+	"js/ts.preferences.importModuleSpecifierEnding": "js",
+	"js/ts.preferences.preferTypeOnlyAutoImports": true
 }
