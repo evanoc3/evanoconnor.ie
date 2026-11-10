@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  workflow_dispatch:
   pull_request:
     branches: main
 
@@ -24,14 +23,17 @@ jobs:
     
     - name: Install dependencies
       run: npm ci
+    
+    - name: Run cloc report
+      run: npm run cloc
 
     - name: Run NPM audit
       run: npm audit
-    
+
     - name: Build
       run: npm run build
 
-    - name: Run unit tests
+    - name: Unit tests
       run: npm run test:unit
 
     - name: Upload build artifact
@@ -41,12 +43,12 @@ jobs:
         path: ./dist
         if-no-files-found: error
 
-    - name: Setup Playwright
+    - name: Setup playwright
       run: npx playwright install chromium --with-deps
       env:
         CI: "true"
 
-    - name: Run E2E tests
+    - name: E2E tests
       run: npm run test:e2e
     
     - name: Upload E2E test report artifact
@@ -55,6 +57,3 @@ jobs:
         name: playwright-report
         path: playwright-report/
         if-no-files-found: error
-    
-    - name: Run cloc report
-      run: npm run cloc

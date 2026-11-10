@@ -3,7 +3,7 @@
 A static personal site, built using [Astro](https://astro.build/).
 
 
-* All features need either a unit or an E2E test (or both).
+* All features need either a unit test, an E2E test, or both. Consider the 'Test Pyramid' when deciding which to add though, and if something can be covered by both, then prefer unit tests.
 
 * Most features, where possible, are expected to work with 'progressive enhancement', meaning that they should work even if JS is disabled in the browser, and only use it sparingly to make the experience better when it is enabled.
 
