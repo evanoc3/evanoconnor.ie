@@ -1,11 +1,12 @@
 ---
-import { lastBuildTime } from "@/utils/date-utils.ts";
+import { lastBuildTime } from "#/utils/date-utils.ts";
 ---
 
-<style lang="scss">
-  @use "theme";
 
-  @include theme.set-vars(
+<style lang="scss">
+  @use "mixins";
+
+  @include mixins.theme-vars(
     $light-theme-colours: (
       --background-secondary-colour: #f8f8f8,
       --text-secondary-colour: #aaa
@@ -43,11 +44,8 @@ import { lastBuildTime } from "@/utils/date-utils.ts";
 
 <script>
   import { DateTime } from "luxon";
-  import { getHumanReadableShortDuration } from "@/utils/date-utils";
 
-  window.addEventListener("load", () => {
-    setLastBuildTimeLabel();
-  });
+  import { getHumanReadableShortDuration } from "#/utils/date-utils";
 
   function setLastBuildTimeLabel(): void {
     const timeTag = document.querySelector("#last-built-time-label > time");
@@ -55,10 +53,15 @@ import { lastBuildTime } from "@/utils/date-utils.ts";
       return;
 
     const lastBuiltTime = DateTime.fromISO(timeTag.getAttribute("datetime") ?? "");
-    if (!lastBuiltTime.isValid)
+    if (!lastBuiltTime.isValid) {
       return;
+    }
 
     const lastBuiltAgoDuration = getHumanReadableShortDuration(lastBuiltTime, DateTime.now());
     timeTag.textContent = lastBuiltAgoDuration === "now" ? lastBuiltAgoDuration : `${lastBuiltAgoDuration} ago`;
   }
+
+  window.addEventListener("load", () => {
+    setLastBuildTimeLabel();
+  });
 </script>

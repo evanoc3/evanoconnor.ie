@@ -54,12 +54,6 @@ export async function validateLinkTags(page: Page, opts: ValidateLinkTagsOptions
   }
 }
 
-export async function hasLink(page: Page, linkText: string, linkHref: string): Promise<void> {
-  const link = page.getByRole("link", { name: linkText });
-  await expect(link).toBeVisible();
-  await expect(link).toHaveAttribute("href", linkHref);
-}
-
 export async function successfulNavigation(page: Page, url: string): Promise<void> {
   const resp = (await page.goto(url, { timeout: 5000 }))!;
   expect(resp).not.toBeNull();

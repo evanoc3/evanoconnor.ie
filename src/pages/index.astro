@@ -1,18 +1,14 @@
 ---
-import PageLayout from "@/components/common/PageLayout.astro";
-import Footer from "@/components/index/Footer.astro";
+import PageLayout from "#/components/common/page-layout.astro";
+import Footer from "#/components/index/footer.astro";
 ---
 
+
 <style lang="scss">
-  @use "page";
-  @use "resets";
-  @use "theme";
+  @use "mixins";
 
-  @include page.full-height;
-  @include page.optimize-for-text;
-  @include resets.global;
-
-  @include theme.set-vars(
+  @include mixins.reset($isAstroStyle: true);
+  @include mixins.theme-vars(
     $light-theme-colours: (
       --background-colour: white,
       --text-colour: #222,
@@ -28,9 +24,11 @@ import Footer from "@/components/index/Footer.astro";
       --link-active-colour: #0ff
     )
   );
-
-  :global(body) {
+  
+  body {
+    @include mixins.optimize-for-text;
     background-color: var(--background-colour);
+    
   }
 
   main {
@@ -88,9 +86,6 @@ import Footer from "@/components/index/Footer.astro";
     
     <ul>
       <li><a href="/cv/">/cv</a></li>
-      <li><a href="/playground/go/">/playground/go</a></li>
-      <li><a href="/playground/lightspeed/">/playground/lightspeed</a></li>
-      <li><a href="/playground/table-of-contents/">/playground/table-of-contents</a></li>
     </ul>
   </main>
 

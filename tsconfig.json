@@ -1,20 +1,27 @@
 {
   "compilerOptions": {
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "noEmit": true,
+    "paths": {
+      "#/*": [
+        "./src/*"
+      ],
+      "#static/*": [
+        "./static/*"
+      ],
+      "#tests/*": [
+        "./tests/*"
+      ]
+    }
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
   "extends": "astro/tsconfigs/strict",
   "include": [
     ".astro/types.d.ts",
-    "**/*"
+    "node_modules/vite-plugin-svgr/client.d.ts",
+    "playwright.config.ts",
+    "astro.config.mjs",
+    "src",
+    "tests"
   ]
 }

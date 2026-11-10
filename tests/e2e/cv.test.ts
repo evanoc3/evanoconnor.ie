@@ -1,5 +1,7 @@
-import { test, expect } from "@playwright/test";
-import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "../e2e-test-utils.ts";
+import { expect, test } from "@playwright/test";
+
+import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "#tests/utils/e2e-test-utils.ts";
+
 
 test.describe("/cv/", () => {
 

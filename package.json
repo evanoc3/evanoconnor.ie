@@ -1,34 +1,44 @@
 {
   "author": "Evan O'Connor <evan@evanoconnor.ie> (https://evanoconnor.ie)",
-  "dependencies": {
-    "@astrojs/react": "^4.4.0",
-    "@astrojs/sitemap": "^3.6.0",
-    "@playwright/test": "^1.56.1",
-    "@testing-library/react": "^16.3.0",
-    "@types/luxon": "^3.7.1",
-    "@types/node": "^24.9.1",
-    "astro": "^5.14.7",
-    "bootstrap-icons": "^1.13.1",
+  "devDependencies": {
+    "@astrojs/react": "^7.1.5",
+    "@astrojs/sitemap": "^3.7.4",
+    "@playwright/test": "^1.65.0",
+    "@testing-library/react": "^16.3.3",
+    "@types/luxon": "^3.7.6",
+    "@types/node": "^26.6.6",
+    "astro": "^7.4.8",
+    "bootstrap-icons": "^1.13.2",
     "cloc": "^2.11.0",
     "feather-icons": "^4.29.2",
-    "happy-dom": "^20.0.7",
+    "happy-dom": "^21.0.4",
     "luxon": "^3.7.2",
-    "sass-embedded": "^1.93.2",
-    "uuid": "^13.0.0",
-    "vitest": "^3.2.4"
+    "sass-embedded": "^1.108.1",
+    "typescript": "^7.0.2",
+    "vite-plugin-svgr": "^5.2.0",
+    "vitest": "^5.1.0"
+  },
+  "imports": {
+    "#/*": "./src/*",
+    "#static/*": "./static/*",
+    "#tests/*": "./tests/*"
   },
   "license": "MIT",
   "name": "@evanoc3/evanoconnor.ie",
   "private": true,
   "scripts": {
-    "build": "astro build",
+    "build": "tsc && astro build",
+    "build:docker": "docker build -t evanoconnor-ie .",
     "clean": "rm -rf .astro dist playwright-report test-results",
     "cloc": "cloc --not-match-f \"package-lock.json\" --exclude-ext \"env,svg\" --exclude-dir \".astro,dist,node_modules,playwright-report,test-results\" .",
+    "deploy": "fly deploy --local-only",
     "dev": "astro dev",
     "preview": "astro preview",
+    "start:docker": "docker run --rm -p 8080:80 evanoconnor-ie",
     "test:e2e": "playwright test",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "typecheck": "tsc"
   },
   "type": "module",
-  "version": "0.1.1"
+  "version": "0.2.0"
 }
