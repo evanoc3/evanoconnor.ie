@@ -65,7 +65,7 @@ jobs:
 
     - name: Deploy
       run: |
-        fly config validate &&
-        fly deploy --local-only
+        flyctl config validate &&
+        flyctl deploy --local-only
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

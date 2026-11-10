@@ -34,7 +34,7 @@ jobs:
       uses: superfly/flyctl-actions/setup-flyctl@master
       
     - name: Validate Fly config
-      run: fly config validate
+      run: flyctl config validate
     
     - name: Build
       run: npm run build
