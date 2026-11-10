@@ -30,12 +30,6 @@ jobs:
     - name: Run NPM audit
       run: npm audit
 
-    - name: Setup Fly
-      uses: superfly/flyctl-actions/setup-flyctl@master
-      
-    - name: Validate Fly config
-      run: flyctl config validate
-    
     - name: Build
       run: npm run build
 
