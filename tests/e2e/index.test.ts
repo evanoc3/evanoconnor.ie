@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { hasLink, successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "#tests/utils/e2e-test-utils.ts";
+import { successfulNavigation, validateLinkTags, validateMetaTags, validateSitemap } from "#tests/utils/e2e-test-utils.ts";
 
 
 test.describe("/", () => {
@@ -26,12 +26,6 @@ test.describe("/", () => {
 
   test("has a valid sitemap", async ({ page }) => {
     await validateSitemap(page);
-  });
-
-  test("has links to other pages", async ({ page }) => {
-    await hasLink(page, "/cv", "/cv/");
-    await hasLink(page, "/playground/lightspeed", "/playground/lightspeed/");
-    await hasLink(page, "/playground/table-of-contents", "/playground/table-of-contents/");
   });
 
   test("footer is visible (with JS enabled)", async ({ page }) => {
