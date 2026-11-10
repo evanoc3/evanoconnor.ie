@@ -31,6 +31,7 @@
     "build:docker": "docker build -t evanoconnor-ie .",
     "clean": "rm -rf .astro dist playwright-report test-results",
     "cloc": "cloc --not-match-f \"package-lock.json\" --exclude-ext \"env,svg\" --exclude-dir \".astro,dist,node_modules,playwright-report,test-results\" .",
+    "deploy": "fly deploy --local-only",
     "dev": "astro dev",
     "preview": "astro preview",
     "start:docker": "docker run --rm -p 8080:80 evanoconnor-ie",
