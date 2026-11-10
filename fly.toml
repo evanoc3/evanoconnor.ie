@@ -3,16 +3,16 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'evanoconnor-ie'
-primary_region = 'ams'
+app = "evanoconnor-ie"
+primary_region = "ams"
 
 [http_service]
   internal_port = 80
   force_https = true
-  auto_stop_machines = 'stop'
+  auto_stop_machines = "stop"
   auto_start_machines = true
   min_machines_running = 0
-  processes = ['app']
+  processes = ["app"]
 
 [[http_service.checks]]
   grace_period = "5s"
@@ -22,5 +22,5 @@ primary_region = 'ams'
   path = "/"
 
 [[vm]]
-  memory = '256mb'
+  memory = "256mb"
   cpus = 1
